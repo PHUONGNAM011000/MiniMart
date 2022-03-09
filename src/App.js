@@ -1,8 +1,10 @@
+import { makeStyles } from '@material-ui/core/styles';
+
 import './App.css';
 import Menu from './Atomic/Menu/MenuList/index';
-import MainContainer from './containers';
-import { makeStyles } from '@material-ui/core/styles';
-import { useState } from 'react';
+import MainContainer from './containers/PageCategory';
+import ShowModal from './Atomic/UI/ShowModal';
+import { useSelector } from 'react-redux';
 
 const drawerWidth = 240;
 const useStyles = makeStyles((theme) => ({
@@ -71,8 +73,7 @@ const useStyles = makeStyles((theme) => ({
     overflow: 'auto',
   },
   container: {
-    paddingTop: theme.spacing(4),
-    paddingBottom: theme.spacing(4),
+    paddingTop: theme.spacing(2),
   },
   paper: {
     padding: theme.spacing(2),
@@ -86,31 +87,22 @@ const useStyles = makeStyles((theme) => ({
   user: {
     display: 'flex',
     alignItems: 'center',
+    cursor: 'pointer',
   },
 }));
 
 function App() {
-  const [open, setOpen] = useState(true);
+  const isShowModal = useSelector((state) => state.modal.isShowModal);
   const classes = useStyles();
 
-  const handleDrawerOpen = () => {
-    setOpen(true);
-  };
-
-  const handleDrawerClose = () => {
-    setOpen(false);
-  };
-
   return (
-    <div className={classes.root}>
-      <Menu
-        open={open}
-        classes={classes}
-        handleDrawerOpen={handleDrawerOpen}
-        handleDrawerClose={handleDrawerClose}
-      />
-      <MainContainer classes={classes} />
-    </div>
+    <>
+      {isShowModal && <ShowModal></ShowModal>}
+      <div className={classes.root}>
+        <Menu classes={classes} />
+        <MainContainer classes={classes} />
+      </div>
+    </>
   );
 }
 

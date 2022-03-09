@@ -10,10 +10,23 @@ import MenuItemIcon from './MenuItemIcon/MenuItemIcon';
 import MenuItemText from './MenuItemText/MenuItemText';
 import DashboardIcon from '../../../icons/DashboardIcon';
 import ShoppingCartIcon from '../../../icons/ShoppingCartIcon';
-import { DUMMY_MENU_LIST } from './ArrayMenu';
+import { DUMMY_MENU_LIST } from '../../../Data/ArrayMenu';
 import NavHeader from '../../NavHeader/index';
+import { useDispatch, useSelector } from 'react-redux';
+import { ActionsMenu } from '../../../store/menuSlice';
 
-const Menu = ({ classes, open, handleDrawerOpen, handleDrawerClose }) => {
+const Menu = ({ classes }) => {
+  const open = useSelector((state) => state.menu.isShow);
+  const dispatch = useDispatch();
+
+  const handleDrawerOpen = () => {
+    dispatch(ActionsMenu.showMenu());
+  };
+
+  const handleDrawerClose = () => {
+    dispatch(ActionsMenu.hideMenu());
+  };
+
   return (
     <>
       <NavHeader

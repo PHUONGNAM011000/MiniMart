@@ -5,8 +5,17 @@ import Toolbar from '@material-ui/core/Toolbar';
 import MenuIcon from '@material-ui/icons/Menu';
 import Typography from '@material-ui/core/Typography';
 import Avatar from '@material-ui/core/Avatar';
+import { useDispatch, useSelector } from 'react-redux';
+import { ActionsMenu } from '../../store/menuSlice';
 
-const NavHeader = ({ classes, open, handleDrawerOpen }) => {
+const NavHeader = ({ classes }) => {
+  const open = useSelector((state) => state.menu.isShow);
+  const dispatch = useDispatch();
+
+  const handleDrawerOpen = () => {
+    dispatch(ActionsMenu.showMenu());
+  };
+
   return (
     <>
       <AppBar
