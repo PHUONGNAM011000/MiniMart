@@ -30,12 +30,14 @@ const modalReducer = createSlice({
       state.input = false;
     },
     modalNameChange(state, action) {
-      console.log(action.payload);
       state.categoryModal.name = action.payload;
     },
     modalDecripstionChange(state, action) {
-      console.log(action.payload);
       state.categoryModal.decripstion = action.payload;
+    },
+    showAddCategory(state) {
+      state.isShowModal = true;
+      state.input = false;
     },
   },
 });

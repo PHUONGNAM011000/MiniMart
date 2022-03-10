@@ -15,12 +15,32 @@ const categoryReducer = createSlice({
       );
     },
     editCategory(state, action) {
-      const indexEditItem = state.dataCategory.findIndex(
-        (item) => item.id === action.payload.id
-      );
-      state.dataCategory[indexEditItem].name = action.payload.name;
-      state.dataCategory[indexEditItem].decripstion =
-        action.payload.decripstion;
+      if (action.payload.id) {
+        const indexEditItem = state.dataCategory.findIndex(
+          (item) => item.id === action.payload.id
+        );
+        state.dataCategory[indexEditItem].name = action.payload.name;
+        state.dataCategory[indexEditItem].decripstion =
+          action.payload.decripstion;
+      } else {
+        const copyDataCategory = [...state.dataCategory];
+        const lastItemCategory = copyDataCategory[copyDataCategory.length - 1];
+        if (copyDataCategory.length !== 0) {
+          state.dataCategory.push({
+            id: lastItemCategory.id + 1,
+            stt: lastItemCategory.stt + 1,
+            name: action.payload.name,
+            decripstion: action.payload.decripstion,
+          });
+        } else {
+          state.dataCategory.push({
+            id: 1,
+            stt: 1,
+            name: action.payload.name,
+            decripstion: action.payload.decripstion,
+          });
+        }
+      }
     },
   },
 });
