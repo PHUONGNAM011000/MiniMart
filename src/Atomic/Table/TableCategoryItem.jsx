@@ -5,10 +5,18 @@ import Button from '@material-ui/core/Button';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
 import { useDispatch } from 'react-redux';
 import { ActionsCategory } from '../../store/categorySlice';
-import { ActionsModal } from '../../store/modalSlice';
+import { ActionsModal } from '../../store/modalCategorySlice';
+import { makeStyles } from '@material-ui/core/styles';
 
-const TableItem = ({ row }) => {
+const useStyles = makeStyles((theme) => ({
+  buttonTable: {
+    marginRight: '1rem',
+  },
+}));
+
+const TableCategoryItem = ({ row }) => {
   const dispatch = useDispatch();
+  const classes = useStyles();
 
   const removeHandler = (id) => {
     dispatch(ActionsCategory.remove(id));
@@ -33,8 +41,18 @@ const TableItem = ({ row }) => {
           color="secondary"
           aria-label="contained primary button group"
         >
-          <Button onClick={() => showHandler(row)}>Xem</Button>
-          <Button onClick={() => removeHandler(row.id)}>Xoá</Button>
+          <Button
+            className={classes.buttonTable}
+            onClick={() => showHandler(row)}
+          >
+            Xem
+          </Button>
+          <Button
+            className={classes.buttonTable}
+            onClick={() => removeHandler(row.id)}
+          >
+            Xoá
+          </Button>
           <Button onClick={() => editHandler(row)}>Sửa</Button>
         </ButtonGroup>
       </TableCell>
@@ -42,4 +60,4 @@ const TableItem = ({ row }) => {
   );
 };
 
-export default TableItem;
+export default TableCategoryItem;

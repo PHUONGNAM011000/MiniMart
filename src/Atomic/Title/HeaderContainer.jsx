@@ -1,9 +1,7 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
-import Title from '../../Atomic/Title/Title';
-import { useDispatch } from 'react-redux';
-import { ActionsModal } from '../../store/modalSlice';
+import Title from './Title';
 
 const useStyles = makeStyles((theme) => ({
   seeMore: {
@@ -19,25 +17,20 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function PageCategory() {
+export default function HeaderCategoryContainer(props) {
   const classes = useStyles();
-  const dispatch = useDispatch();
-
-  const AddCategoryHandler = () => {
-    dispatch(ActionsModal.showAddCategory());
-  };
 
   return (
     <React.Fragment>
       <div className={classes.tableHeader}>
-        <Title>Danh mục Sản Phẩm</Title>
+        <Title>{props.title}</Title>
         <div className={classes.tableHeader}>
           <Button
             variant="contained"
             color="primary"
-            onClick={() => AddCategoryHandler()}
+            onClick={props.addHandler}
           >
-            Thêm Danh Mục
+            {props.buttonTitle}
           </Button>
         </div>
       </div>

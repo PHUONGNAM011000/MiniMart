@@ -49,7 +49,10 @@ const Menu = ({ classes }) => {
         <Divider />
         <List>
           {DUMMY_MENU_LIST.map((item) => (
-            <MenuListItem key={item.id}>
+            <MenuListItem
+              key={item.id}
+              params={`${item.id === 1 ? 'category' : 'product'}`}
+            >
               <MenuItemIcon>
                 {item.id === 1 ? <DashboardIcon /> : <ShoppingCartIcon />}
               </MenuItemIcon>

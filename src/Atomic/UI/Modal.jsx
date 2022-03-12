@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme) => ({
     position: 'fixed',
     top: '15vh',
     left: '30%',
-    width: '40%',
+    width: '545px',
     backgroundColor: 'white',
     padding: '1rem',
     borderRadius: '14px',

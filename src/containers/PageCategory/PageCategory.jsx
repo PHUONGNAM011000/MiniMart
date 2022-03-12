@@ -6,7 +6,7 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import { useSelector } from 'react-redux';
-import TableItem from '../../Atomic/Table/TableItem';
+import TableCategoryItem from '../../Atomic/Table/TableCategoryItem';
 
 const useStyles = makeStyles((theme) => ({
   seeMore: {
@@ -49,7 +49,7 @@ export default function PageCategory() {
         </TableHead>
         <TableBody>
           {dataCategory.map((row) => (
-            <TableItem row={row} key={row.id} />
+            <TableCategoryItem row={row} key={row.id} />
           ))}
         </TableBody>
       </Table>

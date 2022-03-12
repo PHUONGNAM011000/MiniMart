@@ -1,27 +1,27 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-const modalReducer = createSlice({
+const modalCategoryReducer = createSlice({
   name: 'modal',
   initialState: {
-    isShowModal: false,
+    isShowModalCategory: false,
     categoryModal: {},
     input: true,
   },
   reducers: {
     showModal(state, action) {
-      state.isShowModal = true;
+      state.isShowModalCategory = true;
       state.categoryModal = {
         name: action.payload.name,
         decripstion: action.payload.decripstion,
       };
     },
     hideModal(state) {
-      state.isShowModal = false;
+      state.isShowModalCategory = false;
       state.categoryModal = {};
       state.input = true;
     },
     editModal(state, action) {
-      state.isShowModal = true;
+      state.isShowModalCategory = true;
       state.categoryModal = {
         id: action.payload.id,
         name: action.payload.name,
@@ -36,11 +36,11 @@ const modalReducer = createSlice({
       state.categoryModal.decripstion = action.payload;
     },
     showAddCategory(state) {
-      state.isShowModal = true;
+      state.isShowModalCategory = true;
       state.input = false;
     },
   },
 });
 
-export const ActionsModal = modalReducer.actions;
-export default modalReducer.reducer;
+export const ActionsModal = modalCategoryReducer.actions;
+export default modalCategoryReducer.reducer;

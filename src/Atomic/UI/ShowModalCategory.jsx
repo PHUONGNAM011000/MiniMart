@@ -5,7 +5,7 @@ import { makeStyles } from '@material-ui/core/styles';
 
 import Title from '../Title/Title';
 import Modal from './Modal';
-import { ActionsModal } from '../../store/modalSlice';
+import { ActionsModal } from '../../store/modalCategorySlice';
 import { ActionsCategory } from '../../store/categorySlice';
 
 const useStyles = makeStyles(() => ({
@@ -17,8 +17,10 @@ const useStyles = makeStyles(() => ({
 }));
 
 const ShowModal = () => {
-  const categoryModal = useSelector((state) => state.modal.categoryModal);
-  const input = useSelector((state) => state.modal.input);
+  const categoryModal = useSelector(
+    (state) => state.modalCategory.categoryModal
+  );
+  const input = useSelector((state) => state.modalCategory.input);
   const dispatch = useDispatch();
   const classes = useStyles();
 

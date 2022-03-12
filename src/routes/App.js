@@ -1,10 +1,13 @@
 import { makeStyles } from '@material-ui/core/styles';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 import './App.css';
-import Menu from './Atomic/Menu/MenuList/index';
-import MainContainer from './containers/PageCategory';
-import ShowModal from './Atomic/UI/ShowModal';
+import Menu from '../Atomic/Menu/MenuList/index';
+import MainCategoryContainer from '../containers/PageCategory/index';
+import ShowModalCategory from '../Atomic/UI/ShowModalCategory';
+import ShowModalProduct from '../Atomic/UI/ShowModalProduct';
 import { useSelector } from 'react-redux';
+import PageProduct from '../containers/PageProduct';
 
 const drawerWidth = 240;
 const useStyles = makeStyles((theme) => ({
@@ -92,17 +95,33 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function App() {
-  const isShowModal = useSelector((state) => state.modal.isShowModal);
+  const isShowModalCategory = useSelector(
+    (state) => state.modalCategory.isShowModalCategory
+  );
+  const isShowModalProduct = useSelector(
+    (state) => state.modalProduct.isShowModalProduct
+  );
   const classes = useStyles();
 
   return (
-    <>
-      {isShowModal && <ShowModal></ShowModal>}
+    <Router>
+      {isShowModalCategory && <ShowModalCategory />}
+      {isShowModalProduct && <ShowModalProduct />}
       <div className={classes.root}>
         <Menu classes={classes} />
-        <MainContainer classes={classes} />
+        <Switch>
+          <Route path="/category">
+            <MainCategoryContainer classes={classes} />
+          </Route>
+          <Route path="/product">
+            <PageProduct classes={classes} />
+          </Route>
+          <Route path="/">
+            <MainCategoryContainer classes={classes} />
+          </Route>
+        </Switch>
       </div>
-    </>
+    </Router>
   );
 }
 

@@ -2,9 +2,17 @@ import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import PageCategory from './PageCategory';
-import TitleCategory from './TitleCategory';
+import HeaderContainer from '../../Atomic/Title/HeaderContainer';
+import { useDispatch } from 'react-redux';
+import { ActionsModal } from '../../store/modalCategorySlice';
 
-const MainContainer = ({ classes }) => {
+const MainCategoryContainer = ({ classes }) => {
+  const dispatch = useDispatch();
+
+  const addCategoryHandler = () => {
+    dispatch(ActionsModal.showAddCategory());
+  };
+
   return (
     <main className={classes.content}>
       <div className={classes.appBarSpacer} />
@@ -12,7 +20,11 @@ const MainContainer = ({ classes }) => {
         <Grid container spacing={3}>
           <Grid item xs={12}>
             <Paper className={classes.paper}>
-              <TitleCategory />
+              <HeaderContainer
+                addHandler={addCategoryHandler}
+                title="Danh Mục Sản Phẩm"
+                buttonTitle="Thêm Danh Mục"
+              />
             </Paper>
           </Grid>
         </Grid>
@@ -30,4 +42,4 @@ const MainContainer = ({ classes }) => {
   );
 };
 
-export default MainContainer;
+export default MainCategoryContainer;
