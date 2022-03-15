@@ -14,15 +14,20 @@ const useStyles = makeStyles((theme) => ({
   },
   modal: {
     position: 'fixed',
-    top: '15vh',
-    left: '30%',
-    width: '545px',
+    top: '11vh',
+    left: '17%',
+    width: '70vw',
     backgroundColor: 'white',
     padding: '1rem',
     borderRadius: '14px',
     boxShadow: '0 2px 8px rgba(0, 0, 0, 0.25)',
     zIndex: '3000',
     animation: 'slide-down 300ms ease-out forwards;',
+
+    '@media screen and (min-width: 1000px)': {
+      width: '500px',
+      left: '32%',
+    },
   },
 }));
 

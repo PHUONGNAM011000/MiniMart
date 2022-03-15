@@ -14,7 +14,7 @@ export const DUMMY_CATEGORY = [
   {
     id: 3,
     stt: 3,
-    name: 'Quần đùi',
-    decripstion: 'Quan dui la mot loai quan mac khi di boi',
+    name: 'Quần dui',
+    decripstion: 'Quan dui la mot loai quan mac rat dep',
   },
 ];
