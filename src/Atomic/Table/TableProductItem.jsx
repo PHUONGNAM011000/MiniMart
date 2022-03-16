@@ -16,6 +16,11 @@ const useStyles = makeStyles((theme) => ({
   },
   buttonTable: {
     marginRight: '1rem',
+
+    '@media screen and (max-width: 1075px)': {
+      marginBottom: '0.5rem',
+      marginRight: '0',
+    },
   },
 }));
 

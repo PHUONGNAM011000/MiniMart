@@ -24,7 +24,22 @@ const useStyles = makeStyles((theme) => ({
     zIndex: '3000',
     animation: 'slide-down 300ms ease-out forwards;',
 
-    '@media screen and (min-width: 1000px)': {
+    '@media screen and (max-width: 800px)': {
+      width: '290px',
+      left: '17%',
+    },
+
+    '@media screen and (min-width: 500px)': {
+      width: '290px',
+      left: '30%',
+    },
+
+    '@media screen and (min-width: 800px)': {
+      width: '550px',
+      left: '22%',
+    },
+
+    '@media screen and (min-width: 1200px)': {
       width: '550px',
       left: '32%',
     },

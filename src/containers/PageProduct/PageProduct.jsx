@@ -53,6 +53,9 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: 'bold',
     padding: '0 !important',
   },
+  table: {
+    borderTop: '1px solid rgba(224, 224, 224, 1);',
+  },
 }));
 
 export default function PageProduct() {
@@ -128,7 +131,7 @@ export default function PageProduct() {
         </div>
       </div>
 
-      <Table size="small">
+      <Table size="small" className={classes.table}>
         <TableHead>
           <TableRow className={classes.tableRow}>
             <TableCell className={classes.textTable}>STT</TableCell>

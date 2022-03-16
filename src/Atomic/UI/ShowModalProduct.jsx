@@ -26,6 +26,10 @@ const useStyles = makeStyles(() => ({
     flexDirection: 'column',
     width: '250px',
     marginLeft: '2rem',
+
+    '@media (max-width: 800px)': {
+      marginLeft: '0',
+    },
   },
   imageModal: {
     width: '230px',
@@ -35,6 +39,11 @@ const useStyles = makeStyles(() => ({
   },
   input: {
     minWidth: '150px',
+  },
+  avatar: {
+    '@media screen and (max-width: 800px)': {
+      display: 'none',
+    },
   },
 }));
 
@@ -83,7 +92,7 @@ const ShowModal = () => {
   return (
     <Modal onClose={hideModalProductHandler}>
       <div className={classes.flexProduct}>
-        <div>
+        <div className={classes.avatar}>
           <Avatar
             variant="square"
             className={classes.imageModal}

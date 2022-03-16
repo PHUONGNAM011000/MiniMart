@@ -11,6 +11,12 @@ import { makeStyles } from '@material-ui/core/styles';
 const useStyles = makeStyles((theme) => ({
   buttonTable: {
     marginRight: '1rem',
+
+    '@media (max-width: 925px)': {
+      display: 'block',
+      marginRight: '0',
+      marginBottom: '0.5rem',
+    },
   },
 }));
 

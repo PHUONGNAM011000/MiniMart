@@ -12,6 +12,9 @@ const useStyles = makeStyles((theme) => ({
   seeMore: {
     marginTop: theme.spacing(3),
   },
+  table: {
+    borderTop: '1px solid rgba(224, 224, 224, 1);',
+  },
   tableHeader: {
     display: 'flex',
     alignItems: 'center',
@@ -38,7 +41,7 @@ export default function PageCategory() {
         <p>{dataCategory.length}</p>
       </div>
 
-      <Table size="small">
+      <Table size="small" className={classes.table}>
         <TableHead>
           <TableRow>
             <TableCell style={{ fontWeight: 'bold', fontSize: '1rem' }}>
