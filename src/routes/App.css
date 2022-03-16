@@ -1,7 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100;0,200;0,400;1,100;1,300;1,500;1,600&display=swap');
+
 * {
   box-sizing: border-box;
   padding: 0;
   margin: 0;
+  font-family: 'Josefin Sans', sans-serif !important;
 }
 
 @media (min-width: 768px) {
@@ -38,7 +41,7 @@ select {
 .select {
   position: relative;
   display: flex;
-  width: 19em;
+  width: 21em;
   height: 3em;
   line-height: 3;
   background: #fefefe;
@@ -70,9 +73,4 @@ select {
 
 .select:hover::after {
   color: Gainsboro;
-}
-
-td {
-  padding: 1rem 0 !important;
-  text-align: left;
 }

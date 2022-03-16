@@ -37,36 +37,53 @@ const TableProductItem = ({ row }) => {
 
   return (
     <TableRow>
-      <TableCell>{row.stt}</TableCell>
-      <TableCell>{row.name}</TableCell>
-      <TableCell>
+      <TableCell style={{ paddingRight: '0' }}>{row.stt}</TableCell>
+      <TableCell style={{ paddingRight: '0' }}>{row.name}</TableCell>
+      <TableCell style={{ paddingRight: '0' }}>
         <Avatar variant="square" src={row.image} className={classes.imgSize} />
       </TableCell>
-      <TableCell>{row.amount}</TableCell>
-      <TableCell>{row.description}</TableCell>
-      <TableCell>{row.category}</TableCell>
-      <TableCell>{row.mass}</TableCell>
+      <TableCell
+        style={{
+          textAlign: 'right',
+          paddingRight: '0',
+        }}
+      >
+        <div style={{ marginRight: '1.5rem' }}>{row.amount}</div>
+      </TableCell>
+      <TableCell style={{ paddingRight: '0' }}>{row.description}</TableCell>
+      <TableCell style={{ paddingRight: '0' }}>{row.category}</TableCell>
+      <TableCell
+        style={{
+          textAlign: 'right',
+        }}
+      >
+        <div style={{ marginRight: '1.5rem' }}>{row.mass}</div>
+      </TableCell>
       <TableCell>{row.status}</TableCell>
       <TableCell>
-        <ButtonGroup
+        <Button
+          className={classes.buttonTable}
+          onClick={() => showModalProduct(row)}
           variant="contained"
           color="secondary"
-          aria-label="contained primary button group"
         >
-          <Button
-            className={classes.buttonTable}
-            onClick={() => showModalProduct(row)}
-          >
-            Xem
-          </Button>
-          <Button
-            className={classes.buttonTable}
-            onClick={() => removeProductHandler(row.id)}
-          >
-            Xoá
-          </Button>
-          <Button onClick={() => editProductHandler(row)}>Sửa</Button>
-        </ButtonGroup>
+          Xem
+        </Button>
+        <Button
+          className={classes.buttonTable}
+          onClick={() => removeProductHandler(row.id)}
+          variant="contained"
+          color="secondary"
+        >
+          Xoá
+        </Button>
+        <Button
+          onClick={() => editProductHandler(row)}
+          variant="contained"
+          color="secondary"
+        >
+          Sửa
+        </Button>
       </TableCell>
     </TableRow>
   );

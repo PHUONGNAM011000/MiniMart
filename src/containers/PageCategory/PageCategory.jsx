@@ -41,10 +41,18 @@ export default function PageCategory() {
       <Table size="small">
         <TableHead>
           <TableRow>
-            <TableCell style={{ fontWeight: 'bold' }}>STT</TableCell>
-            <TableCell style={{ fontWeight: 'bold' }}>Tên Sản Phẩm</TableCell>
-            <TableCell style={{ fontWeight: 'bold' }}>Mô tả</TableCell>
-            <TableCell style={{ fontWeight: 'bold' }}>Hành động</TableCell>
+            <TableCell style={{ fontWeight: 'bold', fontSize: '1rem' }}>
+              STT
+            </TableCell>
+            <TableCell style={{ fontWeight: 'bold', fontSize: '1rem' }}>
+              Tên Sản Phẩm
+            </TableCell>
+            <TableCell style={{ fontWeight: 'bold', fontSize: '1rem' }}>
+              Mô tả
+            </TableCell>
+            <TableCell style={{ fontWeight: 'bold', fontSize: '1rem' }}>
+              Hành động
+            </TableCell>
           </TableRow>
         </TableHead>
         <TableBody>

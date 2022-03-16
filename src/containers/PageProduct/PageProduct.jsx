@@ -31,14 +31,23 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: '5px',
   },
   textTable: {
+    fontWeight: 'bold !important',
+    fontSize: '1rem !important',
+    padding: '0 !important',
+    paddingRight: '1.5rem !important',
+  },
+  textTableAmount: {
     fontWeight: 'bold',
     padding: '0 !important',
+    textAlign: 'right',
     // paddingRight: '1.5rem !important',
+    fontSize: '1rem !important',
   },
   centerText: {
     fontWeight: 'bold',
     padding: '0 !important',
     textAlign: 'center',
+    fontSize: '1rem !important',
   },
   boldLastTable: {
     fontWeight: 'bold',
@@ -96,7 +105,9 @@ export default function PageProduct() {
     <React.Fragment>
       <div className={classes.tableHeader}>
         <div className="select">
-          <p>Sắp xếp theo :&nbsp;</p>
+          <p style={{ fontWeight: '600 !important', color: '#000' }}>
+            Sắp xếp theo :&nbsp;
+          </p>
           <select
             defaultValue="Thứ Tự"
             onChange={(e) => setSortType(e.target.value)}
@@ -109,7 +120,9 @@ export default function PageProduct() {
           </select>
         </div>
         <div className={classes.tableTitle}>
-          <p>SỐ LƯỢNG : </p>
+          <p style={{ fontWeight: '600 !important', color: '#000' }}>
+            Số Lượng :{' '}
+          </p>
           &nbsp;
           <p>{data.length}</p>
         </div>
@@ -117,14 +130,16 @@ export default function PageProduct() {
 
       <Table size="small">
         <TableHead>
-          <TableRow>
+          <TableRow className={classes.tableRow}>
             <TableCell className={classes.textTable}>STT</TableCell>
             <TableCell className={classes.textTable}>Tên Sản Phẩm</TableCell>
             <TableCell className={classes.centerText}>Ảnh</TableCell>
-            <TableCell className={classes.textTable}>Số Lượng</TableCell>
+            <TableCell className={classes.textTableAmount}>Số Lượng</TableCell>
             <TableCell className={classes.centerText}>Mô tả</TableCell>
             <TableCell className={classes.textTable}>Danh Mục</TableCell>
-            <TableCell className={classes.textTable}>Khối Lượng</TableCell>
+            <TableCell className={classes.textTableAmount}>
+              Khối Lượng
+            </TableCell>
             <TableCell className={classes.textTable}>Tình Trạng</TableCell>
             <TableCell className={classes.textTable}>Hành động</TableCell>
           </TableRow>

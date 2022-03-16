@@ -25,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
     animation: 'slide-down 300ms ease-out forwards;',
 
     '@media screen and (min-width: 1000px)': {
-      width: '500px',
+      width: '550px',
       left: '32%',
     },
   },

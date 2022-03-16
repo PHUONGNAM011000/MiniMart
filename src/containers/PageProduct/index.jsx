@@ -27,12 +27,12 @@ const MainProductContainer = ({ classes }) => {
           <p
             style={{
               fontWeight: 'bold',
-              color: '#808080',
+              color: '#000',
             }}
           >
             Tìm kiếm sản phẩm
           </p>
-          <Input placeholder="search ..."></Input>
+          <Input placeholder="search..."></Input>
         </LayoutContainer>
         <LayoutContainer classes={classes}>
           <PageProduct />

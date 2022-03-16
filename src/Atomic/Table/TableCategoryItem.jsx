@@ -36,25 +36,30 @@ const TableCategoryItem = ({ row }) => {
       <TableCell>{row.name}</TableCell>
       <TableCell>{row.decripstion}</TableCell>
       <TableCell>
-        <ButtonGroup
+        <Button
+          className={classes.buttonTable}
           variant="contained"
           color="secondary"
-          aria-label="contained primary button group"
+          onClick={() => showHandler(row)}
         >
-          <Button
-            className={classes.buttonTable}
-            onClick={() => showHandler(row)}
-          >
-            Xem
-          </Button>
-          <Button
-            className={classes.buttonTable}
-            onClick={() => removeHandler(row.id)}
-          >
-            Xoá
-          </Button>
-          <Button onClick={() => editHandler(row)}>Sửa</Button>
-        </ButtonGroup>
+          Xem
+        </Button>
+        <Button
+          className={classes.buttonTable}
+          variant="contained"
+          color="secondary"
+          onClick={() => removeHandler(row.id)}
+        >
+          Xoá
+        </Button>
+        <Button
+          color="secondary"
+          variant="contained"
+          onClick={() => editHandler(row)}
+        >
+          Sửa
+        </Button>
+        {/* </ButtonGroup> */}
       </TableCell>
     </TableRow>
   );
