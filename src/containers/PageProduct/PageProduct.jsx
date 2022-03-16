@@ -40,7 +40,7 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: 'bold',
     padding: '0 !important',
     textAlign: 'right',
-    // paddingRight: '1.5rem !important',
+    paddingRight: '1.5rem !important',
     fontSize: '1rem !important',
   },
   centerText: {
