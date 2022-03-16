@@ -2,7 +2,6 @@ import React from 'react';
 import TableCell from '@material-ui/core/TableCell';
 import TableRow from '@material-ui/core/TableRow';
 import Button from '@material-ui/core/Button';
-import ButtonGroup from '@material-ui/core/ButtonGroup';
 import { useDispatch } from 'react-redux';
 import { ActionsCategory } from '../../store/categorySlice';
 import { ActionsModal } from '../../store/modalCategorySlice';
