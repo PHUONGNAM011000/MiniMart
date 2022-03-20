@@ -6,7 +6,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import Typography from '@material-ui/core/Typography';
 import Avatar from '@material-ui/core/Avatar';
 import { useDispatch, useSelector } from 'react-redux';
-import { ActionsMenu } from '../../store/menuSlice';
+import { ActionsMenu } from '../../../store/menuSlice';
 
 const NavHeader = ({ classes }) => {
   const open = useSelector((state) => state.menu.isShow);

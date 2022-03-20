@@ -2,7 +2,7 @@ import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import PageCategory from './PageCategory';
-import HeaderContainer from '../../Atomic/Title/HeaderContainer';
+import HeaderContainer from '../../Atomic/UI/Title/HeaderContainer';
 import { useDispatch } from 'react-redux';
 import { ActionsModal } from '../../store/modalCategorySlice';
 

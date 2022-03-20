@@ -3,8 +3,8 @@ import TableCell from '@material-ui/core/TableCell';
 import TableRow from '@material-ui/core/TableRow';
 import Button from '@material-ui/core/Button';
 import { useDispatch } from 'react-redux';
-import { ActionsCategory } from '../../store/categorySlice';
-import { ActionsModal } from '../../store/modalCategorySlice';
+import { ActionsCategory } from '../../../store/categorySlice';
+import { ActionsModal } from '../../../store/modalCategorySlice';
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) => ({

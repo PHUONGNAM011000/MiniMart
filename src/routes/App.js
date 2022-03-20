@@ -8,6 +8,7 @@ import ShowModalCategory from '../Atomic/UI/ShowModalCategory';
 import ShowModalProduct from '../Atomic/UI/ShowModalProduct';
 import { useSelector } from 'react-redux';
 import PageProduct from '../containers/PageProduct';
+import SelectSort from '../Atomic/UI/Select/SelectSort';
 
 const drawerWidth = 240;
 const useStyles = makeStyles((theme) => ({
@@ -95,19 +96,20 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function App() {
+  const classes = useStyles();
   const isShowModalCategory = useSelector(
     (state) => state.modalCategory.isShowModalCategory
   );
   const isShowModalProduct = useSelector(
     (state) => state.modalProduct.isShowModalProduct
   );
-  const classes = useStyles();
 
   return (
     <Router>
       {isShowModalCategory && <ShowModalCategory />}
       {isShowModalProduct && <ShowModalProduct />}
       <div className={classes.root}>
+        {/* <CustomizedDialogs /> */}
         <Menu classes={classes} />
         <Switch>
           <Route path="/category">
@@ -116,7 +118,10 @@ function App() {
           <Route path="/product">
             <PageProduct classes={classes} />
           </Route>
-          <Route path="/">
+          <Route path="/test">
+            <SelectSort />
+          </Route>
+          <Route exact path="/">
             <MainCategoryContainer classes={classes} />
           </Route>
         </Switch>

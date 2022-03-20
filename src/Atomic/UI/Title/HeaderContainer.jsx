@@ -32,7 +32,7 @@ export default function HeaderCategoryContainer(props) {
         <div className={classes.tableHeader}>
           <Button
             variant="contained"
-            color="primary"
+            color="secondary"
             onClick={props.addHandler}
           >
             {props.buttonTitle}

@@ -6,7 +6,7 @@ import { useDispatch } from 'react-redux';
 import { ActionsModalProduct } from '../../store/modalProductSlicde';
 import { ActionsProduct } from '../../store/productSlice';
 
-import Title from '../Title/Title';
+import Title from '../UI/Title/Title';
 import Modal from './Modal';
 
 const useStyles = makeStyles(() => ({
@@ -179,7 +179,7 @@ const ShowModal = () => {
             {!showInputProduct && (
               <Button
                 variant="contained"
-                color="primary"
+                color="secondary"
                 onClick={() => editProductHandler(productModal)}
               >
                 Lưu

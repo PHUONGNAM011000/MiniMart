@@ -1,9 +1,9 @@
 import PageProduct from './PageProduct';
-import HeaderContainer from '../../Atomic/Title/HeaderContainer';
+import HeaderContainer from '../../Atomic/UI/Title/HeaderContainer';
 import { useDispatch } from 'react-redux';
 import { ActionsModalProduct } from '../../store/modalProductSlicde';
 import LayoutContainer from '../../Atomic/Layout/LayoutContainer';
-import { Input } from '@material-ui/core';
+import TextField from '@material-ui/core/TextField';
 
 const MainProductContainer = ({ classes }) => {
   const dispatch = useDispatch();
@@ -24,15 +24,14 @@ const MainProductContainer = ({ classes }) => {
           />
         </LayoutContainer>
         <LayoutContainer classes={classes}>
-          <p
-            style={{
-              fontWeight: 'bold',
-              color: '#000',
-            }}
-          >
-            Tìm kiếm sản phẩm
-          </p>
-          <Input placeholder="search..."></Input>
+          <TextField
+            id="outlined-search"
+            label="Tìm kiếm"
+            placeholder="Tìm kiếm sản phẩm..."
+            type="text"
+            variant="outlined"
+            color="primary"
+          />
         </LayoutContainer>
         <LayoutContainer classes={classes}>
           <PageProduct />

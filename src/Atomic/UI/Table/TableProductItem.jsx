@@ -5,8 +5,8 @@ import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
 import { useDispatch } from 'react-redux';
-import { ActionsModalProduct } from '../../store/modalProductSlicde';
-import { ActionsProduct } from '../../store/productSlice';
+import { ActionsModalProduct } from '../../../store/modalProductSlicde';
+import { ActionsProduct } from '../../../store/productSlice';
 
 const useStyles = makeStyles((theme) => ({
   imgSize: {

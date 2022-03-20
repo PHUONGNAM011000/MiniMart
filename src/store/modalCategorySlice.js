@@ -6,9 +6,14 @@ const modalCategoryReducer = createSlice({
     isShowModalCategory: false,
     categoryModal: {},
     input: true,
+    titleModal: 'add',
+    validate: true,
+    checkValidateName: false,
+    checkValidateDecripstion: false,
   },
   reducers: {
     showModal(state, action) {
+      state.titleModal = 'show';
       state.isShowModalCategory = true;
       state.categoryModal = {
         name: action.payload.name,
@@ -19,8 +24,13 @@ const modalCategoryReducer = createSlice({
       state.isShowModalCategory = false;
       state.categoryModal = {};
       state.input = true;
+      state.titleModal = 'add';
+      state.validate = true;
+      state.checkValidateName = false;
+      state.checkValidateDecripstion = false;
     },
     editModal(state, action) {
+      state.titleModal = 'edit';
       state.isShowModalCategory = true;
       state.categoryModal = {
         id: action.payload.id,
@@ -30,14 +40,25 @@ const modalCategoryReducer = createSlice({
       state.input = false;
     },
     modalNameChange(state, action) {
+      state.validate = false;
+      state.checkValidateName = false;
       state.categoryModal.name = action.payload;
     },
     modalDecripstionChange(state, action) {
+      state.validate = false;
+      state.checkValidateDecripstion = false;
       state.categoryModal.decripstion = action.payload;
     },
     showAddCategory(state) {
       state.isShowModalCategory = true;
       state.input = false;
+      state.titleModal = 'add';
+    },
+    checkName(state) {
+      state.checkValidateName = true;
+    },
+    checkDescription(state) {
+      state.checkValidateDecripstion = true;
     },
   },
 });

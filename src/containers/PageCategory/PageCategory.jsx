@@ -6,7 +6,7 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import { useSelector } from 'react-redux';
-import TableCategoryItem from '../../Atomic/Table/TableCategoryItem';
+import TableCategoryItem from '../../Atomic/UI/Table/TableCategoryItem';
 
 const useStyles = makeStyles((theme) => ({
   seeMore: {

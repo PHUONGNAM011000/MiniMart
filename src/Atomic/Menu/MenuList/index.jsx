@@ -11,7 +11,7 @@ import MenuItemText from './MenuItemText/MenuItemText';
 import DashboardIcon from '../../../icons/DashboardIcon';
 import ShoppingCartIcon from '../../../icons/ShoppingCartIcon';
 import { DUMMY_MENU_LIST } from '../../../Data/ArrayMenu';
-import NavHeader from '../../NavHeader/index';
+import NavHeader from '../../Layout/NavHeader/index';
 import { useDispatch, useSelector } from 'react-redux';
 import { ActionsMenu } from '../../../store/menuSlice';
 
