@@ -2,6 +2,7 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Title from './Title';
+import { useSelector } from 'react-redux';
 
 const useStyles = makeStyles((theme) => ({
   seeMore: {
@@ -25,6 +26,10 @@ const useStyles = makeStyles((theme) => ({
 export default function HeaderCategoryContainer(props) {
   const classes = useStyles();
 
+  const isColorPrimary = useSelector(
+    (state) => state.customTheme.isColorPrimary
+  );
+
   return (
     <React.Fragment>
       <div className={classes.tableHeader}>
@@ -32,7 +37,7 @@ export default function HeaderCategoryContainer(props) {
         <div className={classes.tableHeader}>
           <Button
             variant="contained"
-            color="secondary"
+            color={isColorPrimary ? 'primary' : 'secondary'}
             onClick={props.addHandler}
           >
             {props.buttonTitle}

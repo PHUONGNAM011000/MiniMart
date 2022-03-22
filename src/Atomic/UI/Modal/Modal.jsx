@@ -14,7 +14,7 @@ const useStyles = makeStyles((theme) => ({
   },
   modal: {
     position: 'fixed',
-    top: '11vh',
+    top: '9vh',
     left: '17%',
     width: '70vw',
     backgroundColor: 'white',

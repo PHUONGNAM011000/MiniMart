@@ -26,7 +26,7 @@ export default function SelectSort({ setSortType }) {
 
   return (
     <div>
-      <FormControl variant="outlined" className={classes.formControl}>
+      <FormControl variant="filled" className={classes.formControl}>
         <InputLabel color="primary">Sắp Xếp</InputLabel>
         <Select
           value={select}

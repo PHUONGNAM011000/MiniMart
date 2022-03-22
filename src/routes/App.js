@@ -4,11 +4,11 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import './App.css';
 import Menu from '../Atomic/Menu/MenuList/index';
 import MainCategoryContainer from '../containers/PageCategory/index';
-import ShowModalCategory from '../Atomic/UI/ShowModalCategory';
-import ShowModalProduct from '../Atomic/UI/ShowModalProduct';
+import ShowModalCategory from '../Atomic/UI/Modal/ShowModalCategory';
 import { useSelector } from 'react-redux';
 import PageProduct from '../containers/PageProduct';
 import SelectSort from '../Atomic/UI/Select/SelectSort';
+import DialogProductModal from '../Atomic/UI/Modal/DialogProductModal';
 
 const drawerWidth = 240;
 const useStyles = makeStyles((theme) => ({
@@ -107,8 +107,9 @@ function App() {
   return (
     <Router>
       {isShowModalCategory && <ShowModalCategory />}
-      {isShowModalProduct && <ShowModalProduct />}
+      {isShowModalProduct && <DialogProductModal />}
       <div className={classes.root}>
+        {/* <DialogProductModal /> */}
         {/* <CustomizedDialogs /> */}
         <Menu classes={classes} />
         <Switch>

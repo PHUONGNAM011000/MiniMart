@@ -1,14 +1,9 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
-import TableProductItem from '../../Atomic/UI/Table/TableProductItem';
 import { useSelector } from 'react-redux';
 import useSelect from '../../hooks/use-select';
 import SelectSort from '../../Atomic/UI/Select/SelectSort';
+import TableProduct from '../../Atomic/UI/Table/TableProduct/TableProduct';
 
 const useStyles = makeStyles((theme) => ({
   seeMore: {
@@ -78,32 +73,7 @@ export default function PageProduct() {
           <p>{data.length}</p>
         </div>
       </div>
-
-      <Table size="small" className={classes.table}>
-        <TableHead>
-          <TableRow>
-            <TableCell className={classes.textTable}>STT</TableCell>
-            <TableCell className={classes.textTable}>Tên Sản Phẩm</TableCell>
-            <TableCell className={classes.centerText}>Ảnh</TableCell>
-            <TableCell className={classes.textTableAmount}>Số Lượng</TableCell>
-            <TableCell className={classes.centerText}>Mô tả</TableCell>
-            <TableCell className={classes.textTable}>Danh Mục</TableCell>
-            <TableCell className={classes.textTableAmount}>
-              Khối Lượng
-            </TableCell>
-            <TableCell className={classes.textTable}>Tình Trạng</TableCell>
-            <TableCell className={classes.textTable}>Hành động</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {data.map((row) => (
-            <TableProductItem row={row} key={row.id} />
-          ))}
-        </TableBody>
-      </Table>
-      {data.length === 0 && (
-        <p className={classes.titleEmty}>Hiện không có sản phẩm nào.</p>
-      )}
+      <TableProduct dataTable={data} />
     </React.Fragment>
   );
 }

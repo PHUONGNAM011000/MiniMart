@@ -5,9 +5,9 @@ import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 
 import Modal from './Modal';
-import { ActionsModal } from '../../store/modalCategorySlice';
-import { ActionsCategory } from '../../store/categorySlice';
-import { dialogActions } from '../../store/dialogSlice';
+import { ActionsModal } from '../../../store/modalCategorySlice';
+import { ActionsCategory } from '../../../store/categorySlice';
+import { dialogActions } from '../../../store/dialogSlice';
 import DialogModal from './DialogModal';
 
 const useStyles = makeStyles(() => ({
@@ -47,7 +47,7 @@ const ShowModal = () => {
     dispatch(ActionsModal.modalNameChange(e.target.value));
   };
 
-  const editCategoryHandler = (item) => {
+  const editCategoryHandler = () => {
     if (categoryModal.name === '' || categoryModal.name === undefined) {
       dispatch(ActionsModal.checkName());
       return;
@@ -119,6 +119,8 @@ const ShowModal = () => {
           <TextField
             error={checkValidateDecripstion}
             helperText={checkValidateDecripstion && 'Bạn chưa nhập mô tả'}
+            multiline
+            rows={5}
             color="primary"
             label="Mô tả"
             variant="outlined"

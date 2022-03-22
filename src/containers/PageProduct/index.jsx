@@ -3,7 +3,7 @@ import HeaderContainer from '../../Atomic/UI/Title/HeaderContainer';
 import { useDispatch } from 'react-redux';
 import { ActionsModalProduct } from '../../store/modalProductSlicde';
 import LayoutContainer from '../../Atomic/Layout/LayoutContainer';
-import TextField from '@material-ui/core/TextField';
+import Search from '../../Atomic/Search/Search';
 
 const MainProductContainer = ({ classes }) => {
   const dispatch = useDispatch();
@@ -24,14 +24,7 @@ const MainProductContainer = ({ classes }) => {
           />
         </LayoutContainer>
         <LayoutContainer classes={classes}>
-          <TextField
-            id="outlined-search"
-            label="Tìm kiếm"
-            placeholder="Tìm kiếm sản phẩm..."
-            type="text"
-            variant="outlined"
-            color="primary"
-          />
+          <Search />
         </LayoutContainer>
         <LayoutContainer classes={classes}>
           <PageProduct />

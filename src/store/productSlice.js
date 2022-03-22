@@ -20,19 +20,51 @@ const productReducer = createSlice({
         state.dataProduct[indexEditItem] = { ...action.payload };
       } else {
         const copyDataProduct = [...state.dataProduct];
-        const lastItemCategory = copyDataProduct[copyDataProduct.length - 1];
+
         if (copyDataProduct.length !== 0) {
-          state.dataProduct.push({
-            id: lastItemCategory.id + 1,
-            stt: lastItemCategory.stt + 1,
-            ...action.payload,
+          const lastItemCategory = copyDataProduct.reduce(function (
+            accumulator,
+            element
+          ) {
+            return accumulator.stt > element.stt ? accumulator : element;
           });
+          if (
+            action.payload.category === undefined ||
+            action.payload.status === undefined
+          ) {
+            state.dataProduct.push({
+              id: lastItemCategory.id + 1,
+              stt: lastItemCategory.stt + 1,
+              ...action.payload,
+              category: 'Áo Thun',
+              status: 'Còn hàng',
+            });
+          } else {
+            state.dataProduct.push({
+              id: lastItemCategory.id + 1,
+              stt: lastItemCategory.stt + 1,
+              ...action.payload,
+            });
+          }
         } else {
-          state.dataProduct.push({
-            id: 1,
-            stt: 1,
-            ...action.payload,
-          });
+          if (
+            action.payload.category === undefined ||
+            action.payload.status === undefined
+          ) {
+            state.dataProduct.push({
+              id: 1,
+              stt: 1,
+              ...action.payload,
+              category: 'Áo Thun',
+              status: 'Còn hàng',
+            });
+          } else {
+            state.dataProduct.push({
+              id: 1,
+              stt: 1,
+              ...action.payload,
+            });
+          }
         }
       }
     },

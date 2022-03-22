@@ -5,6 +5,7 @@ import modalCategoryReducer from './modalCategorySlice';
 import productReducer from './productSlice';
 import modalProductReducer from './modalProductSlicde';
 import dialogReducer from './dialogSlice';
+import customThemeReducer from './customThemeSlice';
 
 const store = configureStore({
   reducer: {
@@ -14,6 +15,7 @@ const store = configureStore({
     product: productReducer,
     modalProduct: modalProductReducer,
     dialog: dialogReducer,
+    customTheme: customThemeReducer,
   },
 });
 

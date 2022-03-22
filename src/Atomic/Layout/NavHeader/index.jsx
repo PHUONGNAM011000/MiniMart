@@ -7,13 +7,22 @@ import Typography from '@material-ui/core/Typography';
 import Avatar from '@material-ui/core/Avatar';
 import { useDispatch, useSelector } from 'react-redux';
 import { ActionsMenu } from '../../../store/menuSlice';
+import Switch from '@material-ui/core/Switch';
+import { ActionsCustomTheme } from '../../../store/customThemeSlice';
 
 const NavHeader = ({ classes }) => {
   const open = useSelector((state) => state.menu.isShow);
+  const isColorPrimary = useSelector(
+    (state) => state.customTheme.isColorPrimary
+  );
   const dispatch = useDispatch();
 
   const handleDrawerOpen = () => {
     dispatch(ActionsMenu.showMenu());
+  };
+
+  const handleChangeTheme = () => {
+    dispatch(ActionsCustomTheme.colorChange());
   };
 
   return (
@@ -21,7 +30,7 @@ const NavHeader = ({ classes }) => {
       <AppBar
         position="absolute"
         className={clsx(classes.appBar, open && classes.appBarShift)}
-        color="secondary"
+        color={isColorPrimary ? 'primary' : 'secondary'}
       >
         <Toolbar className={classes.toolbar}>
           <IconButton
@@ -62,6 +71,12 @@ const NavHeader = ({ classes }) => {
             >
               Phương Nam
             </Typography>
+            <Switch
+              checked={isColorPrimary}
+              onChange={handleChangeTheme}
+              color="default"
+              inputProps={{ 'aria-label': 'checkbox with default color' }}
+            />
           </div>
         </Toolbar>
       </AppBar>

@@ -9,7 +9,6 @@ const DialogModal = ({ open, onClose, onSaveDialog, title }) => {
       aria-labelledby="customized-dialog-title"
       open={open}
       onClose={onClose}
-      style={{ zIndex: '3000' }}
       maxWidth="xs"
       fullWidth={true}
     >
