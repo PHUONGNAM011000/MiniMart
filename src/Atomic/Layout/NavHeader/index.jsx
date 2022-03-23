@@ -15,6 +15,7 @@ const NavHeader = ({ classes }) => {
   const isColorPrimary = useSelector(
     (state) => state.customTheme.isColorPrimary
   );
+
   const dispatch = useDispatch();
 
   const handleDrawerOpen = () => {
@@ -67,7 +68,7 @@ const NavHeader = ({ classes }) => {
               variant="h6"
               color="inherit"
               noWrap
-              className={classes.title}
+              className={classes.nameUser}
             >
               Phương Nam
             </Typography>

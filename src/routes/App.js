@@ -50,6 +50,14 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
     marginLeft: '1rem',
   },
+  nameUser: {
+    flexGrow: 1,
+    marginLeft: '1rem',
+
+    '@media screen and (max-width: 500px)': {
+      display: 'none',
+    },
+  },
   drawerPaper: {
     position: 'relative',
     whiteSpace: 'nowrap',

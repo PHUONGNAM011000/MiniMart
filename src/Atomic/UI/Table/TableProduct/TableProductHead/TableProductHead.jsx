@@ -18,13 +18,13 @@ const TableProductHead = () => {
     <TableHead>
       <TableRow>
         <StyledTableCell align="left">STT</StyledTableCell>
-        <StyledTableCell align="left">Tên Sản Phẩm</StyledTableCell>
+        <StyledTableCell align="left">Tên sản phẩm</StyledTableCell>
         <StyledTableCell align="center">Ảnh&nbsp;</StyledTableCell>
-        <StyledTableCell align="right">Số Lượng&nbsp;</StyledTableCell>
+        <StyledTableCell align="right">Số lượng&nbsp;</StyledTableCell>
         <StyledTableCell align="center">Mô tả&nbsp;</StyledTableCell>
-        <StyledTableCell align="left">Danh Mục&nbsp;</StyledTableCell>
-        <StyledTableCell align="right">Khối Lượng&nbsp;(kg)</StyledTableCell>
-        <StyledTableCell align="left">Tình Trạng&nbsp;</StyledTableCell>
+        <StyledTableCell align="left">Danh mục &nbsp;</StyledTableCell>
+        <StyledTableCell align="right">Khối lượng&nbsp;(kg)</StyledTableCell>
+        <StyledTableCell align="left">Tình trạng&nbsp;</StyledTableCell>
         <StyledTableCell align="center">Hành động&nbsp;</StyledTableCell>
       </TableRow>
     </TableHead>

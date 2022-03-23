@@ -1,6 +1,11 @@
 import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
-import { InputAdornment, makeStyles } from '@material-ui/core';
+import {
+  FormControl,
+  InputAdornment,
+  InputLabel,
+  makeStyles,
+} from '@material-ui/core';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import MuiDialogTitle from '@material-ui/core/DialogTitle';
@@ -16,6 +21,9 @@ import { ActionsProduct } from '../../../store/productSlice';
 import SelectCategory from '../Select/SelectCategory';
 import DialogModal from './DialogModal';
 import { dialogActions } from '../../../store/dialogSlice';
+import Grid from '@material-ui/core/Grid';
+import OutlinedInput from '@material-ui/core/OutlinedInput';
+import clsx from 'clsx';
 
 const useStyles = makeStyles(() => ({
   buttonModal: {
@@ -23,12 +31,9 @@ const useStyles = makeStyles(() => ({
     justifyContent: 'flex-end',
     marginTop: '1rem',
   },
-  marginInput: {
-    marginTop: '10px',
-  },
   flexProduct: {
-    display: 'flex',
-    paddingTop: '10px',
+    flexGrow: 1,
+    // display: 'flex',
 
     '@media (max-width: 800px)': {
       flexDirection: 'column',
@@ -42,7 +47,6 @@ const useStyles = makeStyles(() => ({
     minWidth: '15rem',
 
     '@media (max-width: 800px)': {
-      paddingTop: '1.5rem',
       marginLeft: '0',
     },
   },
@@ -51,9 +55,7 @@ const useStyles = makeStyles(() => ({
     height: '15rem',
     borderRadius: '5px',
     boxShadow: 'rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;',
-  },
-  avatar: {
-    marginRight: '1rem',
+    marginBottom: '2rem',
   },
 }));
 
@@ -81,7 +83,7 @@ const DialogTitle = withStyles(styles)((props) => {
   const { children, classes, onClose, ...other } = props;
   return (
     <MuiDialogTitle disableTypography className={classes.root} {...other}>
-      <Typography variant="h4" className={classes.title}>
+      <Typography variant="h6" className={classes.title}>
         {children}
       </Typography>
       <IconButton
@@ -245,6 +247,7 @@ export default function DialogProductModal(props) {
         onClose={() => hideModalProductHandler()}
         aria-labelledby="customized-dialog-title"
         open={true}
+        // maxWidth="lg"
       >
         <DialogTitle
           id="customized-dialog-title"
@@ -255,16 +258,16 @@ export default function DialogProductModal(props) {
         <DialogContent dividers>
           <div className={classes.flexProduct}>
             {titleProductModal !== 'add' && (
-              <div className={classes.avatar}>
+              <Grid item xs={12}>
                 <Avatar
                   variant="square"
                   className={classes.imageModal}
                   src={productModal.image}
                 />
-              </div>
+              </Grid>
             )}
-            <div className={classes.flexContent}>
-              <div>
+            <Grid container spacing={3}>
+              <Grid item xs={12}>
                 <TextField
                   error={checkName}
                   helperText={checkName && 'Bạn chưa nhập tên sản phẩm'}
@@ -279,9 +282,9 @@ export default function DialogProductModal(props) {
                   value={productModal.name || ''}
                   onChange={(e) => NameProductChangeHandler(e)}
                 />
-              </div>
+              </Grid>
               {titleProductModal === 'add' && (
-                <div className={classes.marginInput}>
+                <Grid item xs={12}>
                   <TextField
                     error={checkImage}
                     helperText={checkImage && 'Bạn chưa nhập Url ảnh'}
@@ -295,12 +298,12 @@ export default function DialogProductModal(props) {
                     }}
                     onChange={(e) => urlProductChangeHandler(e)}
                   />
-                </div>
+                </Grid>
               )}
-              <div className={classes.marginInput}>
+              <Grid item xs={6}>
                 <TextField
                   error={checkAmount}
-                  helperText={checkAmount && 'Bạn chưa nhập Số lượng'}
+                  helperText={checkAmount && 'Bạn chưa nhập số lượng'}
                   color="primary"
                   label="Số lượng"
                   type="number"
@@ -312,9 +315,8 @@ export default function DialogProductModal(props) {
                   value={productModal.amount || ''}
                   onChange={(e) => AmountProductChangeHandler(e)}
                 />
-              </div>
-
-              <div className={classes.marginInput}>
+              </Grid>
+              <Grid item xs={6}>
                 <SelectCategory
                   data={dataCategory.map((item) => item.name)}
                   value={productModal.category}
@@ -323,27 +325,27 @@ export default function DialogProductModal(props) {
                   label={'Danh mục'}
                   onChange={categoryModalChangeHandler}
                 />
-              </div>
-              <div className={classes.marginInput}>
+              </Grid>
+              <Grid item xs={6}>
                 <TextField
                   error={checkMass}
-                  helperText={checkMass && 'Bạn chưa nhập Khối lượng'}
+                  helperText={checkMass && 'Bạn chưa nhập khối lượng'}
                   color="primary"
-                  label="Khối lượng"
-                  variant="outlined"
                   type="text"
+                  label="Khối lượng"
                   fullWidth={true}
                   InputProps={{
-                    readOnly: showInputProduct,
-                    startAdornment: (
-                      <InputAdornment position="start">Kg</InputAdornment>
+                    endAdornment: (
+                      <InputAdornment position="end">kg</InputAdornment>
                     ),
+                    readOnly: showInputProduct,
                   }}
+                  variant="outlined"
                   value={productModal.mass || ''}
                   onChange={(e) => MassProductChangeHandler(e)}
                 />
-              </div>
-              <div className={classes.marginInput}>
+              </Grid>
+              <Grid item xs={6}>
                 <SelectCategory
                   data={['Hết hàng', 'Còn hàng']}
                   value={productModal.status}
@@ -352,8 +354,8 @@ export default function DialogProductModal(props) {
                   label={'Trạng thái'}
                   onChange={StatusProductChangeHandler}
                 />
-              </div>
-              <div className={classes.marginInput}>
+              </Grid>
+              <Grid item xs={12}>
                 <TextField
                   error={checkDescription}
                   helperText={checkDescription && 'Bạn chưa nhập Mô tả'}
@@ -370,8 +372,8 @@ export default function DialogProductModal(props) {
                   value={productModal.description || ''}
                   onChange={(e) => DescriptionProductChangeHandler(e)}
                 />
-              </div>
-            </div>
+              </Grid>
+            </Grid>
           </div>
         </DialogContent>
         <DialogActions>

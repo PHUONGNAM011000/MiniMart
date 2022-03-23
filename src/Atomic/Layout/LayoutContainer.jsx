@@ -4,7 +4,7 @@ import Paper from '@material-ui/core/Paper';
 
 const LayoutContainer = ({ classes, children }) => {
   return (
-    <Container maxWidth="lg" className={classes.container}>
+    <Container maxWidth={false} className={classes.container}>
       <Grid container spacing={3}>
         <Grid item xs={12}>
           <Paper className={classes.paper}>{children}</Paper>
