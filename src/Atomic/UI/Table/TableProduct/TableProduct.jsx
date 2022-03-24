@@ -14,6 +14,7 @@ const useStyles = makeStyles({
 
 export default function TableProduct({ dataTable }) {
   const classes = useStyles();
+  // const
 
   return (
     <TableContainer component={Paper}>

@@ -9,6 +9,7 @@ import { useSelector } from 'react-redux';
 import PageProduct from '../containers/PageProduct';
 import SelectSort from '../Atomic/UI/Select/SelectSort';
 import DialogProductModal from '../Atomic/UI/Modal/DialogProductModal';
+import { Backdrop, CircularProgress } from '@material-ui/core';
 
 const drawerWidth = 240;
 const useStyles = makeStyles((theme) => ({
@@ -127,9 +128,15 @@ function App() {
           <Route path="/product">
             <PageProduct classes={classes} />
           </Route>
-          <Route path="/test">
-            <SelectSort />
-          </Route>
+          {/* <Route path="/test">
+            <Backdrop
+              className={classes.backdrop}
+              open={true}
+              style={{ zIndex: '2000' }}
+            >
+              <CircularProgress color="inherit" />
+            </Backdrop>
+          </Route> */}
           <Route exact path="/">
             <MainCategoryContainer classes={classes} />
           </Route>

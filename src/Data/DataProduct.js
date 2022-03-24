@@ -9,7 +9,7 @@ export const DUMMY_PRODUCT = [
     description: 'ao nay mac dep oi la dep et o et',
     mass: '1.2',
     category: 'Quần Kaki',
-    status: 'còn hàng',
+    status: 'Còn hàng',
   },
   {
     id: 2,
@@ -21,7 +21,7 @@ export const DUMMY_PRODUCT = [
     description: 'áo này dành cho tui',
     mass: '0.5',
     category: 'Áo Thun',
-    status: 'hết hàng',
+    status: 'Hết hàng',
   },
   {
     id: 1,
@@ -33,6 +33,6 @@ export const DUMMY_PRODUCT = [
     description: 'Lap top cực xịn ram 8gb, chíp m1',
     mass: '3.5',
     category: 'Quần dui',
-    status: 'còn hàng',
+    status: 'Còn hàng',
   },
 ];

@@ -58,17 +58,17 @@ export default function PageCategory() {
             </TableCell>
           </TableRow>
         </TableHead>
+        {dataCategory.length === 0 && (
+          <p className={classes.titleEmty}>
+            Hiện không có danh mục sản phẩm nào.
+          </p>
+        )}
         <TableBody>
           {dataCategory.map((row) => (
             <TableCategoryItem row={row} key={row.id} />
           ))}
         </TableBody>
       </Table>
-      {dataCategory.length === 0 && (
-        <p className={classes.titleEmty}>
-          Hiện không có danh mục sản phẩm nào.
-        </p>
-      )}
     </React.Fragment>
   );
 }

@@ -4,13 +4,16 @@ const dialogSlice = createSlice({
   name: 'dialog',
   initialState: {
     isShowDialog: false,
+    idDialog: -1,
   },
   reducers: {
-    showDialog(state) {
+    showDialog(state, action) {
       state.isShowDialog = true;
+      state.idDialog = action.payload;
     },
     hideDialog(state) {
       state.isShowDialog = false;
+      state.idDialog = -1;
     },
   },
 });

@@ -1,11 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { withStyles } from '@material-ui/core/styles';
-import {
-  FormControl,
-  InputAdornment,
-  InputLabel,
-  makeStyles,
-} from '@material-ui/core';
+import { InputAdornment, makeStyles } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import MuiDialogTitle from '@material-ui/core/DialogTitle';
@@ -19,11 +14,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { ActionsModalProduct } from '../../../store/modalProductSlicde';
 import { ActionsProduct } from '../../../store/productSlice';
 import SelectCategory from '../Select/SelectCategory';
-import DialogModal from './DialogModal';
-import { dialogActions } from '../../../store/dialogSlice';
 import Grid from '@material-ui/core/Grid';
-import OutlinedInput from '@material-ui/core/OutlinedInput';
-import clsx from 'clsx';
+import Backdrop from '@material-ui/core/Backdrop';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 const useStyles = makeStyles(() => ({
   buttonModal: {
@@ -56,6 +49,10 @@ const useStyles = makeStyles(() => ({
     borderRadius: '5px',
     boxShadow: 'rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;',
     marginBottom: '2rem',
+  },
+  backdrop: {
+    zIndex: '2000',
+    color: '#fff',
   },
 }));
 
@@ -114,6 +111,14 @@ export default function DialogProductModal(props) {
   const classes = useStyles();
   const dispatch = useDispatch();
 
+  const [open, setOpen] = React.useState(true);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setOpen(false);
+    }, 1500);
+  }, []);
+
   const productModal = useSelector((state) => state.modalProduct.productModal);
   const showInputProduct = useSelector(
     (state) => state.modalProduct.showInputProduct
@@ -125,8 +130,6 @@ export default function DialogProductModal(props) {
   const validate = useSelector((state) => state.modalProduct.validate);
 
   const dataCategory = useSelector((state) => state.category.dataCategory);
-
-  const isShowDialog = useSelector((state) => state.dialog.isShowDialog);
 
   const checkName = useSelector((state) => state.modalProduct.checkName);
 
@@ -207,198 +210,187 @@ export default function DialogProductModal(props) {
       !validateDescription &&
       !validateMass
     )
-      dispatch(dialogActions.showDialog());
-  };
-
-  const closeDialogHandler = () => {
-    dispatch(dialogActions.hideDialog());
-  };
-
-  const saveDialogHandler = () => {
-    dispatch(dialogActions.hideDialog());
-    dispatch(ActionsProduct.editProduct(productModal));
+      dispatch(ActionsProduct.editProduct(productModal));
     dispatch(ActionsModalProduct.hideModalProduct());
   };
 
-  let titleModal, titleDialog;
+  let titleModal;
 
   if (titleProductModal === 'show') {
     titleModal = 'Xem';
   } else if (titleProductModal === 'edit') {
     titleModal = 'Sửa';
-    titleDialog = 'sửa sản phẩm';
   } else {
     titleModal = 'Thêm';
-    titleDialog = 'thêm sản phẩm';
   }
 
   return (
     <>
-      {isShowDialog && (
-        <DialogModal
-          open={isShowDialog}
-          onClose={closeDialogHandler}
-          onSaveDialog={saveDialogHandler}
-          title={titleDialog}
-        />
-      )}
-
-      <Dialog
-        onClose={() => hideModalProductHandler()}
-        aria-labelledby="customized-dialog-title"
-        open={true}
-        // maxWidth="lg"
+      <Backdrop
+        className={classes.backdrop}
+        open={open}
+        style={{ zIndex: '1500' }}
       >
-        <DialogTitle
-          id="customized-dialog-title"
+        <CircularProgress color="inherit" />
+      </Backdrop>
+
+      {!open && (
+        <Dialog
           onClose={() => hideModalProductHandler()}
+          aria-labelledby="customized-dialog-title"
+          open={true}
         >
-          <span>{titleModal}</span> sản phẩm
-        </DialogTitle>
-        <DialogContent dividers>
-          <div className={classes.flexProduct}>
-            {titleProductModal !== 'add' && (
-              <Grid item xs={12}>
-                <Avatar
-                  variant="square"
-                  className={classes.imageModal}
-                  src={productModal.image}
-                />
-              </Grid>
-            )}
-            <Grid container spacing={3}>
-              <Grid item xs={12}>
-                <TextField
-                  error={checkName}
-                  helperText={checkName && 'Bạn chưa nhập tên sản phẩm'}
-                  color="primary"
-                  label="Tên sản phẩm"
-                  variant="outlined"
-                  type="text"
-                  fullWidth={true}
-                  InputProps={{
-                    readOnly: showInputProduct,
-                  }}
-                  value={productModal.name || ''}
-                  onChange={(e) => NameProductChangeHandler(e)}
-                />
-              </Grid>
-              {titleProductModal === 'add' && (
+          <DialogTitle
+            id="customized-dialog-title"
+            onClose={() => hideModalProductHandler()}
+          >
+            <span>{titleModal}</span> sản phẩm
+          </DialogTitle>
+          <DialogContent dividers>
+            <div className={classes.flexProduct}>
+              {titleProductModal !== 'add' && (
+                <Grid item xs={12}>
+                  <Avatar
+                    variant="square"
+                    className={classes.imageModal}
+                    src={productModal.image}
+                  />
+                </Grid>
+              )}
+              <Grid container spacing={3}>
                 <Grid item xs={12}>
                   <TextField
-                    error={checkImage}
-                    helperText={checkImage && 'Bạn chưa nhập Url ảnh'}
+                    error={checkName}
+                    helperText={checkName && 'Bạn chưa nhập tên sản phẩm'}
                     color="primary"
-                    label="Url ảnh"
+                    label="Tên sản phẩm"
                     variant="outlined"
                     type="text"
                     fullWidth={true}
                     InputProps={{
                       readOnly: showInputProduct,
                     }}
-                    onChange={(e) => urlProductChangeHandler(e)}
+                    value={productModal.name || ''}
+                    onChange={(e) => NameProductChangeHandler(e)}
                   />
                 </Grid>
-              )}
-              <Grid item xs={6}>
-                <TextField
-                  error={checkAmount}
-                  helperText={checkAmount && 'Bạn chưa nhập số lượng'}
-                  color="primary"
-                  label="Số lượng"
-                  type="number"
-                  variant="outlined"
-                  fullWidth={true}
-                  InputProps={{
-                    readOnly: showInputProduct,
-                  }}
-                  value={productModal.amount || ''}
-                  onChange={(e) => AmountProductChangeHandler(e)}
-                />
+                {titleProductModal === 'add' && (
+                  <Grid item xs={12}>
+                    <TextField
+                      error={checkImage}
+                      helperText={checkImage && 'Bạn chưa nhập Url ảnh'}
+                      color="primary"
+                      label="Url ảnh"
+                      variant="outlined"
+                      type="text"
+                      fullWidth={true}
+                      InputProps={{
+                        readOnly: showInputProduct,
+                      }}
+                      onChange={(e) => urlProductChangeHandler(e)}
+                    />
+                  </Grid>
+                )}
+                <Grid item xs={6}>
+                  <TextField
+                    error={checkAmount}
+                    helperText={checkAmount && 'Bạn chưa nhập số lượng'}
+                    color="primary"
+                    label="Số lượng"
+                    type="number"
+                    variant="outlined"
+                    fullWidth={true}
+                    InputProps={{
+                      readOnly: showInputProduct,
+                    }}
+                    value={productModal.amount || ''}
+                    onChange={(e) => AmountProductChangeHandler(e)}
+                  />
+                </Grid>
+                <Grid item xs={6}>
+                  <SelectCategory
+                    data={dataCategory.map((item) => item.name)}
+                    value={productModal.category}
+                    showInputProduct={showInputProduct}
+                    defaultValue={'Áo Thun'}
+                    label={'Danh mục'}
+                    onChange={categoryModalChangeHandler}
+                  />
+                </Grid>
+                <Grid item xs={6}>
+                  <TextField
+                    error={checkMass}
+                    helperText={checkMass && 'Bạn chưa nhập khối lượng'}
+                    color="primary"
+                    type="text"
+                    label="Khối lượng"
+                    fullWidth={true}
+                    InputProps={{
+                      endAdornment: (
+                        <InputAdornment position="end">kg</InputAdornment>
+                      ),
+                      readOnly: showInputProduct,
+                    }}
+                    variant="outlined"
+                    value={productModal.mass || ''}
+                    onChange={(e) => MassProductChangeHandler(e)}
+                  />
+                </Grid>
+                <Grid item xs={6}>
+                  <SelectCategory
+                    data={['Hết hàng', 'Còn hàng']}
+                    value={productModal.status}
+                    showInputProduct={showInputProduct}
+                    defaultValue={'Còn hàng'}
+                    label={'Trạng thái'}
+                    onChange={StatusProductChangeHandler}
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <TextField
+                    error={checkDescription}
+                    helperText={checkDescription && 'Bạn chưa nhập Mô tả'}
+                    color="primary"
+                    label="Mô tả"
+                    variant="outlined"
+                    type="text"
+                    multiline
+                    rows={5}
+                    fullWidth={true}
+                    InputProps={{
+                      readOnly: showInputProduct,
+                    }}
+                    value={productModal.description || ''}
+                    onChange={(e) => DescriptionProductChangeHandler(e)}
+                  />
+                </Grid>
               </Grid>
-              <Grid item xs={6}>
-                <SelectCategory
-                  data={dataCategory.map((item) => item.name)}
-                  value={productModal.category}
-                  showInputProduct={showInputProduct}
-                  defaultValue={'Áo Thun'}
-                  label={'Danh mục'}
-                  onChange={categoryModalChangeHandler}
-                />
-              </Grid>
-              <Grid item xs={6}>
-                <TextField
-                  error={checkMass}
-                  helperText={checkMass && 'Bạn chưa nhập khối lượng'}
-                  color="primary"
-                  type="text"
-                  label="Khối lượng"
-                  fullWidth={true}
-                  InputProps={{
-                    endAdornment: (
-                      <InputAdornment position="end">kg</InputAdornment>
-                    ),
-                    readOnly: showInputProduct,
-                  }}
-                  variant="outlined"
-                  value={productModal.mass || ''}
-                  onChange={(e) => MassProductChangeHandler(e)}
-                />
-              </Grid>
-              <Grid item xs={6}>
-                <SelectCategory
-                  data={['Hết hàng', 'Còn hàng']}
-                  value={productModal.status}
-                  showInputProduct={showInputProduct}
-                  defaultValue={'Còn hàng'}
-                  label={'Trạng thái'}
-                  onChange={StatusProductChangeHandler}
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  error={checkDescription}
-                  helperText={checkDescription && 'Bạn chưa nhập Mô tả'}
-                  color="primary"
-                  label="Mô tả"
-                  variant="outlined"
-                  type="text"
-                  multiline
-                  rows={5}
-                  fullWidth={true}
-                  InputProps={{
-                    readOnly: showInputProduct,
-                  }}
-                  value={productModal.description || ''}
-                  onChange={(e) => DescriptionProductChangeHandler(e)}
-                />
-              </Grid>
-            </Grid>
-          </div>
-        </DialogContent>
-        <DialogActions>
-          <div className={classes.buttonModal}>
-            <Button
-              variant="contained"
-              color="secondary"
-              style={{
-                marginRight: '5px',
-              }}
-              onClick={() => hideModalProductHandler()}
-            >
-              Đóng
-            </Button>
-            <Button
-              variant="contained"
-              color="primary"
-              onClick={() => editProductHandler()}
-              disabled={validate}
-            >
-              Lưu
-            </Button>
-          </div>
-        </DialogActions>
-      </Dialog>
+            </div>
+          </DialogContent>
+          <DialogActions>
+            <div className={classes.buttonModal}>
+              <Button
+                variant="contained"
+                color="secondary"
+                style={{
+                  marginRight: '5px',
+                }}
+                onClick={() => hideModalProductHandler()}
+              >
+                Đóng
+              </Button>
+              <Button
+                variant="contained"
+                color="primary"
+                onClick={() => editProductHandler()}
+                disabled={validate}
+              >
+                Lưu
+              </Button>
+            </div>
+          </DialogActions>
+        </Dialog>
+      )}
     </>
   );
 }

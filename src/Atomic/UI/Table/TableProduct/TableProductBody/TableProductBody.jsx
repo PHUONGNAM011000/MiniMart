@@ -4,11 +4,14 @@ import {
   TableBody,
   TableCell,
   TableRow,
+  Typography,
 } from '@material-ui/core';
 import { withStyles, makeStyles } from '@material-ui/core/styles';
 import { useDispatch, useSelector } from 'react-redux';
+import { dialogActions } from '../../../../../store/dialogSlice';
 import { ActionsModalProduct } from '../../../../../store/modalProductSlicde';
 import { ActionsProduct } from '../../../../../store/productSlice';
+import DialogModalAlert from '../../../Modal/DialogModalAlert';
 
 const useStyles = makeStyles({
   imgSize: {
@@ -67,12 +70,25 @@ const TableProductBody = ({ dataTable }) => {
     (state) => state.customTheme.isColorPrimary
   );
 
+  const isShowDialog = useSelector((state) => state.dialog.isShowDialog);
+
+  const idDialog = useSelector((state) => state.dialog.idDialog);
+
   const showModalProduct = (item) => {
     dispatch(ActionsModalProduct.showModalProduct(item));
   };
 
   const removeProductHandler = (id) => {
-    dispatch(ActionsProduct.removeProduct(id));
+    dispatch(dialogActions.showDialog(id));
+  };
+
+  const closeDialogHandler = () => {
+    dispatch(dialogActions.hideDialog());
+  };
+
+  const saveDialogHandler = () => {
+    dispatch(ActionsProduct.removeProduct(idDialog));
+    dispatch(dialogActions.hideDialog());
   };
 
   const editProductHandler = (item) => {
@@ -80,69 +96,87 @@ const TableProductBody = ({ dataTable }) => {
   };
 
   return (
-    <TableBody>
-      {dataTable.map((item) => (
-        <StyledTableRow key={item.id}>
-          <StyledTableCell align="left">{item.stt}</StyledTableCell>
-          <StyledTableCell
-            align="left"
-            component="th"
-            scope="row"
-            className={classes.name}
-          >
-            {item.name}
-          </StyledTableCell>
-          <StyledTableCell align="center">
-            <Avatar
-              variant="square"
-              src={item.image}
-              className={classes.imgSize}
-            />
-          </StyledTableCell>
-          <StyledTableCell align="right" className={classes.amount}>
-            {item.amount}
-          </StyledTableCell>
-          <StyledTableCell align="left" className={classes.description}>
-            {item.description}
-          </StyledTableCell>
-          <StyledTableCell align="left" className={classes.category}>
-            {item.category}
-          </StyledTableCell>
-          <StyledTableCell align="right" className={classes.mass}>
-            {item.mass}
-          </StyledTableCell>
-          <StyledTableCell align="left" className={classes.status}>
-            {item.status}
-          </StyledTableCell>
-          <StyledTableCell align="center" className={classes.groupButton}>
-            <Button
-              onClick={() => showModalProduct(item)}
-              variant="contained"
-              color={isColorPrimary ? 'primary' : 'secondary'}
-              className={classes.button}
+    <>
+      <DialogModalAlert
+        open={isShowDialog}
+        onClose={closeDialogHandler}
+        onSaveDialog={saveDialogHandler}
+        title={'xoá sản phẩm này không ?'}
+      />
+
+      {dataTable.length === 0 && (
+        <Typography
+          display="block"
+          style={{ width: '220px', margin: '1rem 0.5rem' }}
+        >
+          Hiện không có sản phẩm nào
+        </Typography>
+      )}
+
+      <TableBody>
+        {dataTable.map((item) => (
+          <StyledTableRow key={item.id}>
+            <StyledTableCell align="left">{item.stt}</StyledTableCell>
+            <StyledTableCell
+              align="left"
+              component="th"
+              scope="row"
+              className={classes.name}
             >
-              Xem
-            </Button>
-            <Button
-              onClick={() => removeProductHandler(item.id)}
-              variant="contained"
-              color={isColorPrimary ? 'primary' : 'secondary'}
-              className={classes.button}
-            >
-              Xoá
-            </Button>
-            <Button
-              onClick={() => editProductHandler(item)}
-              variant="contained"
-              color={isColorPrimary ? 'primary' : 'secondary'}
-              className={classes.button}
-            >
-              Sửa
-            </Button>
-          </StyledTableCell>
-        </StyledTableRow>
-      ))}
-    </TableBody>
+              {item.name}
+            </StyledTableCell>
+            <StyledTableCell align="center">
+              <Avatar
+                variant="square"
+                src={item.image}
+                className={classes.imgSize}
+              />
+            </StyledTableCell>
+            <StyledTableCell align="right" className={classes.amount}>
+              {item.amount}
+            </StyledTableCell>
+            <StyledTableCell align="left" className={classes.description}>
+              {item.description}
+            </StyledTableCell>
+            <StyledTableCell align="left" className={classes.category}>
+              {item.category}
+            </StyledTableCell>
+            <StyledTableCell align="right" className={classes.mass}>
+              {item.mass}
+            </StyledTableCell>
+            <StyledTableCell align="left" className={classes.status}>
+              {item.status}
+            </StyledTableCell>
+            <StyledTableCell align="center" className={classes.groupButton}>
+              <Button
+                onClick={() => showModalProduct(item)}
+                variant="contained"
+                color={isColorPrimary ? 'primary' : 'secondary'}
+                className={classes.button}
+              >
+                Xem
+              </Button>
+              <Button
+                onClick={() => removeProductHandler(item.id)}
+                variant="contained"
+                color={isColorPrimary ? 'primary' : 'secondary'}
+                className={classes.button}
+              >
+                Xoá
+              </Button>
+              <Button
+                onClick={() => editProductHandler(item)}
+                variant="contained"
+                color={isColorPrimary ? 'primary' : 'secondary'}
+                className={classes.button}
+              >
+                Sửa
+              </Button>
+            </StyledTableCell>
+          </StyledTableRow>
+        ))}
+      </TableBody>
+    </>
   );
 };
 

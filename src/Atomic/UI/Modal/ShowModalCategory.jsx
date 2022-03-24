@@ -8,7 +8,7 @@ import Modal from './Modal';
 import { ActionsModal } from '../../../store/modalCategorySlice';
 import { ActionsCategory } from '../../../store/categorySlice';
 import { dialogActions } from '../../../store/dialogSlice';
-import DialogModal from './DialogModal';
+import DialogModalAlert from './DialogModalAlert';
 
 const useStyles = makeStyles(() => ({
   buttonModal: {
@@ -90,7 +90,7 @@ const ShowModal = () => {
   return (
     <>
       {isShowDialog && (
-        <DialogModal
+        <DialogModalAlert
           open={isShowDialog}
           onClose={closeDialogHandler}
           onSaveDialog={saveDialogHandler}
