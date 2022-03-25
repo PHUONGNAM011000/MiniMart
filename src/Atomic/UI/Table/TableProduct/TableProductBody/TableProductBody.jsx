@@ -102,6 +102,7 @@ const TableProductBody = ({ dataTable }) => {
         onClose={closeDialogHandler}
         onSaveDialog={saveDialogHandler}
         title={'xoá sản phẩm này không ?'}
+        titleButton={'Xoá'}
       />
 
       {dataTable.length === 0 && (

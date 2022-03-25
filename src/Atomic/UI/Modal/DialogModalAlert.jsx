@@ -48,7 +48,13 @@ const DialogTitle = withStyles(styles)((props) => {
   );
 });
 
-const DialogModalAlert = ({ open, onClose, onSaveDialog, title }) => {
+const DialogModalAlert = ({
+  open,
+  onClose,
+  onSaveDialog,
+  title,
+  titleButton,
+}) => {
   return (
     <Dialog
       aria-labelledby="customized-dialog-title"
@@ -64,7 +70,7 @@ const DialogModalAlert = ({ open, onClose, onSaveDialog, title }) => {
           Huỷ
         </Button>
         <Button autoFocus onClick={onSaveDialog} color="secondary">
-          Lưu
+          {titleButton}
         </Button>
       </DialogActions>
     </Dialog>

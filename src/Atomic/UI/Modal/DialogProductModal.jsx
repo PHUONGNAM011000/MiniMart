@@ -69,7 +69,6 @@ const styles = (theme) => ({
   },
   title: {
     marginRight: '5rem',
-
     '@media screen and (max-width: 800px)': {
       fontSize: '1.5rem',
     },
@@ -379,14 +378,16 @@ export default function DialogProductModal(props) {
               >
                 Đóng
               </Button>
-              <Button
-                variant="contained"
-                color="primary"
-                onClick={() => editProductHandler()}
-                disabled={validate}
-              >
-                Lưu
-              </Button>
+              {titleProductModal !== 'show' && (
+                <Button
+                  variant="contained"
+                  color="primary"
+                  onClick={() => editProductHandler()}
+                  disabled={validate}
+                >
+                  {titleModal}
+                </Button>
+              )}
             </div>
           </DialogActions>
         </Dialog>
