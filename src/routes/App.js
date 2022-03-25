@@ -8,6 +8,7 @@ import ShowModalCategory from '../Atomic/UI/Modal/ShowModalCategory';
 import { useSelector } from 'react-redux';
 import PageProduct from '../containers/PageProduct';
 import DialogProductModal from '../Atomic/UI/Modal/DialogProductModal';
+import Demo from '../Demo/Demo';
 
 const drawerWidth = 240;
 const useStyles = makeStyles((theme) => ({
@@ -39,15 +40,16 @@ const useStyles = makeStyles((theme) => ({
       duration: theme.transitions.duration.enteringScreen,
     }),
   },
-  menuButton: {
-    marginRight: 36,
-  },
   menuButtonHidden: {
     display: 'none',
   },
   title: {
     flexGrow: 1,
     marginLeft: '1rem',
+
+    '@media screen and (max-width: 300px)': {
+      width: '10rem',
+    },
   },
   nameUser: {
     flexGrow: 1,
@@ -82,12 +84,16 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
     height: '100vh',
     overflow: 'auto',
+    paddingTop: theme.spacing(6),
+    paddingBottom: theme.spacing(6),
   },
   container: {
-    paddingTop: theme.spacing(4),
+    padding: theme.spacing(2),
+    paddingLeft: theme.spacing(2),
+    backgroundColor: '#F9FAFC',
   },
   paper: {
-    padding: theme.spacing(2),
+    padding: theme.spacing(3),
     display: 'flex',
     overflow: 'auto',
     flexDirection: 'column',
@@ -115,6 +121,9 @@ function App() {
     <Router>
       {isShowModalCategory && <ShowModalCategory />}
       {isShowModalProduct && <DialogProductModal />}
+      {/* <div>
+        <Demo />
+      </div> */}
       <div className={classes.root}>
         <Menu classes={classes} />
         <Switch>

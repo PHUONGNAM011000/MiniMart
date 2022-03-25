@@ -10,16 +10,8 @@ const useStyles = makeStyles((theme) => ({
   },
   tableHeader: {
     display: 'flex',
-    alignItems: 'center',
+    alignItems: 'flex-start',
     justifyContent: 'space-between',
-    // '& button': {
-    //   '@media screen and (max-width: 768px)': {
-    //     display: 'none',
-    //   },
-    // },
-  },
-  tableTitle: {
-    marginLeft: '1rem',
   },
 }));
 

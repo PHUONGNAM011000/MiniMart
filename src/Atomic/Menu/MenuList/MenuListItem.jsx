@@ -13,7 +13,11 @@ const MenuListItem = (props) => {
   const classes = useStyles();
 
   return (
-    <Link className={classes.link} to={`${props.params}`}>
+    <Link
+      className={classes.link}
+      to={`${props.params}`}
+      onClick={props.onClick}
+    >
       <ListItem button>{props.children}</ListItem>
     </Link>
   );

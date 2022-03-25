@@ -30,7 +30,10 @@ const NavHeader = ({ classes }) => {
     <>
       <AppBar
         position="absolute"
-        className={clsx(classes.appBar, open && classes.appBarShift)}
+        className={clsx(
+          classes.appBar
+          // open && classes.appBarShift
+        )}
         color={isColorPrimary ? 'primary' : 'secondary'}
       >
         <Toolbar className={classes.toolbar}>
@@ -39,10 +42,7 @@ const NavHeader = ({ classes }) => {
             color="inherit"
             aria-label="open drawer"
             onClick={handleDrawerOpen}
-            className={clsx(
-              classes.menuButton,
-              open && classes.menuButtonHidden
-            )}
+            className={clsx(open && classes.menuButtonHidden)}
           >
             <MenuIcon />
           </IconButton>

@@ -35,11 +35,12 @@ const Menu = ({ classes }) => {
         handleDrawerOpen={handleDrawerOpen}
       />
       <Drawer
-        variant="permanent"
+        variant="temporary"
         classes={{
           paper: clsx(classes.drawerPaper, !open && classes.drawerPaperClose),
         }}
         open={open}
+        onClose={handleDrawerClose}
       >
         <div className={classes.toolbarIcon}>
           <IconButton onClick={handleDrawerClose}>
@@ -52,6 +53,7 @@ const Menu = ({ classes }) => {
             <MenuListItem
               key={item.id}
               params={`${item.id === 1 ? 'category' : 'product'}`}
+              onClick={handleDrawerClose}
             >
               <MenuItemIcon>
                 {item.id === 1 ? <DashboardIcon /> : <ShoppingCartIcon />}

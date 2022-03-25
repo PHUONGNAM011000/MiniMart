@@ -40,14 +40,14 @@ const useStyles = makeStyles({
     margin: '0.5rem',
   },
   groupButton: {
-    minWidth: '300px',
+    minWidth: '280px',
   },
 });
 
 const StyledTableRow = withStyles((theme) => ({
   root: {
-    '&:nth-of-type(odd)': {
-      backgroundColor: theme.palette.action.hover,
+    '&:hover': {
+      backgroundColor: '#F7F8F8',
     },
   },
 }))(TableRow);
@@ -105,14 +105,14 @@ const TableProductBody = ({ dataTable }) => {
         titleButton={'Xoá'}
       />
 
-      {dataTable.length === 0 && (
+      {/* {dataTable.length === 0 && (
         <Typography
           display="block"
           style={{ width: '220px', margin: '1rem 0.5rem' }}
         >
           Hiện không có sản phẩm nào
         </Typography>
-      )}
+      )} */}
 
       <TableBody>
         {dataTable.map((item) => (
