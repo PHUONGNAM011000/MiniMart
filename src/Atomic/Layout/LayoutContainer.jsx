@@ -6,7 +6,7 @@ const LayoutContainer = ({ classes, children }) => {
   return (
     <Container maxWidth={false} className={classes.container}>
       <Grid container>
-        <Grid xs={12}>
+        <Grid xs={12} item>
           <Paper className={classes.paper}>{children}</Paper>
         </Grid>
       </Grid>

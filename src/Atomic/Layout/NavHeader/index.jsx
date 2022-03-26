@@ -32,7 +32,7 @@ const NavHeader = ({ classes }) => {
         position="absolute"
         className={clsx(
           classes.appBar
-          // open && classes.appBarShift
+          // , open && classes.appBarShift
         )}
         color={isColorPrimary ? 'primary' : 'secondary'}
       >
