@@ -18,7 +18,7 @@ const MainProductContainer = ({ classes }) => {
       <main className={classes.content}>
         <div
           className={classes.appBarSpacer}
-          style={{ backgroundColor: '#F9FAFC' }}
+          // style={{ backgroundColor: '#F9FAFC' }}
         />
         <Container maxWidth={false} className={classes.container}>
           <HeaderContainer

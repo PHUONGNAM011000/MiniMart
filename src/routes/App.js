@@ -8,7 +8,6 @@ import ShowModalCategory from '../Atomic/UI/Modal/ShowModalCategory';
 import { useSelector } from 'react-redux';
 import PageProduct from '../containers/PageProduct';
 import DialogProductModal from '../Atomic/UI/Modal/DialogProductModal';
-import Demo from '../Demo/Demo';
 
 const drawerWidth = 240;
 const useStyles = makeStyles((theme) => ({
@@ -82,15 +81,14 @@ const useStyles = makeStyles((theme) => ({
   appBarSpacer: theme.mixins.toolbar,
   content: {
     flexGrow: 1,
-    height: '100vh',
     overflow: 'auto',
     paddingTop: theme.spacing(6),
     paddingBottom: theme.spacing(6),
+    backgroundColor: '#F9FAFC',
   },
   container: {
     padding: theme.spacing(2),
     paddingLeft: theme.spacing(2),
-    backgroundColor: '#F9FAFC',
   },
   paper: {
     padding: theme.spacing(3),
