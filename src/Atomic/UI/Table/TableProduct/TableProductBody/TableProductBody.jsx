@@ -4,7 +4,6 @@ import {
   TableBody,
   TableCell,
   TableRow,
-  Typography,
 } from '@material-ui/core';
 import { withStyles, makeStyles } from '@material-ui/core/styles';
 import { useDispatch, useSelector } from 'react-redux';
