@@ -1,6 +1,6 @@
 import { Button, TableBody, TableCell, TableRow } from '@material-ui/core';
 import { withStyles, makeStyles } from '@material-ui/core/styles';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 const useStyles = makeStyles({
   name: {
@@ -36,16 +36,16 @@ const StyledTableCell = withStyles((theme) => ({
 }))(TableCell);
 
 const TableBodyCategory = ({ dataTable }) => {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const classes = useStyles();
 
   const isColorPrimary = useSelector(
     (state) => state.customTheme.isColorPrimary
   );
 
-  const isShowDialog = useSelector((state) => state.dialog.isShowDialog);
+  // const isShowDialog = useSelector((state) => state.dialog.isShowDialog);
 
-  const idDialog = useSelector((state) => state.dialog.idDialog);
+  // const idDialog = useSelector((state) => state.dialog.idDialog);
 
   //   const showModalProduct = (item) => {
   //     dispatch(ActionsModalProduct.showModalProduct(item));
