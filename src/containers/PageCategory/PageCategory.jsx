@@ -7,6 +7,8 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import { useSelector } from 'react-redux';
 import TableCategoryItem from '../../Atomic/UI/Table/TableCategoryItem';
+import SelectSort from '../../Atomic/UI/Select/SelectSort';
+import TableCategory from '../../Atomic/UI/Table/TableCategory/TableCategory';
 
 const useStyles = makeStyles((theme) => ({
   seeMore: {
@@ -18,7 +20,8 @@ const useStyles = makeStyles((theme) => ({
   tableHeader: {
     display: 'flex',
     alignItems: 'center',
-    justifyContent: 'flex-end',
+    justifyContent: 'space-between',
+    marginBottom: '2rem',
   },
   tableTitle: {
     marginLeft: '1rem',
@@ -36,39 +39,15 @@ export default function PageCategory() {
   return (
     <React.Fragment>
       <div className={classes.tableHeader}>
-        <p className={classes.tableTitle}>SỐ LƯỢNG : </p>
-        &nbsp;
-        <p>{dataCategory.length}</p>
+        <SelectSort />
+        <div style={{ display: 'flex' }}>
+          <p className={classes.tableTitle}>SỐ LƯỢNG : </p>
+          &nbsp;
+          <p>{dataCategory.length}</p>
+        </div>
       </div>
 
-      <Table size="small" className={classes.table}>
-        <TableHead>
-          <TableRow>
-            <TableCell style={{ fontWeight: 'bold', fontSize: '1rem' }}>
-              STT
-            </TableCell>
-            <TableCell style={{ fontWeight: 'bold', fontSize: '1rem' }}>
-              Tên Sản Phẩm
-            </TableCell>
-            <TableCell style={{ fontWeight: 'bold', fontSize: '1rem' }}>
-              Mô tả
-            </TableCell>
-            <TableCell style={{ fontWeight: 'bold', fontSize: '1rem' }}>
-              Hành động
-            </TableCell>
-          </TableRow>
-        </TableHead>
-        {dataCategory.length === 0 && (
-          <p className={classes.titleEmty}>
-            Hiện không có danh mục sản phẩm nào.
-          </p>
-        )}
-        <TableBody>
-          {dataCategory.map((row) => (
-            <TableCategoryItem row={row} key={row.id} />
-          ))}
-        </TableBody>
-      </Table>
+      <TableCategory dataTable={dataCategory} />
     </React.Fragment>
   );
 }

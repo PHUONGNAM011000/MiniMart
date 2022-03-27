@@ -7,7 +7,6 @@ import Select from '@material-ui/core/Select';
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
-    margin: theme.spacing(1),
     minWidth: 120,
   },
   selectEmpty: {
@@ -33,6 +32,10 @@ export default function SelectSort({ setSortType }) {
           onChange={handleChange}
           label="select"
           color="primary"
+          style={{
+            backgroundColor: '#fff',
+            minWidth: '200px',
+          }}
         >
           <MenuItem value="">
             <em>Thu dọn</em>

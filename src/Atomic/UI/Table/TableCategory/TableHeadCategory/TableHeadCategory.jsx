@@ -13,22 +13,17 @@ const StyledTableCell = withStyles((theme) => ({
   },
 }))(TableCell);
 
-const TableProductHead = () => {
+const TableHeadCategory = () => {
   return (
     <TableHead>
       <TableRow>
         <StyledTableCell align="left">STT</StyledTableCell>
         <StyledTableCell align="left">Tên sản phẩm</StyledTableCell>
-        <StyledTableCell align="center">Ảnh&nbsp;</StyledTableCell>
-        <StyledTableCell align="right">Số lượng&nbsp;</StyledTableCell>
         <StyledTableCell align="left">Mô tả&nbsp;</StyledTableCell>
-        <StyledTableCell align="left">Danh mục &nbsp;</StyledTableCell>
-        <StyledTableCell align="right">Khối lượng&nbsp;(kg)</StyledTableCell>
-        <StyledTableCell align="left">Tình trạng&nbsp;</StyledTableCell>
         <StyledTableCell align="center">Hành động&nbsp;</StyledTableCell>
       </TableRow>
     </TableHead>
   );
 };
 
-export default TableProductHead;
+export default TableHeadCategory;

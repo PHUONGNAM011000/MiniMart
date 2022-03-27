@@ -82,13 +82,13 @@ const useStyles = makeStyles((theme) => ({
   content: {
     flexGrow: 1,
     overflow: 'auto',
+    height: '100vh',
     paddingTop: theme.spacing(6),
     paddingBottom: theme.spacing(6),
-    backgroundColor: '#F9FAFC',
+    backgroundColor: '#E3F2FD',
   },
   container: {
-    padding: theme.spacing(2),
-    paddingLeft: theme.spacing(2),
+    padding: theme.spacing(4),
   },
   paper: {
     padding: theme.spacing(3),

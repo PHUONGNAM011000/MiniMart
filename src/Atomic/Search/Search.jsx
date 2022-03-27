@@ -10,9 +10,8 @@ export default function Search() {
       // error={checkMass}
       // helperText={checkMass && 'Bạn chưa nhập khối lượng'}
       placeholder="Tìm kiếm sản phẩm . . ."
-      style={{
-        maxWidth: '500px',
-      }}
+      fullWidth={true}
+      style={{ maxWidth: '500px', background: '#fff' }}
       color="primary"
       type="text"
       InputProps={{

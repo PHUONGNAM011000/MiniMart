@@ -30,10 +30,7 @@ const NavHeader = ({ classes }) => {
     <>
       <AppBar
         position="absolute"
-        className={clsx(
-          classes.appBar
-          // , open && classes.appBarShift
-        )}
+        className={clsx(classes.appBar, !open && classes.appBarShifts)}
         color={isColorPrimary ? 'primary' : 'secondary'}
       >
         <Toolbar className={classes.toolbar}>

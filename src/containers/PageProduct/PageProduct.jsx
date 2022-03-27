@@ -22,6 +22,8 @@ const useStyles = makeStyles((theme) => ({
   },
   tableTitle: {
     display: 'flex',
+    fontWeight: '600 !important',
+    color: '#000 !important',
   },
   titleEmty: {
     marginTop: '1rem',
@@ -66,9 +68,7 @@ export default function PageProduct() {
         <SelectSort setSortType={setSortType} />
 
         <div className={classes.tableTitle}>
-          <p style={{ fontWeight: '600 !important', color: '#000' }}>
-            Số Lượng :{' '}
-          </p>
+          <p>Số lượng : </p>
           &nbsp;
           <p>{data.length}</p>
         </div>

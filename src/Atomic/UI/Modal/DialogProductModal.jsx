@@ -208,9 +208,10 @@ export default function DialogProductModal(props) {
       !validateAmount &&
       !validateDescription &&
       !validateMass
-    )
+    ) {
       dispatch(ActionsProduct.editProduct(productModal));
-    dispatch(ActionsModalProduct.hideModalProduct());
+      dispatch(ActionsModalProduct.hideModalProduct());
+    }
   };
 
   let titleModal;
@@ -370,9 +371,10 @@ export default function DialogProductModal(props) {
             <div className={classes.buttonModal}>
               <Button
                 variant="contained"
-                color="secondary"
+                // color="secondary"
                 style={{
                   marginRight: '5px',
+                  backgroundColor: '#E3F2FD',
                 }}
                 onClick={() => hideModalProductHandler()}
               >
