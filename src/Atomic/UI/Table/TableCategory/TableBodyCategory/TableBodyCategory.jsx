@@ -1,19 +1,30 @@
 import { Button, TableBody, TableCell, TableRow } from '@material-ui/core';
 import { withStyles, makeStyles } from '@material-ui/core/styles';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { ActionsModal } from '../../../../../store/modalCategorySlice';
+import { dialogActions } from '../../../../../store/dialogSlice';
+import DialogModalAlert from '../../../Modal/DialogModalAlert';
+import { ActionsCategory } from '../../../../../store/categorySlice';
 
 const useStyles = makeStyles({
+  stt: {
+    width: '70px',
+    minWidth: '70px',
+  },
   name: {
-    minWidth: '140px',
+    width: '150px',
+    minWidth: '150px',
   },
   description: {
-    minWidth: '220px',
+    minWidth: '300px',
   },
   button: {
     margin: '0.5rem',
+    boxShadow: 'none',
   },
   groupButton: {
-    minWidth: '280px',
+    width: '300px',
+    minWidth: '300px',
   },
 });
 
@@ -36,61 +47,65 @@ const StyledTableCell = withStyles((theme) => ({
 }))(TableCell);
 
 const TableBodyCategory = ({ dataTable }) => {
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
   const classes = useStyles();
 
   const isColorPrimary = useSelector(
     (state) => state.customTheme.isColorPrimary
   );
 
-  // const isShowDialog = useSelector((state) => state.dialog.isShowDialog);
+  // const dataCategory = useSelector((state) => state.category.dataCategory);
 
-  // const idDialog = useSelector((state) => state.dialog.idDialog);
+  const isShowDialog = useSelector((state) => state.dialog.isShowDialog);
 
-  //   const showModalProduct = (item) => {
-  //     dispatch(ActionsModalProduct.showModalProduct(item));
-  //   };
+  const idDialog = useSelector((state) => state.dialog.idDialog);
 
-  //   const removeProductHandler = (id) => {
-  //     dispatch(dialogActions.showDialog(id));
-  //   };
+  const showCategoryProduct = (item) => {
+    dispatch(ActionsModal.showModal(item));
+  };
 
-  //   const closeDialogHandler = () => {
-  //     dispatch(dialogActions.hideDialog());
-  //   };
+  const removeProductHandler = (id) => {
+    dispatch(dialogActions.showDialog(id));
+  };
 
-  //   const saveDialogHandler = () => {
-  //     dispatch(ActionsProduct.removeProduct(idDialog));
-  //     dispatch(dialogActions.hideDialog());
-  //   };
+  const closeDialogHandler = () => {
+    dispatch(dialogActions.hideDialog());
+  };
 
-  //   const editProductHandler = (item) => {
-  //     dispatch(ActionsModalProduct.editModalProduct(item));
-  //   };
+  const saveDialogHandler = () => {
+    dispatch(ActionsCategory.remove(idDialog));
+    dispatch(dialogActions.hideDialog());
+  };
+
+  const editCategoryHandler = (item) => {
+    dispatch(ActionsModal.editModal(item));
+  };
 
   return (
     <>
-      {/* <DialogModalAlert
+      <DialogModalAlert
         open={isShowDialog}
-        // onClose={closeDialogHandler}
-        // onSaveDialog={saveDialogHandler}
+        onClose={closeDialogHandler}
+        onSaveDialog={saveDialogHandler}
         title={'xoá sản phẩm này không ?'}
         titleButton={'Xoá'}
-      /> */}
+      />
 
-      {/* {dataTable.length === 0 && (
-          <Typography
-            display="block"
-            style={{ width: '220px', margin: '1rem 0.5rem' }}
-          >
-            Hiện không có sản phẩm nào
-          </Typography>
-        )} */}
+      {/* {dataCategory.length === 0 && (
+        <Typography
+          display="block"
+          style={{ width: '220px', margin: '1rem 0.5rem' }}
+        >
+          Hiện không có sản phẩm nào
+        </Typography>
+      )} */}
 
       <TableBody>
         {dataTable.map((item) => (
           <StyledTableRow key={item.id}>
-            <StyledTableCell align="left">{item.stt}</StyledTableCell>
+            <StyledTableCell align="left" className={classes.stt}>
+              {item.stt}
+            </StyledTableCell>
             <StyledTableCell
               align="left"
               component="th"
@@ -107,6 +122,7 @@ const TableBodyCategory = ({ dataTable }) => {
                 variant="contained"
                 className={classes.button}
                 color={isColorPrimary ? 'primary' : 'secondary'}
+                onClick={() => showCategoryProduct(item)}
               >
                 Xem
               </Button>
@@ -114,6 +130,7 @@ const TableBodyCategory = ({ dataTable }) => {
                 variant="contained"
                 className={classes.button}
                 color={isColorPrimary ? 'primary' : 'secondary'}
+                onClick={() => removeProductHandler(item.id)}
               >
                 Xoá
               </Button>
@@ -121,6 +138,7 @@ const TableBodyCategory = ({ dataTable }) => {
                 variant="contained"
                 className={classes.button}
                 color={isColorPrimary ? 'primary' : 'secondary'}
+                onClick={() => editCategoryHandler(item)}
               >
                 Sửa
               </Button>

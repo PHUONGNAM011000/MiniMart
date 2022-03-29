@@ -7,6 +7,7 @@ const StyledTableCell = withStyles((theme) => ({
   head: {
     backgroundColor: '#F3F4F6',
     color: theme.palette.common.black,
+    fontSize: '1rem',
   },
   body: {
     fontSize: 14,

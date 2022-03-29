@@ -371,10 +371,9 @@ export default function DialogProductModal(props) {
             <div className={classes.buttonModal}>
               <Button
                 variant="contained"
-                // color="secondary"
+                color="secondary"
                 style={{
                   marginRight: '5px',
-                  backgroundColor: '#E3F2FD',
                 }}
                 onClick={() => hideModalProductHandler()}
               >

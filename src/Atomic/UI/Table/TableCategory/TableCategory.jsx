@@ -20,9 +20,9 @@ const TableCategory = ({ dataTable }) => {
       <TableContainer
         style={{
           background: '#fff',
-          borderRadius: '1rem',
-          boxShadow:
-            'rgb(0 0 0 / 10%) 0rem 0.25rem 0.375rem -0.0625rem, rgb(0 0 0 / 6%) 0rem 0.125rem 0.25rem -0.0625rem',
+          borderRadius: '10px',
+          boxShadow: 'rgb(43 52 69 / 10%) 0px 4px 16px',
+          minWidth: '250px',
         }}
       >
         <Table className={classes.table} aria-label="customized table">

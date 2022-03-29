@@ -23,6 +23,7 @@ const styles = (theme) => ({
   },
   title: {
     marginRight: '5rem',
+    minWidth: '200px',
 
     '@media screen and (max-width: 800px)': {
       fontSize: '1.5rem',

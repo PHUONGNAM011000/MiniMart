@@ -11,6 +11,8 @@ const useSelect = (dataProduct) => {
         nameIncrease: 'name',
         priceDecrease: 'amount',
         nameDecrease: 'name',
+        idIncrease: 'id',
+        idDecrease: 'id',
       };
       const sortProperty = types[type];
       const sorted =
@@ -41,7 +43,7 @@ const useSelect = (dataProduct) => {
       setData(sorted);
     };
 
-    sortArray(sortType); // eslint-disable-next-line
+    sortArray(sortType);
   }, [sortType, dataProduct]);
 
   return {

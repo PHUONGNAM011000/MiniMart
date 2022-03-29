@@ -2,7 +2,7 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { useSelector } from 'react-redux';
 import useSelect from '../../hooks/use-select';
-import SelectSort from '../../Atomic/UI/Select/SelectSort';
+import SelectProductSort from '../../Atomic/UI/Select/SelectProductSort';
 import TableProduct from '../../Atomic/UI/Table/TableProduct/TableProduct';
 
 const useStyles = makeStyles((theme) => ({
@@ -11,19 +11,20 @@ const useStyles = makeStyles((theme) => ({
   },
   tableHeader: {
     display: 'flex',
-    alignItems: 'center',
+    alignItems: 'flex-start',
     justifyContent: 'space-between',
     marginBottom: '2rem',
 
-    '& p': {
-      fontWeight: 'bold',
-      color: '#808080',
+    '@media screen and (max-width: 450px)': {
+      flexDirection: 'column',
+      alignItems: 'flex-start',
     },
   },
   tableTitle: {
     display: 'flex',
     fontWeight: '600 !important',
     color: '#000 !important',
+    marginTop: '10px',
   },
   titleEmty: {
     marginTop: '1rem',
@@ -60,12 +61,22 @@ const useStyles = makeStyles((theme) => ({
 export default function PageProduct() {
   const classes = useStyles();
   const dataProduct = useSelector((state) => state.product.dataProduct);
-  const { data, setSortType } = useSelect(dataProduct);
+
+  const searchQuery = useSelector((state) => state.search.searchQuery);
+
+  let filtered = dataProduct;
+
+  if (searchQuery) {
+    filtered = dataProduct.filter((item) =>
+      item.name.toLowerCase().startsWith(searchQuery.toLowerCase())
+    );
+  }
+  const { data, setSortType } = useSelect(filtered);
 
   return (
     <React.Fragment>
       <div className={classes.tableHeader}>
-        <SelectSort setSortType={setSortType} />
+        <SelectProductSort setSortType={setSortType} />
 
         <div className={classes.tableTitle}>
           <p>Số lượng : </p>

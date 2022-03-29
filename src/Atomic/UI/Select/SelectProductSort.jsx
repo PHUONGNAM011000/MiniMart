@@ -8,13 +8,14 @@ import Select from '@material-ui/core/Select';
 const useStyles = makeStyles((theme) => ({
   formControl: {
     minWidth: 120,
+    marginBottom: '1rem',
   },
   selectEmpty: {
     marginTop: theme.spacing(2),
   },
 }));
 
-export default function SelectSort({ setSortType }) {
+export default function SelectProductSort({ setSortType, typeSort }) {
   const classes = useStyles();
   const [select, setSelect] = React.useState('');
 
@@ -34,7 +35,7 @@ export default function SelectSort({ setSortType }) {
           color="primary"
           style={{
             backgroundColor: '#fff',
-            minWidth: '200px',
+            minWidth: '250px',
           }}
         >
           <MenuItem value="">

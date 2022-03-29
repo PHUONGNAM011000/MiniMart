@@ -32,11 +32,7 @@ const modalCategoryReducer = createSlice({
     editModal(state, action) {
       state.titleModal = 'edit';
       state.isShowModalCategory = true;
-      state.categoryModal = {
-        id: action.payload.id,
-        name: action.payload.name,
-        decripstion: action.payload.decripstion,
-      };
+      state.categoryModal = action.payload;
       state.input = false;
     },
     modalNameChange(state, action) {

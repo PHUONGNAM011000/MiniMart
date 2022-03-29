@@ -1,5 +1,5 @@
 import ListItem from '@material-ui/core/ListItem';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) => ({
@@ -13,13 +13,13 @@ const MenuListItem = (props) => {
   const classes = useStyles();
 
   return (
-    <Link
+    <NavLink
       className={classes.link}
       to={`${props.params}`}
       onClick={props.onClick}
     >
       <ListItem button>{props.children}</ListItem>
-    </Link>
+    </NavLink>
   );
 };
 

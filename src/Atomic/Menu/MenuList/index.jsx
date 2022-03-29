@@ -14,6 +14,7 @@ import { DUMMY_MENU_LIST } from '../../../Data/ArrayMenu';
 import NavHeader from '../../Layout/NavHeader/index';
 import { useDispatch, useSelector } from 'react-redux';
 import { ActionsMenu } from '../../../store/menuSlice';
+import { ActionsSearch } from '../../../store/searchSlice';
 
 const Menu = ({ classes }) => {
   const open = useSelector((state) => state.menu.isShow);
@@ -25,6 +26,11 @@ const Menu = ({ classes }) => {
 
   const handleDrawerClose = () => {
     dispatch(ActionsMenu.hideMenu());
+  };
+
+  const handleDrawerCloseHandler = () => {
+    dispatch(ActionsMenu.hideMenu());
+    dispatch(ActionsSearch.clearSearchQuery());
   };
 
   return (
@@ -53,7 +59,7 @@ const Menu = ({ classes }) => {
             <MenuListItem
               key={item.id}
               params={`${item.id === 1 ? 'category' : 'product'}`}
-              onClick={handleDrawerClose}
+              onClick={handleDrawerCloseHandler}
             >
               <MenuItemIcon>
                 {item.id === 1 ? <DashboardIcon /> : <ShoppingCartIcon />}

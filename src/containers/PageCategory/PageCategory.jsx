@@ -1,14 +1,9 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-// import Table from '@material-ui/core/Table';
-// import TableBody from '@material-ui/core/TableBody';
-// import TableCell from '@material-ui/core/TableCell';
-// import TableHead from '@material-ui/core/TableHead';
-// import TableRow from '@material-ui/core/TableRow';
 import { useSelector } from 'react-redux';
-// import TableCategoryItem from '../../Atomic/UI/Table/TableCategoryItem';
-import SelectSort from '../../Atomic/UI/Select/SelectSort';
+import SelectCategorySort from '../../Atomic/UI/Select/SelectCategorySort';
 import TableCategory from '../../Atomic/UI/Table/TableCategory/TableCategory';
+import useSelect from '../../hooks/use-select';
 
 const useStyles = makeStyles((theme) => ({
   seeMore: {
@@ -19,12 +14,18 @@ const useStyles = makeStyles((theme) => ({
   },
   tableHeader: {
     display: 'flex',
-    alignItems: 'center',
+    alignItems: 'flex-start',
     justifyContent: 'space-between',
     marginBottom: '2rem',
+
+    '@media screen and (max-width: 450px)': {
+      flexDirection: 'column',
+      alignItems: 'flex-start',
+    },
   },
   tableTitle: {
     marginLeft: '1rem',
+    margin: '0px !important',
   },
   titleEmty: {
     marginTop: '1rem',
@@ -36,18 +37,30 @@ export default function PageCategory() {
   const classes = useStyles();
   const dataCategory = useSelector((state) => state.category.dataCategory);
 
+  let filtered = dataCategory;
+
+  const searchQuery = useSelector((state) => state.search.searchQuery);
+
+  if (searchQuery) {
+    filtered = dataCategory.filter((item) =>
+      item.name.toLowerCase().startsWith(searchQuery.toLowerCase())
+    );
+  }
+
+  const { data, setSortType } = useSelect(filtered);
+
   return (
     <React.Fragment>
       <div className={classes.tableHeader}>
-        <SelectSort />
-        <div style={{ display: 'flex' }}>
-          <p className={classes.tableTitle}>SỐ LƯỢNG : </p>
+        <SelectCategorySort setSortType={setSortType} />
+
+        <div style={{ display: 'flex', marginTop: '10px' }}>
+          <p className={classes.tableTitle}>Số lượng: </p>
           &nbsp;
-          <p>{dataCategory.length}</p>
+          <p>{data.length}</p>
         </div>
       </div>
-
-      <TableCategory dataTable={dataCategory} />
+      <TableCategory dataTable={data} />
     </React.Fragment>
   );
 }

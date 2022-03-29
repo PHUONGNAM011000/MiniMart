@@ -4,6 +4,7 @@ import {
   TableBody,
   TableCell,
   TableRow,
+  Typography,
 } from '@material-ui/core';
 import { withStyles, makeStyles } from '@material-ui/core/styles';
 import { useDispatch, useSelector } from 'react-redux';
@@ -37,6 +38,7 @@ const useStyles = makeStyles({
   },
   button: {
     margin: '0.5rem',
+    boxShadow: 'none',
   },
   groupButton: {
     minWidth: '280px',

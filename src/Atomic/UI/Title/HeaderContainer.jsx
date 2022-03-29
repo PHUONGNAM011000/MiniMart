@@ -5,13 +5,19 @@ import Title from './Title';
 import { useSelector } from 'react-redux';
 
 const useStyles = makeStyles((theme) => ({
-  seeMore: {
-    marginTop: theme.spacing(3),
-  },
   tableHeader: {
     display: 'flex',
     alignItems: 'flex-start',
     justifyContent: 'space-between',
+
+    '@media screen and (max-width: 500px)': {
+      flexDirection: 'column',
+
+      '& button': {
+        minWidth: '250px !important',
+        minHeight: '50px !important',
+      },
+    },
   },
 }));
 
@@ -26,15 +32,16 @@ export default function HeaderCategoryContainer(props) {
     <React.Fragment>
       <div className={classes.tableHeader}>
         <Title>{props.title}</Title>
-        <div className={classes.tableHeader}>
-          <Button
-            variant="contained"
-            color={isColorPrimary ? 'primary' : 'secondary'}
-            onClick={props.addHandler}
-          >
-            {props.buttonTitle}
-          </Button>
-        </div>
+        <Button
+          variant="contained"
+          color={isColorPrimary ? 'primary' : 'secondary'}
+          onClick={props.addHandler}
+          style={{
+            boxShadow: 'none',
+          }}
+        >
+          {props.buttonTitle}
+        </Button>
       </div>
     </React.Fragment>
   );
