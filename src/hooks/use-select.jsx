@@ -1,18 +1,16 @@
 import { useEffect, useState } from 'react';
 
-const useSelect = (dataProduct) => {
+const useSelect = (dataProduct, typeSort) => {
   const [data, setData] = useState([]);
   const [sortType, setSortType] = useState('');
 
   useEffect(() => {
     const sortArray = (type) => {
       const types = {
-        priceIncrease: 'amount',
+        priceIncrease: typeSort,
         nameIncrease: 'name',
-        priceDecrease: 'amount',
+        priceDecrease: typeSort,
         nameDecrease: 'name',
-        idIncrease: 'id',
-        idDecrease: 'id',
       };
       const sortProperty = types[type];
       const sorted =
@@ -44,7 +42,7 @@ const useSelect = (dataProduct) => {
     };
 
     sortArray(sortType);
-  }, [sortType, dataProduct]);
+  }, [sortType, dataProduct, typeSort]);
 
   return {
     data,

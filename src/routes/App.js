@@ -43,18 +43,23 @@ const useStyles = makeStyles((theme) => ({
     display: 'none',
   },
   title: {
+    height: '27px',
     flexGrow: 1,
-    marginLeft: '1rem',
 
     '@media screen and (max-width: 300px)': {
       width: '10rem',
+    },
+
+    '@media screen and (max-width: 440px)': {
+      fontSize: '1rem',
+      height: '19px',
     },
   },
   nameUser: {
     flexGrow: 1,
     marginLeft: '1rem',
 
-    '@media screen and (max-width: 500px)': {
+    '@media screen and (max-width: 560px)': {
       display: 'none',
     },
   },
@@ -85,7 +90,8 @@ const useStyles = makeStyles((theme) => ({
     height: '100vh',
     paddingTop: theme.spacing(6),
     paddingBottom: theme.spacing(6),
-    backgroundColor: '#E3F2FD',
+    backgroundImage:
+      'url(https://images.unsplash.com/photo-1648492694364-26cf4b39806b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80)',
   },
   container: {
     padding: theme.spacing(4),
@@ -117,8 +123,8 @@ function App() {
 
   return (
     <Router>
-      {isShowModalCategory && <DialogCategoryModal />}
-      {isShowModalProduct && <DialogProductModal />}
+      {isShowModalCategory && <DialogCategoryModal titleModal="danh mục" />}
+      {isShowModalProduct && <DialogProductModal titleModal="sản phẩm" />}
       <div className={classes.root}>
         <Menu classes={classes} />
         <Switch>

@@ -13,6 +13,7 @@ const modalProductReducer = createSlice({
     checkAmount: false,
     checkDescription: false,
     checkMass: false,
+    checkImageURL: false,
   },
   reducers: {
     showModalProduct(state, action) {
@@ -44,6 +45,7 @@ const modalProductReducer = createSlice({
       state.checkMass = false;
       state.checkName = false;
       state.checkImage = false;
+      state.checkImageURL = false;
     },
 
     nameChanged(state, action) {
@@ -56,6 +58,7 @@ const modalProductReducer = createSlice({
       state.productModal.image = action.payload;
       state.validate = false;
       state.checkImage = false;
+      state.checkImageURL = false;
     },
 
     amountChanged(state, action) {
@@ -92,6 +95,11 @@ const modalProductReducer = createSlice({
     checkImageHandled(state) {
       state.checkImage = true;
     },
+
+    checkImageURLHandled(state) {
+      state.checkImageURL = true;
+    },
+
     checkAmountHandled(state) {
       state.checkAmount = true;
     },

@@ -9,8 +9,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { ActionsMenu } from '../../../store/menuSlice';
 import Switch from '@material-ui/core/Switch';
 import { ActionsCustomTheme } from '../../../store/customThemeSlice';
+import SelectLanguage from '../../UI/Select/SelectLanguage';
+import { useTranslation } from 'react-i18next';
 
 const NavHeader = ({ classes }) => {
+  const { i18n } = useTranslation();
   const open = useSelector((state) => state.menu.isShow);
   const isColorPrimary = useSelector(
     (state) => state.customTheme.isColorPrimary
@@ -24,6 +27,10 @@ const NavHeader = ({ classes }) => {
 
   const handleChangeTheme = () => {
     dispatch(ActionsCustomTheme.colorChange());
+  };
+
+  const selectChangeHandler = (e) => {
+    i18n.changeLanguage(e.target.value);
   };
 
   return (
@@ -75,6 +82,7 @@ const NavHeader = ({ classes }) => {
               color="default"
               inputProps={{ 'aria-label': 'checkbox with default color' }}
             />
+            <SelectLanguage selectChangeHandler={selectChangeHandler} />
           </div>
         </Toolbar>
       </AppBar>

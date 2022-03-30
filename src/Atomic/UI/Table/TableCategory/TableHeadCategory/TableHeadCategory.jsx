@@ -2,6 +2,7 @@ import { TableRow } from '@material-ui/core';
 import TableHead from '@material-ui/core/TableHead';
 import TableCell from '@material-ui/core/TableCell';
 import { withStyles } from '@material-ui/core/styles';
+import { useTranslation } from 'react-i18next';
 
 const StyledTableCell = withStyles((theme) => ({
   head: {
@@ -15,13 +16,15 @@ const StyledTableCell = withStyles((theme) => ({
 }))(TableCell);
 
 const TableHeadCategory = () => {
+  const { t } = useTranslation();
+
   return (
     <TableHead>
       <TableRow>
-        <StyledTableCell align="left">STT</StyledTableCell>
-        <StyledTableCell align="left">Tên sản phẩm</StyledTableCell>
-        <StyledTableCell align="left">Mô tả&nbsp;</StyledTableCell>
-        <StyledTableCell align="center">Hành động&nbsp;</StyledTableCell>
+        <StyledTableCell align="left">{t('stt')}</StyledTableCell>
+        <StyledTableCell align="left">{t('category')}</StyledTableCell>
+        <StyledTableCell align="left">{t('description')}&nbsp;</StyledTableCell>
+        <StyledTableCell align="center">{t('action')}&nbsp;</StyledTableCell>
       </TableRow>
     </TableHead>
   );

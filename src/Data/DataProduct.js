@@ -4,7 +4,7 @@ export const DUMMY_PRODUCT = [
     stt: 3,
     name: 'áo t-shirt',
     image:
-      'https://images.unsplash.com/photo-1646589367332-bd48bc09cc36?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80',
+      'https://thucungaz.com/wp-content/uploads/2019/04/cho-con-moi-bat-ve-keu-nhieu-ban-dem-phai-lam-sao.jpg',
     amount: '15',
     description: 'ao nay mac dep oi la dep et o et',
     mass: '1.2',
@@ -16,7 +16,7 @@ export const DUMMY_PRODUCT = [
     stt: 2,
     name: 'áo ba lỗ',
     image:
-      'https://images.unsplash.com/photo-1637921880358-607124a72020?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80',
+      'http://2.bp.blogspot.com/-Dm8ns6HJc9E/UFciSGY3yuI/AAAAAAAADuw/ahvXNdwYNOo/s1600/cho-con.jpg',
     amount: '10',
     description: 'áo này dành cho tui',
     mass: '0.5',
@@ -28,7 +28,7 @@ export const DUMMY_PRODUCT = [
     stt: 1,
     name: 'Laptop',
     image:
-      'https://images.unsplash.com/photo-1646589391055-06efac9ab4a7?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80',
+      'http://vanchuyenchomeo.com/wp-content/uploads/2020/03/cach-nuoi-cho-con-2-thang-tuoi.jpg',
     amount: '10',
     description: 'Lap top cực xịn ram 8gb, chíp m1',
     mass: '3.5',

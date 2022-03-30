@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 import useSelect from '../../hooks/use-select';
 import SelectProductSort from '../../Atomic/UI/Select/SelectProductSort';
 import TableProduct from '../../Atomic/UI/Table/TableProduct/TableProduct';
+import { useTranslation } from 'react-i18next';
 
 const useStyles = makeStyles((theme) => ({
   seeMore: {
@@ -24,7 +25,6 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     fontWeight: '600 !important',
     color: '#000 !important',
-    marginTop: '10px',
   },
   titleEmty: {
     marginTop: '1rem',
@@ -59,6 +59,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function PageProduct() {
+  const { t } = useTranslation();
   const classes = useStyles();
   const dataProduct = useSelector((state) => state.product.dataProduct);
 
@@ -71,15 +72,15 @@ export default function PageProduct() {
       item.name.toLowerCase().startsWith(searchQuery.toLowerCase())
     );
   }
-  const { data, setSortType } = useSelect(filtered);
+  const { data, setSortType } = useSelect(filtered, 'amount');
 
   return (
     <React.Fragment>
       <div className={classes.tableHeader}>
-        <SelectProductSort setSortType={setSortType} />
+        <SelectProductSort title={t('titleSort')} setSortType={setSortType} />
 
         <div className={classes.tableTitle}>
-          <p>Số lượng : </p>
+          <p>{t('amount')}: </p>
           &nbsp;
           <p>{data.length}</p>
         </div>

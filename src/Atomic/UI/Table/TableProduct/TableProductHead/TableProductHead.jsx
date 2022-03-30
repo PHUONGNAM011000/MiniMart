@@ -2,6 +2,7 @@ import { TableRow } from '@material-ui/core';
 import TableHead from '@material-ui/core/TableHead';
 import TableCell from '@material-ui/core/TableCell';
 import { withStyles } from '@material-ui/core/styles';
+import { useTranslation } from 'react-i18next';
 
 const StyledTableCell = withStyles((theme) => ({
   head: {
@@ -15,18 +16,20 @@ const StyledTableCell = withStyles((theme) => ({
 }))(TableCell);
 
 const TableProductHead = () => {
+  const { t } = useTranslation();
+
   return (
     <TableHead>
       <TableRow>
-        <StyledTableCell align="left">STT</StyledTableCell>
-        <StyledTableCell align="left">Tên sản phẩm</StyledTableCell>
-        <StyledTableCell align="center">Ảnh&nbsp;</StyledTableCell>
-        <StyledTableCell align="right">Số lượng&nbsp;</StyledTableCell>
-        <StyledTableCell align="left">Mô tả&nbsp;</StyledTableCell>
-        <StyledTableCell align="left">Danh mục &nbsp;</StyledTableCell>
-        <StyledTableCell align="right">Khối lượng&nbsp;(kg)</StyledTableCell>
-        <StyledTableCell align="left">Tình trạng&nbsp;</StyledTableCell>
-        <StyledTableCell align="center">Hành động&nbsp;</StyledTableCell>
+        <StyledTableCell align="left">{t('stt')}</StyledTableCell>
+        <StyledTableCell align="left">{t('nameProduct')}</StyledTableCell>
+        <StyledTableCell align="center">{t('image')}&nbsp;</StyledTableCell>
+        <StyledTableCell align="right">{t('amount')}&nbsp;</StyledTableCell>
+        <StyledTableCell align="left">{t('description')}&nbsp;</StyledTableCell>
+        <StyledTableCell align="left">{t('category')} &nbsp;</StyledTableCell>
+        <StyledTableCell align="right">{t('mass')}&nbsp;(kg)</StyledTableCell>
+        <StyledTableCell align="left">{t('status')}&nbsp;</StyledTableCell>
+        <StyledTableCell align="center">{t('action')}&nbsp;</StyledTableCell>
       </TableRow>
     </TableHead>
   );

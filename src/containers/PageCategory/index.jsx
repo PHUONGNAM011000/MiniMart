@@ -5,9 +5,11 @@ import { ActionsModal } from '../../store/modalCategorySlice';
 import LayoutContainer from '../../Atomic/Layout/LayoutContainer';
 import Search from '../../Atomic/Search/Search';
 import { Container } from '@material-ui/core';
+import { useTranslation } from 'react-i18next';
 import { ActionsSearch } from '../../store/searchSlice';
 
 const MainCategoryContainer = ({ classes }) => {
+  const { t } = useTranslation();
   const dispatch = useDispatch();
   const searchQuery = useSelector((state) => state.search.searchQuery);
 
@@ -25,12 +27,16 @@ const MainCategoryContainer = ({ classes }) => {
       <Container maxWidth={false} className={classes.container}>
         <HeaderContainer
           addHandler={addCategoryHandler}
-          title="Danh Mục Sản Phẩm"
-          buttonTitle="Thêm Danh Mục"
+          title={t('titleCategory')}
+          buttonTitle={t('buttonTitle')}
         />
       </Container>
       <LayoutContainer classes={classes}>
-        <Search value={searchQuery} onSearchChange={searchChangeHandler} />
+        <Search
+          value={searchQuery}
+          onSearchChange={searchChangeHandler}
+          title={t('titleSearchCategory')}
+        />
       </LayoutContainer>
       <LayoutContainer classes={classes}>
         <PageCategory />

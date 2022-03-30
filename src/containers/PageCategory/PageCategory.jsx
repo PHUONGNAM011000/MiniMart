@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 import SelectCategorySort from '../../Atomic/UI/Select/SelectCategorySort';
 import TableCategory from '../../Atomic/UI/Table/TableCategory/TableCategory';
 import useSelect from '../../hooks/use-select';
+import { useTranslation } from 'react-i18next';
 
 const useStyles = makeStyles((theme) => ({
   seeMore: {
@@ -14,13 +15,14 @@ const useStyles = makeStyles((theme) => ({
   },
   tableHeader: {
     display: 'flex',
-    alignItems: 'flex-start',
+    alignItems: 'flex-end',
     justifyContent: 'space-between',
-    marginBottom: '2rem',
+    marginBottom: '64px',
 
     '@media screen and (max-width: 450px)': {
       flexDirection: 'column',
       alignItems: 'flex-start',
+      marginBottom: '24px',
     },
   },
   tableTitle: {
@@ -47,15 +49,16 @@ export default function PageCategory() {
     );
   }
 
-  const { data, setSortType } = useSelect(filtered);
+  const { data, setSortType } = useSelect(filtered, 'id');
+  const { t } = useTranslation();
 
   return (
     <React.Fragment>
       <div className={classes.tableHeader}>
-        <SelectCategorySort setSortType={setSortType} />
+        <SelectCategorySort title={t('titleSort')} setSortType={setSortType} />
 
-        <div style={{ display: 'flex', marginTop: '10px' }}>
-          <p className={classes.tableTitle}>Số lượng: </p>
+        <div style={{ display: 'flex' }}>
+          <p className={classes.tableTitle}>{t('amount')}: </p>
           &nbsp;
           <p>{data.length}</p>
         </div>

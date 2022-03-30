@@ -3,6 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Title from './Title';
 import { useSelector } from 'react-redux';
+import AddIcon from '@material-ui/icons/Add';
 
 const useStyles = makeStyles((theme) => ({
   tableHeader: {
@@ -12,11 +13,6 @@ const useStyles = makeStyles((theme) => ({
 
     '@media screen and (max-width: 500px)': {
       flexDirection: 'column',
-
-      '& button': {
-        minWidth: '250px !important',
-        minHeight: '50px !important',
-      },
     },
   },
 }));
@@ -40,7 +36,10 @@ export default function HeaderCategoryContainer(props) {
             boxShadow: 'none',
           }}
         >
-          {props.buttonTitle}
+          <span style={{ height: '24px', paddingRight: '0.5rem' }}>
+            <AddIcon />
+          </span>
+          <span style={{ height: '20px' }}>{props.buttonTitle}</span>
         </Button>
       </div>
     </React.Fragment>

@@ -16,6 +16,9 @@ import Backdrop from '@material-ui/core/Backdrop';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { ActionsModal } from '../../../store/modalCategorySlice';
 import { ActionsCategory } from '../../../store/categorySlice';
+import DialogModalAlert from './DialogModalAlert';
+import { dialogActions } from '../../../store/dialogSlice';
+import { useTranslation } from 'react-i18next';
 
 const useStyles = makeStyles(() => ({
   buttonModal: {
@@ -106,6 +109,7 @@ const DialogActions = withStyles((theme) => ({
 }))(MuiDialogActions);
 
 export default function DialogCategoryModal(props) {
+  const { t } = useTranslation();
   const classes = useStyles();
   const dispatch = useDispatch();
 
@@ -137,6 +141,8 @@ export default function DialogCategoryModal(props) {
     (state) => state.modalCategory.checkValidateDecripstion
   );
 
+  const titleDialog = useSelector((state) => state.dialog.titleDialog);
+
   const nameCategoryChangeHandler = (e) => {
     dispatch(ActionsModal.modalNameChange(e.target.value));
   };
@@ -147,6 +153,16 @@ export default function DialogCategoryModal(props) {
 
   const hideModalCategoryHandler = () => {
     dispatch(ActionsModal.hideModal());
+  };
+
+  const closeDialogHandler = () => {
+    dispatch(dialogActions.hideDialog());
+  };
+
+  const saveDialogHandler = () => {
+    dispatch(ActionsModal.hideModal());
+    dispatch(dialogActions.hideDialog());
+    dispatch(ActionsCategory.editCategory(categoryModal));
   };
 
   const editCategoryHandler = () => {
@@ -165,19 +181,20 @@ export default function DialogCategoryModal(props) {
     }
 
     if (!validateName && !validateDescription) {
-      dispatch(ActionsModal.hideModal());
-      dispatch(ActionsCategory.editCategory(categoryModal));
+      dispatch(dialogActions.editDialog());
     }
   };
 
-  let titleModal;
+  let titleModal, titleButtonDialog;
 
   if (titleCategoryModal === 'show') {
-    titleModal = 'Xem';
+    titleModal = t('Show');
   } else if (titleCategoryModal === 'edit') {
-    titleModal = 'Sửa';
+    titleModal = t('Edit');
+    titleButtonDialog = t('editTitleButtonDialogCategory');
   } else {
-    titleModal = 'Thêm';
+    titleModal = t('Add');
+    titleButtonDialog = t('addTitleButtonDialogCategory');
   }
 
   return (
@@ -190,6 +207,16 @@ export default function DialogCategoryModal(props) {
         <CircularProgress color="inherit" />
       </Backdrop>
 
+      {titleDialog === 'edit' && (
+        <DialogModalAlert
+          open={true}
+          onClose={closeDialogHandler}
+          onSaveDialog={saveDialogHandler}
+          title={titleButtonDialog}
+          titleButton={t('Save')}
+        />
+      )}
+
       {!open && (
         <Dialog
           onClose={() => hideModalCategoryHandler()}
@@ -200,7 +227,7 @@ export default function DialogCategoryModal(props) {
             id="customized-dialog-title"
             onClose={() => hideModalCategoryHandler()}
           >
-            <span>{titleModal}</span> sản phẩm
+            <span>{titleModal}</span> {t('category')}
           </DialogTitle>
           <DialogContent dividers>
             <div className={classes.flexProduct}>
@@ -208,11 +235,9 @@ export default function DialogCategoryModal(props) {
                 <Grid item xs={12}>
                   <TextField
                     error={checkValidateName}
-                    helperText={
-                      checkValidateName && 'Bạn chưa nhập tên sản phẩm'
-                    }
+                    helperText={checkValidateName && t('errorNameCategory')}
                     color="primary"
-                    label="Tên sản phẩm"
+                    label={t('nameCategory')}
                     variant="outlined"
                     type="text"
                     fullWidth={true}
@@ -227,10 +252,10 @@ export default function DialogCategoryModal(props) {
                   <TextField
                     error={checkValidateDecripstion}
                     helperText={
-                      checkValidateDecripstion && 'Bạn chưa nhập Mô tả'
+                      checkValidateDecripstion && t('errorDescription')
                     }
                     color="primary"
-                    label="Mô tả"
+                    label={t('description')}
                     variant="outlined"
                     type="text"
                     multiline

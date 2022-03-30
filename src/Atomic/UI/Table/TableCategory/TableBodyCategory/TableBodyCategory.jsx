@@ -5,6 +5,10 @@ import { ActionsModal } from '../../../../../store/modalCategorySlice';
 import { dialogActions } from '../../../../../store/dialogSlice';
 import DialogModalAlert from '../../../Modal/DialogModalAlert';
 import { ActionsCategory } from '../../../../../store/categorySlice';
+import VisibilityIcon from '@material-ui/icons/Visibility';
+import DeleteIcon from '@material-ui/icons/Delete';
+import EditIcon from '@material-ui/icons/Edit';
+import { useTranslation } from 'react-i18next';
 
 const useStyles = makeStyles({
   stt: {
@@ -47,6 +51,7 @@ const StyledTableCell = withStyles((theme) => ({
 }))(TableCell);
 
 const TableBodyCategory = ({ dataTable }) => {
+  const { t } = useTranslation();
   const dispatch = useDispatch();
   const classes = useStyles();
 
@@ -54,11 +59,9 @@ const TableBodyCategory = ({ dataTable }) => {
     (state) => state.customTheme.isColorPrimary
   );
 
-  // const dataCategory = useSelector((state) => state.category.dataCategory);
-
-  const isShowDialog = useSelector((state) => state.dialog.isShowDialog);
-
   const idDialog = useSelector((state) => state.dialog.idDialog);
+
+  const titleDialog = useSelector((state) => state.dialog.titleDialog);
 
   const showCategoryProduct = (item) => {
     dispatch(ActionsModal.showModal(item));
@@ -83,23 +86,15 @@ const TableBodyCategory = ({ dataTable }) => {
 
   return (
     <>
-      <DialogModalAlert
-        open={isShowDialog}
-        onClose={closeDialogHandler}
-        onSaveDialog={saveDialogHandler}
-        title={'xoá sản phẩm này không ?'}
-        titleButton={'Xoá'}
-      />
-
-      {/* {dataCategory.length === 0 && (
-        <Typography
-          display="block"
-          style={{ width: '220px', margin: '1rem 0.5rem' }}
-        >
-          Hiện không có sản phẩm nào
-        </Typography>
-      )} */}
-
+      {titleDialog === 'remove' && (
+        <DialogModalAlert
+          open={true}
+          onClose={closeDialogHandler}
+          onSaveDialog={saveDialogHandler}
+          title={t('removeTitleButtonDialogCategory')}
+          titleButton={t('Remove')}
+        />
+      )}
       <TableBody>
         {dataTable.map((item) => (
           <StyledTableRow key={item.id}>
@@ -119,28 +114,28 @@ const TableBodyCategory = ({ dataTable }) => {
             </StyledTableCell>
             <StyledTableCell align="center" className={classes.groupButton}>
               <Button
-                variant="contained"
+                variant="outlined"
                 className={classes.button}
                 color={isColorPrimary ? 'primary' : 'secondary'}
                 onClick={() => showCategoryProduct(item)}
               >
-                Xem
+                <VisibilityIcon />
               </Button>
               <Button
-                variant="contained"
+                variant="outlined"
                 className={classes.button}
                 color={isColorPrimary ? 'primary' : 'secondary'}
                 onClick={() => removeProductHandler(item.id)}
               >
-                Xoá
+                <DeleteIcon />
               </Button>
               <Button
-                variant="contained"
+                variant="outlined"
                 className={classes.button}
                 color={isColorPrimary ? 'primary' : 'secondary'}
                 onClick={() => editCategoryHandler(item)}
               >
-                Sửa
+                <EditIcon />
               </Button>
             </StyledTableCell>
           </StyledTableRow>

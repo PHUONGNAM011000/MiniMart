@@ -11,6 +11,10 @@ import { dialogActions } from '../../../../../store/dialogSlice';
 import { ActionsModalProduct } from '../../../../../store/modalProductSlicde';
 import { ActionsProduct } from '../../../../../store/productSlice';
 import DialogModalAlert from '../../../Modal/DialogModalAlert';
+import VisibilityIcon from '@material-ui/icons/Visibility';
+import DeleteIcon from '@material-ui/icons/Delete';
+import EditIcon from '@material-ui/icons/Edit';
+import { useTranslation } from 'react-i18next';
 
 const useStyles = makeStyles({
   imgSize: {
@@ -63,6 +67,7 @@ const StyledTableCell = withStyles((theme) => ({
 }))(TableCell);
 
 const TableProductBody = ({ dataTable }) => {
+  const { t } = useTranslation();
   const dispatch = useDispatch();
   const classes = useStyles();
 
@@ -70,9 +75,9 @@ const TableProductBody = ({ dataTable }) => {
     (state) => state.customTheme.isColorPrimary
   );
 
-  const isShowDialog = useSelector((state) => state.dialog.isShowDialog);
-
   const idDialog = useSelector((state) => state.dialog.idDialog);
+
+  const titleDialog = useSelector((state) => state.dialog.titleDialog);
 
   const showModalProduct = (item) => {
     dispatch(ActionsModalProduct.showModalProduct(item));
@@ -97,23 +102,15 @@ const TableProductBody = ({ dataTable }) => {
 
   return (
     <>
-      <DialogModalAlert
-        open={isShowDialog}
-        onClose={closeDialogHandler}
-        onSaveDialog={saveDialogHandler}
-        title={'xoá sản phẩm này không ?'}
-        titleButton={'Xoá'}
-      />
-
-      {/* {dataTable.length === 0 && (
-        <Typography
-          display="block"
-          style={{ width: '220px', margin: '1rem 0.5rem' }}
-        >
-          Hiện không có sản phẩm nào
-        </Typography>
-      )} */}
-
+      {titleDialog === 'remove' && (
+        <DialogModalAlert
+          open={true}
+          onClose={closeDialogHandler}
+          onSaveDialog={saveDialogHandler}
+          title={t('removeTitleButtonDialogProduct')}
+          titleButton={t('Remove')}
+        />
+      )}
       <TableBody>
         {dataTable.map((item) => (
           <StyledTableRow key={item.id}>
@@ -151,27 +148,27 @@ const TableProductBody = ({ dataTable }) => {
             <StyledTableCell align="center" className={classes.groupButton}>
               <Button
                 onClick={() => showModalProduct(item)}
-                variant="contained"
+                variant="outlined"
                 color={isColorPrimary ? 'primary' : 'secondary'}
                 className={classes.button}
               >
-                Xem
+                <VisibilityIcon />
               </Button>
               <Button
                 onClick={() => removeProductHandler(item.id)}
-                variant="contained"
+                variant="outlined"
                 color={isColorPrimary ? 'primary' : 'secondary'}
                 className={classes.button}
               >
-                Xoá
+                <DeleteIcon />
               </Button>
               <Button
                 onClick={() => editProductHandler(item)}
-                variant="contained"
+                variant="outlined"
                 color={isColorPrimary ? 'primary' : 'secondary'}
                 className={classes.button}
               >
-                Sửa
+                <EditIcon />
               </Button>
             </StyledTableCell>
           </StyledTableRow>

@@ -14,9 +14,7 @@ export default function Title(props) {
       color={isColorPrimary ? 'primary' : 'secondary'}
       gutterBottom
       style={{
-        paddingRight: '1rem',
         minWidth: 'max-content',
-        paddingBottom: '1rem',
         marginBottom: '0',
       }}
     >

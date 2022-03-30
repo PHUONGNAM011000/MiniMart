@@ -17,6 +17,9 @@ import SelectCategory from '../Select/SelectCategory';
 import Grid from '@material-ui/core/Grid';
 import Backdrop from '@material-ui/core/Backdrop';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import DialogModalAlert from './DialogModalAlert';
+import { dialogActions } from '../../../store/dialogSlice';
+import { useTranslation } from 'react-i18next';
 
 const useStyles = makeStyles(() => ({
   buttonModal: {
@@ -26,7 +29,6 @@ const useStyles = makeStyles(() => ({
   },
   flexProduct: {
     flexGrow: 1,
-    // display: 'flex',
 
     '@media (max-width: 800px)': {
       flexDirection: 'column',
@@ -107,6 +109,7 @@ const DialogActions = withStyles((theme) => ({
 }))(MuiDialogActions);
 
 export default function DialogProductModal(props) {
+  const { t } = useTranslation();
   const classes = useStyles();
   const dispatch = useDispatch();
 
@@ -134,6 +137,10 @@ export default function DialogProductModal(props) {
 
   const checkImage = useSelector((state) => state.modalProduct.checkImage);
 
+  const checkImageURL = useSelector(
+    (state) => state.modalProduct.checkImageURL
+  );
+
   const checkAmount = useSelector((state) => state.modalProduct.checkAmount);
 
   const checkMass = useSelector((state) => state.modalProduct.checkMass);
@@ -141,6 +148,8 @@ export default function DialogProductModal(props) {
   const checkDescription = useSelector(
     (state) => state.modalProduct.checkDescription
   );
+
+  const titleDialog = useSelector((state) => state.dialog.titleDialog);
 
   const hideModalProductHandler = () => {
     dispatch(ActionsModalProduct.hideModalProduct());
@@ -179,8 +188,12 @@ export default function DialogProductModal(props) {
       productModal.name === '' || productModal.name === undefined;
     const validateImage =
       productModal.image === '' || productModal.image === undefined;
+
+    let validateImageURL = false;
+
     const validateAmount =
       productModal.amount === '' || productModal.amount === undefined;
+
     const validateDescription =
       productModal.description === '' || productModal.description === undefined;
     const validateMass =
@@ -189,12 +202,23 @@ export default function DialogProductModal(props) {
     if (validateName) {
       dispatch(ActionsModalProduct.checkNameHandled());
     }
+
     if (validateImage) {
       dispatch(ActionsModalProduct.checkImageHandled());
     }
+
+    if (!validateImage) {
+      validateImageURL =
+        productModal.image.match(/\.(jpeg|jpg|gif|png)$/) == null;
+
+      if (validateImageURL)
+        dispatch(ActionsModalProduct.checkImageURLHandled());
+    }
+
     if (validateAmount) {
       dispatch(ActionsModalProduct.checkAmountHandled());
     }
+
     if (validateDescription) {
       dispatch(ActionsModalProduct.checkDescriptionHandled());
     }
@@ -205,23 +229,35 @@ export default function DialogProductModal(props) {
     if (
       !validateName &&
       !validateImage &&
+      !validateImageURL &&
       !validateAmount &&
       !validateDescription &&
       !validateMass
     ) {
-      dispatch(ActionsProduct.editProduct(productModal));
-      dispatch(ActionsModalProduct.hideModalProduct());
+      dispatch(dialogActions.editDialog());
     }
   };
 
-  let titleModal;
+  const closeDialogHandler = () => {
+    dispatch(dialogActions.hideDialog());
+  };
+
+  const saveDialogHandler = () => {
+    dispatch(dialogActions.hideDialog());
+    dispatch(ActionsProduct.editProduct(productModal));
+    dispatch(ActionsModalProduct.hideModalProduct());
+  };
+
+  let titleModal, titleButtonDialog;
 
   if (titleProductModal === 'show') {
-    titleModal = 'Xem';
+    titleModal = t('Show');
   } else if (titleProductModal === 'edit') {
-    titleModal = 'Sửa';
+    titleModal = t('Edit');
+    titleButtonDialog = t('editTitleButtonDialogProduct');
   } else {
-    titleModal = 'Thêm';
+    titleModal = t('Add');
+    titleButtonDialog = t('addTitleButtonDialogProduct');
   }
 
   return (
@@ -234,6 +270,16 @@ export default function DialogProductModal(props) {
         <CircularProgress color="inherit" />
       </Backdrop>
 
+      {titleDialog === 'edit' && (
+        <DialogModalAlert
+          open={true}
+          onClose={closeDialogHandler}
+          onSaveDialog={saveDialogHandler}
+          title={titleButtonDialog}
+          titleButton={t('save')}
+        />
+      )}
+
       {!open && (
         <Dialog
           onClose={() => hideModalProductHandler()}
@@ -244,7 +290,7 @@ export default function DialogProductModal(props) {
             id="customized-dialog-title"
             onClose={() => hideModalProductHandler()}
           >
-            <span>{titleModal}</span> sản phẩm
+            <span>{titleModal}</span> {t('titleProduct')}
           </DialogTitle>
           <DialogContent dividers>
             <div className={classes.flexProduct}>
@@ -261,9 +307,9 @@ export default function DialogProductModal(props) {
                 <Grid item xs={12}>
                   <TextField
                     error={checkName}
-                    helperText={checkName && 'Bạn chưa nhập tên sản phẩm'}
+                    helperText={checkName && t('errorNameProduct')}
                     color="primary"
-                    label="Tên sản phẩm"
+                    label={t('nameProduct')}
                     variant="outlined"
                     type="text"
                     fullWidth={true}
@@ -274,19 +320,23 @@ export default function DialogProductModal(props) {
                     onChange={(e) => NameProductChangeHandler(e)}
                   />
                 </Grid>
-                {titleProductModal === 'add' && (
+                {titleProductModal !== 'show' && (
                   <Grid item xs={12}>
                     <TextField
-                      error={checkImage}
-                      helperText={checkImage && 'Bạn chưa nhập Url ảnh'}
+                      error={checkImage || checkImageURL}
+                      helperText={
+                        (checkImage && t('errorImage')) ||
+                        (checkImageURL && t('errorUrl'))
+                      }
                       color="primary"
-                      label="Url ảnh"
+                      label={t('image')}
                       variant="outlined"
                       type="text"
                       fullWidth={true}
                       InputProps={{
                         readOnly: showInputProduct,
                       }}
+                      value={productModal.image || ''}
                       onChange={(e) => urlProductChangeHandler(e)}
                     />
                   </Grid>
@@ -294,9 +344,9 @@ export default function DialogProductModal(props) {
                 <Grid item xs={6}>
                   <TextField
                     error={checkAmount}
-                    helperText={checkAmount && 'Bạn chưa nhập số lượng'}
+                    helperText={checkAmount && t('errorAmount')}
                     color="primary"
-                    label="Số lượng"
+                    label={t('amount')}
                     type="number"
                     variant="outlined"
                     fullWidth={true}
@@ -312,18 +362,18 @@ export default function DialogProductModal(props) {
                     data={dataCategory.map((item) => item.name)}
                     value={productModal.category}
                     showInputProduct={showInputProduct}
-                    defaultValue={'Áo Thun'}
-                    label={'Danh mục'}
+                    defaultValue={dataCategory[0].name}
+                    label={t('category')}
                     onChange={categoryModalChangeHandler}
                   />
                 </Grid>
                 <Grid item xs={6}>
                   <TextField
                     error={checkMass}
-                    helperText={checkMass && 'Bạn chưa nhập khối lượng'}
+                    helperText={checkMass && t('errorMass')}
                     color="primary"
                     type="text"
-                    label="Khối lượng"
+                    label={t('mass')}
                     fullWidth={true}
                     InputProps={{
                       endAdornment: (
@@ -338,20 +388,20 @@ export default function DialogProductModal(props) {
                 </Grid>
                 <Grid item xs={6}>
                   <SelectCategory
-                    data={['Hết hàng', 'Còn hàng']}
+                    data={[t('stocking'), t('outStock')]}
                     value={productModal.status}
                     showInputProduct={showInputProduct}
-                    defaultValue={'Còn hàng'}
-                    label={'Trạng thái'}
+                    defaultValue={t('stocking')}
+                    label={t('status')}
                     onChange={StatusProductChangeHandler}
                   />
                 </Grid>
                 <Grid item xs={12}>
                   <TextField
                     error={checkDescription}
-                    helperText={checkDescription && 'Bạn chưa nhập Mô tả'}
+                    helperText={checkDescription && t('errorDescription')}
                     color="primary"
-                    label="Mô tả"
+                    label={t('description')}
                     variant="outlined"
                     type="text"
                     multiline
@@ -377,7 +427,7 @@ export default function DialogProductModal(props) {
                 }}
                 onClick={() => hideModalProductHandler()}
               >
-                Đóng
+                {t('close')}
               </Button>
               {titleProductModal !== 'show' && (
                 <Button

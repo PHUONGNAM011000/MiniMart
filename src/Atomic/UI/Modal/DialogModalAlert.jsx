@@ -9,6 +9,7 @@ import {
 } from '@material-ui/core';
 import CloseIcon from '@material-ui/icons/Close';
 import MuiDialogTitle from '@material-ui/core/DialogTitle';
+import { useTranslation } from 'react-i18next';
 
 const styles = (theme) => ({
   root: {
@@ -22,7 +23,7 @@ const styles = (theme) => ({
     color: theme.palette.grey[500],
   },
   title: {
-    marginRight: '5rem',
+    marginRight: '2rem',
     minWidth: '200px',
 
     '@media screen and (max-width: 800px)': {
@@ -56,6 +57,8 @@ const DialogModalAlert = ({
   title,
   titleButton,
 }) => {
+  const { t } = useTranslation();
+
   return (
     <Dialog
       aria-labelledby="customized-dialog-title"
@@ -64,11 +67,11 @@ const DialogModalAlert = ({
       maxWidth="xs"
       fullWidth={true}
     >
-      <DialogTitle onClose={onClose}>Bạn có chắc chắn {title}</DialogTitle>
+      <DialogTitle onClose={onClose}>{title}</DialogTitle>
 
       <DialogActions>
         <Button autoFocus color="primary" onClick={onClose}>
-          Huỷ
+          {t('close')}
         </Button>
         <Button autoFocus onClick={onSaveDialog} color="secondary">
           {titleButton}

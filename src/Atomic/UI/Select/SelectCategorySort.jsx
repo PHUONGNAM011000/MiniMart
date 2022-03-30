@@ -4,20 +4,25 @@ import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
+import { useTranslation } from 'react-i18next';
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
     minWidth: 120,
-    marginBottom: '1rem',
+
+    '@media screen and (max-width: 450px)': {
+      paddingBottom: '1rem',
+    },
   },
   selectEmpty: {
     marginTop: theme.spacing(2),
   },
 }));
 
-export default function SelectCategorySort({ setSortType }) {
+export default function SelectCategorySort({ setSortType, title }) {
   const classes = useStyles();
   const [select, setSelect] = React.useState('');
+  const { t } = useTranslation();
 
   const handleChange = (event) => {
     setSortType(event.target.value);
@@ -27,7 +32,7 @@ export default function SelectCategorySort({ setSortType }) {
   return (
     <div>
       <FormControl variant="filled" className={classes.formControl}>
-        <InputLabel color="primary">Sắp Xếp</InputLabel>
+        <InputLabel color="primary">{title}</InputLabel>
         <Select
           value={select}
           onChange={handleChange}
@@ -38,13 +43,10 @@ export default function SelectCategorySort({ setSortType }) {
             minWidth: '250px',
           }}
         >
-          <MenuItem value="">
-            <em>Thu dọn</em>
-          </MenuItem>
-          <MenuItem value="priceIncrease">Id tăng dần</MenuItem>
-          <MenuItem value="priceDecrease">Id giảm dần</MenuItem>
-          <MenuItem value="nameIncrease">Tên A-Z</MenuItem>
-          <MenuItem value="nameDecrease">Tên Z-A</MenuItem>
+          <MenuItem value="priceIncrease">{t('idSortSelectAsc')}</MenuItem>
+          <MenuItem value="priceDecrease">{t('idSortSelectDesc')}</MenuItem>
+          <MenuItem value="nameIncrease">{t('nameSortSelectAsc')}</MenuItem>
+          <MenuItem value="nameDecrease">{t('nameSortSelectDesc')}</MenuItem>
         </Select>
       </FormControl>
     </div>
