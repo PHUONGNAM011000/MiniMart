@@ -1,39 +1,62 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import InputLabel from '@material-ui/core/InputLabel';
-import FormControl from '@material-ui/core/FormControl';
-import Select from '@material-ui/core/Select';
+import { MenuItem, TextField } from '@material-ui/core';
 import { useTranslation } from 'react-i18next';
 
+const currencies = [
+  {
+    value: 'vi',
+    label: 'Tiếng Việt',
+  },
+  {
+    value: 'en',
+    label: 'Tiếng Anh',
+  },
+];
+
 const useStyles = makeStyles((theme) => ({
-  formControl: {
-    marginLeft: '0.5rem',
-    minWidth: 120,
+  root: {
+    '& .MuiTextField-root': {
+      margin: theme.spacing(1),
+      width: '10rem',
+
+      '& label': {
+        color: '#fff',
+      },
+    },
+  },
+  text: {
+    backgroundColor: 'rgba(0, 0, 0, 0)',
   },
 }));
 
-export default function SelectLanguage({ selectChangeHandler }) {
+export default function SelectLanguage() {
   const classes = useStyles();
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const [value, setValue] = React.useState('vi');
+
+  const handleChange = (event) => {
+    setValue(event.target.value);
+    i18n.changeLanguage(event.target.value);
+  };
 
   return (
-    <div>
-      <FormControl className={classes.formControl}>
-        <InputLabel style={{ color: '#fff' }}>{t('language')}</InputLabel>
-        <Select
-          native
-          defaultValue=""
-          onChange={selectChangeHandler}
-          style={{
-            color: '#fff',
-            backgroundColor: 'rgba(0, 0,0, 0.2)',
-            paddingLeft: '0.8rem',
-          }}
-        >
-          <option value="vi">Vietnamese</option>
-          <option value="en">English</option>
-        </Select>
-      </FormControl>
-    </div>
+    <form className={classes.root} noValidate autoComplete="off">
+      <TextField
+        select
+        label={t('language')}
+        value={value}
+        onChange={handleChange}
+        variant="filled"
+        className={classes.text}
+        color="primary"
+      >
+        {currencies.map((option) => (
+          <MenuItem key={option.value} value={option.value}>
+            {option.label}
+          </MenuItem>
+        ))}
+      </TextField>
+    </form>
   );
 }

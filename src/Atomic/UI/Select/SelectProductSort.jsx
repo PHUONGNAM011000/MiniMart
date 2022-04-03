@@ -9,6 +9,10 @@ import { useTranslation } from 'react-i18next';
 const useStyles = makeStyles((theme) => ({
   formControl: {
     minWidth: 120,
+
+    '@media screen and (max-width: 450px)': {
+      paddingBottom: '1rem',
+    },
   },
   selectEmpty: {
     marginTop: theme.spacing(2),

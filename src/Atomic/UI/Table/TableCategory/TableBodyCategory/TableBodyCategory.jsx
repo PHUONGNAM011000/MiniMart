@@ -114,7 +114,6 @@ const TableBodyCategory = ({ dataTable }) => {
             </StyledTableCell>
             <StyledTableCell align="center" className={classes.groupButton}>
               <Button
-                variant="outlined"
                 className={classes.button}
                 color={isColorPrimary ? 'primary' : 'secondary'}
                 onClick={() => showCategoryProduct(item)}
@@ -122,7 +121,6 @@ const TableBodyCategory = ({ dataTable }) => {
                 <VisibilityIcon />
               </Button>
               <Button
-                variant="outlined"
                 className={classes.button}
                 color={isColorPrimary ? 'primary' : 'secondary'}
                 onClick={() => removeProductHandler(item.id)}
@@ -130,7 +128,6 @@ const TableBodyCategory = ({ dataTable }) => {
                 <DeleteIcon />
               </Button>
               <Button
-                variant="outlined"
                 className={classes.button}
                 color={isColorPrimary ? 'primary' : 'secondary'}
                 onClick={() => editCategoryHandler(item)}

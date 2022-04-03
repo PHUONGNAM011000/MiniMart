@@ -50,7 +50,7 @@ const useStyles = makeStyles(() => ({
     height: '15rem',
     borderRadius: '5px',
     boxShadow: 'rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;',
-    marginBottom: '2rem',
+    margin: '2rem auto',
   },
   backdrop: {
     zIndex: '2000',
@@ -389,7 +389,11 @@ export default function DialogProductModal(props) {
                 <Grid item xs={6}>
                   <SelectCategory
                     data={[t('stocking'), t('outStock')]}
-                    value={productModal.status}
+                    value={
+                      productModal.status === 'Còn hàng'
+                        ? t('stocking')
+                        : t('outStock')
+                    }
                     showInputProduct={showInputProduct}
                     defaultValue={t('stocking')}
                     label={t('status')}

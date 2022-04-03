@@ -3,15 +3,18 @@ import React from 'react';
 import TextField from '@material-ui/core/TextField';
 import { InputAdornment } from '@material-ui/core';
 import SearchIcon from '@material-ui/icons/Search';
+import { useTranslation } from 'react-i18next';
 
 export default function Search({ onSearchChange, value, title }) {
+  const { t } = useTranslation();
+
   return (
     <TextField
+      label={t('labelSearchCategory')}
       placeholder={`${title} . . .`}
       fullWidth={true}
       style={{
-        minWidth: '250px',
-        maxWidth: '500px',
+        maxWidth: '550px',
         background: '#fff',
         borderRadius: '4px',
       }}
@@ -24,6 +27,7 @@ export default function Search({ onSearchChange, value, title }) {
           </InputAdornment>
         ),
       }}
+      multiline
       variant="outlined"
       value={value}
       onChange={(e) => onSearchChange(e)}

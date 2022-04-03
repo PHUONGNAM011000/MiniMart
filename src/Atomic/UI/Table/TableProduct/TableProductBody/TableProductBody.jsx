@@ -148,7 +148,6 @@ const TableProductBody = ({ dataTable }) => {
             <StyledTableCell align="center" className={classes.groupButton}>
               <Button
                 onClick={() => showModalProduct(item)}
-                variant="outlined"
                 color={isColorPrimary ? 'primary' : 'secondary'}
                 className={classes.button}
               >
@@ -156,7 +155,6 @@ const TableProductBody = ({ dataTable }) => {
               </Button>
               <Button
                 onClick={() => removeProductHandler(item.id)}
-                variant="outlined"
                 color={isColorPrimary ? 'primary' : 'secondary'}
                 className={classes.button}
               >
@@ -164,7 +162,6 @@ const TableProductBody = ({ dataTable }) => {
               </Button>
               <Button
                 onClick={() => editProductHandler(item)}
-                variant="outlined"
                 color={isColorPrimary ? 'primary' : 'secondary'}
                 className={classes.button}
               >

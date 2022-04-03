@@ -281,7 +281,7 @@ export default function DialogCategoryModal(props) {
                 }}
                 onClick={() => hideModalCategoryHandler()}
               >
-                Đóng
+                {t('close')}
               </Button>
               {titleCategoryModal !== 'show' && (
                 <Button

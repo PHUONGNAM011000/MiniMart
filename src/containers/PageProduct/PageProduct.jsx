@@ -5,6 +5,8 @@ import useSelect from '../../hooks/use-select';
 import SelectProductSort from '../../Atomic/UI/Select/SelectProductSort';
 import TableProduct from '../../Atomic/UI/Table/TableProduct/TableProduct';
 import { useTranslation } from 'react-i18next';
+import CardProduct from '../../Atomic/UI/Card/CardProduct';
+import SentimentVeryDissatisfiedIcon from '@material-ui/icons/SentimentVeryDissatisfied';
 
 const useStyles = makeStyles((theme) => ({
   seeMore: {
@@ -12,7 +14,7 @@ const useStyles = makeStyles((theme) => ({
   },
   tableHeader: {
     display: 'flex',
-    alignItems: 'flex-start',
+    alignItems: 'flex-end',
     justifyContent: 'space-between',
     marginBottom: '2rem',
 
@@ -56,6 +58,18 @@ const useStyles = makeStyles((theme) => ({
   table: {
     borderTop: '1px solid rgba(224, 224, 224, 1);',
   },
+  titleCardEmpty: {
+    backgroundColor: '#fff',
+    padding: '0.5rem',
+    borderRadius: '5px',
+    width: 'max-content',
+    display: 'flex',
+    alignItems: 'center',
+
+    '@media screen and (min-width: 800px)': {
+      display: 'none',
+    },
+  },
 }));
 
 export default function PageProduct() {
@@ -86,6 +100,13 @@ export default function PageProduct() {
         </div>
       </div>
       <TableProduct dataTable={data} />
+      <CardProduct dataTable={data} />
+      {data.length === 0 && (
+        <h4 className={classes.titleCardEmpty}>
+          <p style={{ marginRight: '0.5rem' }}>{t('titleEmpty')}</p>
+          <SentimentVeryDissatisfiedIcon />
+        </h4>
+      )}
     </React.Fragment>
   );
 }

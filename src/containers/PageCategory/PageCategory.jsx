@@ -5,6 +5,8 @@ import SelectCategorySort from '../../Atomic/UI/Select/SelectCategorySort';
 import TableCategory from '../../Atomic/UI/Table/TableCategory/TableCategory';
 import useSelect from '../../hooks/use-select';
 import { useTranslation } from 'react-i18next';
+import CardCategory from '../../Atomic/UI/Card/CardCategory';
+import SentimentVeryDissatisfiedIcon from '@material-ui/icons/SentimentVeryDissatisfied';
 
 const useStyles = makeStyles((theme) => ({
   seeMore: {
@@ -32,6 +34,18 @@ const useStyles = makeStyles((theme) => ({
   titleEmty: {
     marginTop: '1rem',
     marginLeft: '5px',
+  },
+  titleCardEmpty: {
+    backgroundColor: '#fff',
+    padding: '0.5rem',
+    borderRadius: '5px',
+    width: 'max-content',
+    display: 'flex',
+    alignItems: 'center',
+
+    '@media screen and (min-width: 800px)': {
+      display: 'none',
+    },
   },
 }));
 
@@ -64,6 +78,13 @@ export default function PageCategory() {
         </div>
       </div>
       <TableCategory dataTable={data} />
+      <CardCategory dataTable={data} />
+      {data.length === 0 && (
+        <h4 className={classes.titleCardEmpty}>
+          <p style={{ marginRight: '0.5rem' }}>{t('titleEmpty')}</p>
+          <SentimentVeryDissatisfiedIcon />
+        </h4>
+      )}
     </React.Fragment>
   );
 }

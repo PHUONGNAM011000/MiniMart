@@ -10,15 +10,17 @@ import MenuItemIcon from './MenuItemIcon/MenuItemIcon';
 import MenuItemText from './MenuItemText/MenuItemText';
 import DashboardIcon from '../../../icons/DashboardIcon';
 import ShoppingCartIcon from '../../../icons/ShoppingCartIcon';
-import { DUMMY_MENU_LIST } from '../../../Data/ArrayMenu';
 import NavHeader from '../../Layout/NavHeader/index';
 import { useDispatch, useSelector } from 'react-redux';
 import { ActionsMenu } from '../../../store/menuSlice';
 import { ActionsSearch } from '../../../store/searchSlice';
+import { useTranslation } from 'react-i18next';
 
 const Menu = ({ classes }) => {
   const open = useSelector((state) => state.menu.isShow);
   const dispatch = useDispatch();
+
+  const { t } = useTranslation();
 
   const handleDrawerOpen = () => {
     dispatch(ActionsMenu.showMenu());
@@ -55,7 +57,16 @@ const Menu = ({ classes }) => {
         </div>
         <Divider />
         <List>
-          {DUMMY_MENU_LIST.map((item) => (
+          {[
+            {
+              id: 1,
+              name: t('titleCategory'),
+            },
+            {
+              id: 2,
+              name: t('titleProduct'),
+            },
+          ].map((item) => (
             <MenuListItem
               key={item.id}
               params={`${item.id === 1 ? 'category' : 'product'}`}

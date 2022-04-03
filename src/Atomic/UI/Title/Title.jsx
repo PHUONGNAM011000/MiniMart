@@ -15,7 +15,7 @@ export default function Title(props) {
       gutterBottom
       style={{
         minWidth: 'max-content',
-        marginBottom: '0',
+        marginBottom: '8px',
       }}
     >
       {props.children}

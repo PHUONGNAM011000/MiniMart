@@ -10,10 +10,8 @@ import { ActionsMenu } from '../../../store/menuSlice';
 import Switch from '@material-ui/core/Switch';
 import { ActionsCustomTheme } from '../../../store/customThemeSlice';
 import SelectLanguage from '../../UI/Select/SelectLanguage';
-import { useTranslation } from 'react-i18next';
 
 const NavHeader = ({ classes }) => {
-  const { i18n } = useTranslation();
   const open = useSelector((state) => state.menu.isShow);
   const isColorPrimary = useSelector(
     (state) => state.customTheme.isColorPrimary
@@ -27,10 +25,6 @@ const NavHeader = ({ classes }) => {
 
   const handleChangeTheme = () => {
     dispatch(ActionsCustomTheme.colorChange());
-  };
-
-  const selectChangeHandler = (e) => {
-    i18n.changeLanguage(e.target.value);
   };
 
   return (
@@ -60,13 +54,6 @@ const NavHeader = ({ classes }) => {
             MiniMart
           </Typography>
           <div className={classes.user}>
-            <Avatar
-              alt="Remy Sharp"
-              src="https://images.unsplash.com/photo-1644982654131-79f434ac0c6c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2940&q=80"
-              style={{
-                cursor: 'pointer',
-              }}
-            />
             <Typography
               component="h1"
               variant="h6"
@@ -76,13 +63,20 @@ const NavHeader = ({ classes }) => {
             >
               Phương Nam
             </Typography>
+            <Avatar
+              alt="Remy Sharp"
+              src="https://images.unsplash.com/photo-1644982654131-79f434ac0c6c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2940&q=80"
+              style={{
+                cursor: 'pointer',
+              }}
+            />
             <Switch
               checked={isColorPrimary}
               onChange={handleChangeTheme}
               color="default"
               inputProps={{ 'aria-label': 'checkbox with default color' }}
             />
-            <SelectLanguage selectChangeHandler={selectChangeHandler} />
+            <SelectLanguage />
           </div>
         </Toolbar>
       </AppBar>
