@@ -43,10 +43,10 @@ export default function SelectProductSort({ setSortType, title }) {
             minWidth: '250px',
           }}
         >
-          <MenuItem value="priceIncrease">{t('amountSortSelectAsc')}</MenuItem>
-          <MenuItem value="priceDecrease">{t('amountSortSelectDesc')}</MenuItem>
           <MenuItem value="nameIncrease">{t('nameSortSelectAsc')}</MenuItem>
           <MenuItem value="nameDecrease">{t('nameSortSelectDesc')}</MenuItem>
+          <MenuItem value="priceIncrease">{t('amountSortSelectAsc')}</MenuItem>
+          <MenuItem value="priceDecrease">{t('amountSortSelectDesc')}</MenuItem>
         </Select>
       </FormControl>
     </div>

@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
   toolbar: {
     paddingRight: 24,
 
-    '@media screen and (max-width: 400px)': {
+    '@media screen and (max-width: 450px)': {
       justifyContent: 'space-between',
     },
   },
@@ -54,7 +54,7 @@ const useStyles = makeStyles((theme) => ({
     //   width: '10rem',
     // },
 
-    '@media screen and (max-width: 400px)': {
+    '@media screen and (max-width: 450px)': {
       display: 'none',
     },
   },
@@ -62,7 +62,7 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
     marginRight: '1rem',
 
-    '@media screen and (max-width: 560px)': {
+    '@media screen and (max-width: 650px)': {
       display: 'none',
     },
   },

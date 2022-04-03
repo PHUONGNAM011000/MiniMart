@@ -1,5 +1,7 @@
 export const transitionVI = {
   language: 'Ngôn ngữ',
+  vietnamese: 'Tiếng Việt',
+  english: 'Tiếng Anh',
   titleCategory: 'Danh mục sản phẩm',
   titleProduct: 'Sản phẩm',
   buttonTitle: 'Thêm danh mục',

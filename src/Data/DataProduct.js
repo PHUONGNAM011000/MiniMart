@@ -1,14 +1,14 @@
 export const DUMMY_PRODUCT = [
   {
-    id: 3,
-    stt: 3,
-    name: 'áo t-shirt',
+    id: 1,
+    stt: 1,
+    name: 'Laptop',
     image:
-      'https://thucungaz.com/wp-content/uploads/2019/04/cho-con-moi-bat-ve-keu-nhieu-ban-dem-phai-lam-sao.jpg',
-    amount: '15',
-    description: 'ao nay mac dep oi la dep et o et',
-    mass: '1.2',
-    category: 'Quần Kaki',
+      'http://vanchuyenchomeo.com/wp-content/uploads/2020/03/cach-nuoi-cho-con-2-thang-tuoi.jpg',
+    amount: '10',
+    description: 'Lap top cực xịn ram 8gb, chíp m1',
+    mass: '3.5',
+    category: 'Quần dui',
     status: 'Còn hàng',
   },
   {
@@ -24,15 +24,15 @@ export const DUMMY_PRODUCT = [
     status: 'Hết hàng',
   },
   {
-    id: 1,
-    stt: 1,
-    name: 'Laptop',
+    id: 3,
+    stt: 3,
+    name: 'áo t-shirt',
     image:
-      'http://vanchuyenchomeo.com/wp-content/uploads/2020/03/cach-nuoi-cho-con-2-thang-tuoi.jpg',
-    amount: '10',
-    description: 'Lap top cực xịn ram 8gb, chíp m1',
-    mass: '3.5',
-    category: 'Quần dui',
+      'https://thucungaz.com/wp-content/uploads/2019/04/cho-con-moi-bat-ve-keu-nhieu-ban-dem-phai-lam-sao.jpg',
+    amount: '15',
+    description: 'ao nay mac dep oi la dep et o et',
+    mass: '1.2',
+    category: 'Quần Kaki',
     status: 'Còn hàng',
   },
 ];

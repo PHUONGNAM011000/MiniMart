@@ -1,5 +1,7 @@
 export const transitionEN = {
   language: 'Language',
+  vietnamese: 'Vietnamese',
+  english: 'English',
   titleCategory: 'Product Category',
   titleProduct: 'Product',
   buttonTitle: 'Add category',

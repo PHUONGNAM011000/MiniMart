@@ -3,17 +3,6 @@ import { makeStyles } from '@material-ui/core/styles';
 import { MenuItem, TextField } from '@material-ui/core';
 import { useTranslation } from 'react-i18next';
 
-const currencies = [
-  {
-    value: 'vi',
-    label: 'Tiếng Việt',
-  },
-  {
-    value: 'en',
-    label: 'Tiếng Anh',
-  },
-];
-
 const useStyles = makeStyles((theme) => ({
   root: {
     '& .MuiTextField-root': {
@@ -23,10 +12,18 @@ const useStyles = makeStyles((theme) => ({
       '& label': {
         color: '#fff',
       },
+
+      '& div': {
+        color: '#fff',
+      },
+
+      '& svg': {
+        color: '#fff',
+      },
     },
   },
   text: {
-    backgroundColor: 'rgba(0, 0, 0, 0)',
+    backgroundColor: 'rgba(0, 0, 0, 0.1)',
   },
 }));
 
@@ -51,7 +48,16 @@ export default function SelectLanguage() {
         className={classes.text}
         color="primary"
       >
-        {currencies.map((option) => (
+        {[
+          {
+            value: 'vi',
+            label: t('vietnamese'),
+          },
+          {
+            value: 'en',
+            label: t('english'),
+          },
+        ].map((option) => (
           <MenuItem key={option.value} value={option.value}>
             {option.label}
           </MenuItem>

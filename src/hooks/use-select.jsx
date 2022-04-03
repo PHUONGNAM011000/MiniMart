@@ -7,10 +7,10 @@ const useSelect = (dataProduct, typeSort) => {
   useEffect(() => {
     const sortArray = (type) => {
       const types = {
-        priceIncrease: typeSort,
         nameIncrease: 'name',
-        priceDecrease: typeSort,
+        priceIncrease: typeSort,
         nameDecrease: 'name',
+        priceDecrease: typeSort,
       };
       const sortProperty = types[type];
       const sorted =
