@@ -143,7 +143,15 @@ export default function DialogProductModal(props) {
 
   const checkAmount = useSelector((state) => state.modalProduct.checkAmount);
 
+  const checkAmountNegative = useSelector(
+    (state) => state.modalProduct.checkAmountNegative
+  );
+
   const checkMass = useSelector((state) => state.modalProduct.checkMass);
+
+  const checkMassNegative = useSelector(
+    (state) => state.modalProduct.checkMassNegative
+  );
 
   const checkDescription = useSelector(
     (state) => state.modalProduct.checkDescription
@@ -194,10 +202,14 @@ export default function DialogProductModal(props) {
     const validateAmount =
       productModal.amount === '' || productModal.amount === undefined;
 
+    let validateAmountNegative = false;
+
     const validateDescription =
       productModal.description === '' || productModal.description === undefined;
     const validateMass =
       productModal.mass === '' || productModal.mass === undefined;
+
+    let validateMassNegative = false;
 
     if (validateName) {
       dispatch(ActionsModalProduct.checkNameHandled());
@@ -205,9 +217,7 @@ export default function DialogProductModal(props) {
 
     if (validateImage) {
       dispatch(ActionsModalProduct.checkImageHandled());
-    }
-
-    if (!validateImage) {
+    } else {
       validateImageURL =
         productModal.image.match(/\.(jpeg|jpg|gif|png)$/) == null;
 
@@ -217,6 +227,11 @@ export default function DialogProductModal(props) {
 
     if (validateAmount) {
       dispatch(ActionsModalProduct.checkAmountHandled());
+    } else {
+      validateAmountNegative = productModal.amount <= 0;
+
+      if (validateAmountNegative)
+        dispatch(ActionsModalProduct.checkAmountNegativeHandled());
     }
 
     if (validateDescription) {
@@ -224,6 +239,11 @@ export default function DialogProductModal(props) {
     }
     if (validateMass) {
       dispatch(ActionsModalProduct.checkMassHandled());
+    } else {
+      validateMassNegative = productModal.mass <= 0;
+
+      if (validateMassNegative)
+        dispatch(ActionsModalProduct.checkMassNegativeHandled());
     }
 
     if (
@@ -343,8 +363,11 @@ export default function DialogProductModal(props) {
                 )}
                 <Grid item xs={6}>
                   <TextField
-                    error={checkAmount}
-                    helperText={checkAmount && t('errorAmount')}
+                    error={checkAmount || checkAmountNegative}
+                    helperText={
+                      (checkAmount && t('errorAmount')) ||
+                      (checkAmountNegative && t('errorAmountNegative'))
+                    }
                     color="primary"
                     label={t('amount')}
                     type="number"
@@ -369,8 +392,11 @@ export default function DialogProductModal(props) {
                 </Grid>
                 <Grid item xs={6}>
                   <TextField
-                    error={checkMass}
-                    helperText={checkMass && t('errorMass')}
+                    error={checkMass || checkMassNegative}
+                    helperText={
+                      (checkMass && t('errorMass')) ||
+                      (checkMassNegative && t('errorMassNegative'))
+                    }
                     color="primary"
                     type="text"
                     label={t('mass')}

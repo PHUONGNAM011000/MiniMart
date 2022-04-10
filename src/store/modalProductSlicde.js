@@ -14,6 +14,8 @@ const modalProductReducer = createSlice({
     checkDescription: false,
     checkMass: false,
     checkImageURL: false,
+    checkAmountNegative: false,
+    checkMassNegative: false,
   },
   reducers: {
     showModalProduct(state, action) {
@@ -41,11 +43,13 @@ const modalProductReducer = createSlice({
       state.titleProductModal = 'add';
       state.validate = true;
       state.checkAmount = false;
+      state.checkAmountNegative = false;
       state.checkDescription = false;
       state.checkMass = false;
       state.checkName = false;
       state.checkImage = false;
       state.checkImageURL = false;
+      state.checkMassNegative = false;
     },
 
     nameChanged(state, action) {
@@ -65,12 +69,14 @@ const modalProductReducer = createSlice({
       state.productModal.amount = action.payload;
       state.validate = false;
       state.checkAmount = false;
+      state.checkAmountNegative = false;
     },
 
     massChanged(state, action) {
       state.productModal.mass = action.payload;
       state.validate = false;
       state.checkMass = false;
+      state.checkMassNegative = false;
     },
 
     descriptionChanged(state, action) {
@@ -89,9 +95,11 @@ const modalProductReducer = createSlice({
       state.productModal.status = action.payload;
       state.validate = false;
     },
+
     checkNameHandled(state) {
       state.checkName = true;
     },
+
     checkImageHandled(state) {
       state.checkImage = true;
     },
@@ -103,11 +111,21 @@ const modalProductReducer = createSlice({
     checkAmountHandled(state) {
       state.checkAmount = true;
     },
+
+    checkAmountNegativeHandled(state) {
+      state.checkAmountNegative = true;
+    },
+
     checkDescriptionHandled(state) {
       state.checkDescription = true;
     },
+
     checkMassHandled(state) {
       state.checkMass = true;
+    },
+
+    checkMassNegativeHandled(state) {
+      state.checkMassNegative = true;
     },
   },
 });

@@ -60,7 +60,7 @@ const useStyles = makeStyles((theme) => ({
   },
   nameUser: {
     flexGrow: 1,
-    marginRight: '1rem',
+    marginLeft: '1rem',
 
     '@media screen and (max-width: 650px)': {
       display: 'none',

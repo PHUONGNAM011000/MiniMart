@@ -54,6 +54,13 @@ const NavHeader = ({ classes }) => {
             MiniMart
           </Typography>
           <div className={classes.user}>
+            <Avatar
+              alt="Remy Sharp"
+              src="https://images.unsplash.com/photo-1644982654131-79f434ac0c6c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2940&q=80"
+              style={{
+                cursor: 'pointer',
+              }}
+            />
             <Typography
               component="h1"
               variant="h6"
@@ -63,13 +70,6 @@ const NavHeader = ({ classes }) => {
             >
               Phương Nam
             </Typography>
-            <Avatar
-              alt="Remy Sharp"
-              src="https://images.unsplash.com/photo-1644982654131-79f434ac0c6c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2940&q=80"
-              style={{
-                cursor: 'pointer',
-              }}
-            />
             <Switch
               checked={isColorPrimary}
               onChange={handleChangeTheme}

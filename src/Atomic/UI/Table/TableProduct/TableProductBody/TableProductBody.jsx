@@ -25,7 +25,7 @@ const useStyles = makeStyles({
     minWidth: '140px',
   },
   amount: {
-    minWidth: '100px',
+    minWidth: '105px',
   },
   description: {
     minWidth: '220px !important',
@@ -34,10 +34,10 @@ const useStyles = makeStyles({
     minWidth: '120px',
   },
   mass: {
-    minWidth: '140px',
+    minWidth: '170px',
   },
   status: {
-    minWidth: '110px',
+    minWidth: '115px',
   },
   button: {
     margin: '0.5rem',
