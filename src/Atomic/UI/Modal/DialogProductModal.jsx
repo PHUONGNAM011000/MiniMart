@@ -268,15 +268,17 @@ export default function DialogProductModal(props) {
     dispatch(ActionsModalProduct.hideModalProduct());
   };
 
-  let titleModal, titleButtonDialog;
+  let titleModal, titleButton, titleButtonDialog;
 
   if (titleProductModal === 'show') {
     titleModal = t('Show');
   } else if (titleProductModal === 'edit') {
     titleModal = t('Edit');
+    titleButton = t('Save');
     titleButtonDialog = t('editTitleButtonDialogProduct');
   } else {
     titleModal = t('Add');
+    titleButton = t('Add');
     titleButtonDialog = t('addTitleButtonDialogProduct');
   }
 
@@ -296,7 +298,7 @@ export default function DialogProductModal(props) {
           onClose={closeDialogHandler}
           onSaveDialog={saveDialogHandler}
           title={titleButtonDialog}
-          titleButton={t('save')}
+          titleButton={titleButton}
         />
       )}
 
@@ -398,7 +400,7 @@ export default function DialogProductModal(props) {
                       (checkMassNegative && t('errorMassNegative'))
                     }
                     color="primary"
-                    type="text"
+                    type="number"
                     label={t('mass')}
                     fullWidth={true}
                     InputProps={{

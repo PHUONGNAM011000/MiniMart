@@ -15,6 +15,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { ActionsMenu } from '../../../store/menuSlice';
 import { ActionsSearch } from '../../../store/searchSlice';
 import { useTranslation } from 'react-i18next';
+import { ActionsSelect } from '../../../store/selectSlice';
 
 const Menu = ({ classes }) => {
   const open = useSelector((state) => state.menu.isShow);
@@ -33,6 +34,7 @@ const Menu = ({ classes }) => {
   const handleDrawerCloseHandler = () => {
     dispatch(ActionsMenu.hideMenu());
     dispatch(ActionsSearch.clearSearchQuery());
+    dispatch(ActionsSelect.clearSelect());
   };
 
   return (

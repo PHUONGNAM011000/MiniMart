@@ -5,6 +5,8 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import { useTranslation } from 'react-i18next';
+import { useDispatch, useSelector } from 'react-redux';
+import { ActionsSelect } from '../../../store/selectSlice';
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -19,14 +21,14 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SelectCategorySort({ setSortType, title }) {
+export default function SelectCategorySort({ title }) {
   const classes = useStyles();
-  const [select, setSelect] = React.useState('');
   const { t } = useTranslation();
+  const valueSelect = useSelector((state) => state.select.valueSelect);
+  const dispatch = useDispatch();
 
-  const handleChange = (event) => {
-    setSortType(event.target.value);
-    setSelect(event.target.value);
+  const handleChange = (e) => {
+    dispatch(ActionsSelect.onChange(e.target.value));
   };
 
   return (
@@ -34,7 +36,7 @@ export default function SelectCategorySort({ setSortType, title }) {
       <FormControl variant="filled" className={classes.formControl}>
         <InputLabel color="primary">{title}</InputLabel>
         <Select
-          value={select}
+          value={valueSelect}
           onChange={handleChange}
           label="select"
           color="primary"
@@ -45,8 +47,8 @@ export default function SelectCategorySort({ setSortType, title }) {
         >
           <MenuItem value="nameIncrease">{t('nameSortSelectAsc')}</MenuItem>
           <MenuItem value="nameDecrease">{t('nameSortSelectDesc')}</MenuItem>
-          <MenuItem value="priceIncrease">{t('idSortSelectAsc')}</MenuItem>
-          <MenuItem value="priceDecrease">{t('idSortSelectDesc')}</MenuItem>
+          <MenuItem value="idIncrease">{t('idSortSelectAsc')}</MenuItem>
+          <MenuItem value="idDecrease">{t('idSortSelectDesc')}</MenuItem>
         </Select>
       </FormControl>
     </div>

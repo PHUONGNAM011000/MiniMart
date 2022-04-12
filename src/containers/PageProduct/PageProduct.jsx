@@ -1,12 +1,12 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { useSelector } from 'react-redux';
-import useSelect from '../../hooks/use-select';
 import SelectProductSort from '../../Atomic/UI/Select/SelectProductSort';
 import TableProduct from '../../Atomic/UI/Table/TableProduct/TableProduct';
 import { useTranslation } from 'react-i18next';
 import CardProduct from '../../Atomic/UI/Card/CardProduct';
 import SentimentVeryDissatisfiedIcon from '@material-ui/icons/SentimentVeryDissatisfied';
+import _ from 'lodash';
 
 const useStyles = makeStyles((theme) => ({
   seeMore: {
@@ -76,7 +76,7 @@ export default function PageProduct() {
   const { t } = useTranslation();
   const classes = useStyles();
   const dataProduct = useSelector((state) => state.product.dataProduct);
-
+  const valueSelect = useSelector((state) => state.select.valueSelect);
   const searchQuery = useSelector((state) => state.search.searchQuery);
 
   let filtered = dataProduct;
@@ -86,22 +86,30 @@ export default function PageProduct() {
       item.name.toLowerCase().startsWith(searchQuery.toLowerCase())
     );
   }
-  const { data, setSortType } = useSelect(filtered, 'amount');
+
+  if (valueSelect === 'nameIncrease')
+    filtered = _.orderBy(filtered, ['name'], ['asc']);
+  else if (valueSelect === 'nameDecrease')
+    filtered = _.orderBy(filtered, ['name'], ['desc']);
+  else if (valueSelect === 'amountIncrease')
+    filtered = _.orderBy(filtered, ['amount'], ['asc']);
+  else if (valueSelect === 'amountDecrease')
+    filtered = _.orderBy(filtered, ['amount'], ['desc']);
 
   return (
     <React.Fragment>
       <div className={classes.tableHeader}>
-        <SelectProductSort title={t('titleSort')} setSortType={setSortType} />
+        <SelectProductSort title={t('titleSort')} />
 
         <div className={classes.tableTitle}>
           <p>{t('amount')}: </p>
           &nbsp;
-          <p>{data.length}</p>
+          <p>{filtered.length}</p>
         </div>
       </div>
-      <TableProduct dataTable={data} />
-      <CardProduct dataTable={data} />
-      {data.length === 0 && (
+      <TableProduct dataTable={filtered} />
+      <CardProduct dataTable={filtered} />
+      {filtered.length === 0 && (
         <h4 className={classes.titleCardEmpty}>
           <p style={{ marginRight: '0.5rem' }}>{t('titleEmpty')}</p>
           <SentimentVeryDissatisfiedIcon />

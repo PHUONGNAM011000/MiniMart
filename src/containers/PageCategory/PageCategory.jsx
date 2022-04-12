@@ -3,10 +3,10 @@ import { makeStyles } from '@material-ui/core/styles';
 import { useSelector } from 'react-redux';
 import SelectCategorySort from '../../Atomic/UI/Select/SelectCategorySort';
 import TableCategory from '../../Atomic/UI/Table/TableCategory/TableCategory';
-import useSelect from '../../hooks/use-select';
 import { useTranslation } from 'react-i18next';
 import CardCategory from '../../Atomic/UI/Card/CardCategory';
 import SentimentVeryDissatisfiedIcon from '@material-ui/icons/SentimentVeryDissatisfied';
+import _ from 'lodash';
 
 const useStyles = makeStyles((theme) => ({
   seeMore: {
@@ -51,35 +51,42 @@ const useStyles = makeStyles((theme) => ({
 
 export default function PageCategory() {
   const classes = useStyles();
+  const { t } = useTranslation();
   const dataCategory = useSelector((state) => state.category.dataCategory);
+  const searchQuery = useSelector((state) => state.search.searchQuery);
+  const valueSelect = useSelector((state) => state.select.valueSelect);
 
   let filtered = dataCategory;
 
-  const searchQuery = useSelector((state) => state.search.searchQuery);
-
   if (searchQuery) {
-    filtered = dataCategory.filter((item) =>
+    filtered = [...filtered].filter((item) =>
       item.name.toLowerCase().startsWith(searchQuery.toLowerCase())
     );
   }
 
-  const { data, setSortType } = useSelect(filtered, 'id');
-  const { t } = useTranslation();
+  if (valueSelect === 'nameIncrease')
+    filtered = _.orderBy(filtered, ['name'], ['asc']);
+  else if (valueSelect === 'nameDecrease')
+    filtered = _.orderBy(filtered, ['name'], ['desc']);
+  else if (valueSelect === 'idIncrease')
+    filtered = _.orderBy(filtered, ['id'], ['asc']);
+  else if (valueSelect === 'idDecrease')
+    filtered = _.orderBy(filtered, ['id'], ['desc']);
 
   return (
     <React.Fragment>
       <div className={classes.tableHeader}>
-        <SelectCategorySort title={t('titleSort')} setSortType={setSortType} />
+        <SelectCategorySort title={t('titleSort')} />
 
         <div style={{ display: 'flex' }}>
           <p className={classes.tableTitle}>{t('amount')}: </p>
           &nbsp;
-          <p>{data.length}</p>
+          <p>{filtered.length}</p>
         </div>
       </div>
-      <TableCategory dataTable={data} />
-      <CardCategory dataTable={data} />
-      {data.length === 0 && (
+      <TableCategory dataTable={filtered} />
+      <CardCategory dataTable={filtered} />
+      {filtered.length === 0 && (
         <h4 className={classes.titleCardEmpty}>
           <p style={{ marginRight: '0.5rem' }}>{t('titleEmpty')}</p>
           <SentimentVeryDissatisfiedIcon />

@@ -185,15 +185,17 @@ export default function DialogCategoryModal(props) {
     }
   };
 
-  let titleModal, titleButtonDialog;
+  let titleModal, titleButton, titleButtonDialog;
 
   if (titleCategoryModal === 'show') {
     titleModal = t('Show');
   } else if (titleCategoryModal === 'edit') {
     titleModal = t('Edit');
+    titleButton = t('Save');
     titleButtonDialog = t('editTitleButtonDialogCategory');
   } else {
     titleModal = t('Add');
+    titleButton = t('Add');
     titleButtonDialog = t('addTitleButtonDialogCategory');
   }
 
@@ -213,7 +215,7 @@ export default function DialogCategoryModal(props) {
           onClose={closeDialogHandler}
           onSaveDialog={saveDialogHandler}
           title={titleButtonDialog}
-          titleButton={t('Save')}
+          titleButton={titleButton}
         />
       )}
 

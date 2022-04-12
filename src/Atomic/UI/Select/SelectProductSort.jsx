@@ -5,6 +5,8 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import { useTranslation } from 'react-i18next';
+import { ActionsSelect } from '../../../store/selectSlice';
+import { useDispatch, useSelector } from 'react-redux';
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -19,14 +21,14 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SelectProductSort({ setSortType, title }) {
+export default function SelectProductSort({ title }) {
   const classes = useStyles();
-  const [select, setSelect] = React.useState('');
   const { t } = useTranslation();
+  const dispatch = useDispatch();
+  const valueSelect = useSelector((state) => state.select.valueSelect);
 
-  const handleChange = (event) => {
-    setSortType(event.target.value);
-    setSelect(event.target.value);
+  const handleChange = (e) => {
+    dispatch(ActionsSelect.onChange(e.target.value));
   };
 
   return (
@@ -34,7 +36,7 @@ export default function SelectProductSort({ setSortType, title }) {
       <FormControl variant="filled" className={classes.formControl}>
         <InputLabel color="primary">{title}</InputLabel>
         <Select
-          value={select}
+          value={valueSelect}
           onChange={handleChange}
           label="select"
           color="primary"
@@ -45,8 +47,10 @@ export default function SelectProductSort({ setSortType, title }) {
         >
           <MenuItem value="nameIncrease">{t('nameSortSelectAsc')}</MenuItem>
           <MenuItem value="nameDecrease">{t('nameSortSelectDesc')}</MenuItem>
-          <MenuItem value="priceIncrease">{t('amountSortSelectAsc')}</MenuItem>
-          <MenuItem value="priceDecrease">{t('amountSortSelectDesc')}</MenuItem>
+          <MenuItem value="amountIncrease">{t('amountSortSelectAsc')}</MenuItem>
+          <MenuItem value="amountDecrease">
+            {t('amountSortSelectDesc')}
+          </MenuItem>
         </Select>
       </FormControl>
     </div>

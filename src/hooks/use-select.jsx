@@ -7,11 +7,12 @@ const useSelect = (dataProduct, typeSort) => {
   useEffect(() => {
     const sortArray = (type) => {
       const types = {
-        nameIncrease: 'name',
-        priceIncrease: typeSort,
         nameDecrease: 'name',
         priceDecrease: typeSort,
+        nameIncrease: 'name',
+        priceIncrease: typeSort,
       };
+
       const sortProperty = types[type];
       const sorted =
         sortProperty === 'name'
@@ -33,10 +34,10 @@ const useSelect = (dataProduct, typeSort) => {
                   : 0
               )
           : type === 'priceDecrease'
-          ? [...dataProduct].sort((a, b) => b[sortProperty] - a[sortProperty])
-          : [...dataProduct]
+          ? [...dataProduct]
               .sort((a, b) => b[sortProperty] - a[sortProperty])
-              .reverse();
+              .reverse()
+          : [...dataProduct].sort((a, b) => b[sortProperty] - a[sortProperty]);
 
       setData(sorted);
     };

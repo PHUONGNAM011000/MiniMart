@@ -7,6 +7,7 @@ import modalProductReducer from './modalProductSlicde';
 import dialogReducer from './dialogSlice';
 import customThemeReducer from './customThemeSlice';
 import searchReducer from './searchSlice';
+import selectReducer from './selectSlice';
 
 const store = configureStore({
   reducer: {
@@ -18,6 +19,7 @@ const store = configureStore({
     dialog: dialogReducer,
     customTheme: customThemeReducer,
     search: searchReducer,
+    select: selectReducer,
   },
 });
 
