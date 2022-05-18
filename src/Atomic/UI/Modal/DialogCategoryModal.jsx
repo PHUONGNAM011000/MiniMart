@@ -113,13 +113,7 @@ export default function DialogCategoryModal(props) {
   const classes = useStyles();
   const dispatch = useDispatch();
 
-  const [open, setOpen] = React.useState(true);
-
-  useEffect(() => {
-    setTimeout(() => {
-      setOpen(false);
-    }, 1500);
-  }, []);
+  const [open, setOpen] = React.useState(false);
 
   const categoryModal = useSelector(
     (state) => state.modalCategory.categoryModal
@@ -160,9 +154,14 @@ export default function DialogCategoryModal(props) {
   };
 
   const saveDialogHandler = () => {
-    dispatch(ActionsModal.hideModal());
-    dispatch(dialogActions.hideDialog());
-    dispatch(ActionsCategory.editCategory(categoryModal));
+    setOpen(true);
+
+    setTimeout(() => {
+      dispatch(ActionsModal.hideModal());
+      dispatch(dialogActions.hideDialog());
+      dispatch(ActionsCategory.editCategory(categoryModal));
+      setOpen(false);
+    }, 1500);
   };
 
   const editCategoryHandler = () => {
@@ -219,86 +218,82 @@ export default function DialogCategoryModal(props) {
         />
       )}
 
-      {!open && (
-        <Dialog
+      <Dialog
+        onClose={() => hideModalCategoryHandler()}
+        aria-labelledby="customized-dialog-title"
+        open={true}
+      >
+        <DialogTitle
+          id="customized-dialog-title"
           onClose={() => hideModalCategoryHandler()}
-          aria-labelledby="customized-dialog-title"
-          open={true}
         >
-          <DialogTitle
-            id="customized-dialog-title"
-            onClose={() => hideModalCategoryHandler()}
-          >
-            <span>{titleModal}</span> {t('category')}
-          </DialogTitle>
-          <DialogContent dividers>
-            <div className={classes.flexProduct}>
-              <Grid container spacing={3}>
-                <Grid item xs={12}>
-                  <TextField
-                    error={checkValidateName}
-                    helperText={checkValidateName && t('errorNameCategory')}
-                    color="primary"
-                    label={t('nameCategory')}
-                    variant="outlined"
-                    type="text"
-                    fullWidth={true}
-                    InputProps={{
-                      readOnly: input,
-                    }}
-                    value={categoryModal.name || ''}
-                    onChange={(e) => nameCategoryChangeHandler(e)}
-                  />
-                </Grid>
-                <Grid item xs={12}>
-                  <TextField
-                    error={checkValidateDecripstion}
-                    helperText={
-                      checkValidateDecripstion && t('errorDescription')
-                    }
-                    color="primary"
-                    label={t('description')}
-                    variant="outlined"
-                    type="text"
-                    multiline
-                    rows={5}
-                    fullWidth={true}
-                    InputProps={{
-                      readOnly: input,
-                    }}
-                    value={categoryModal.decripstion || ''}
-                    onChange={(e) => descriptionCategoryChangeHandler(e)}
-                  />
-                </Grid>
+          <span>{titleModal}</span> {t('category')}
+        </DialogTitle>
+        <DialogContent dividers>
+          <div className={classes.flexProduct}>
+            <Grid container spacing={3}>
+              <Grid item xs={12}>
+                <TextField
+                  error={checkValidateName}
+                  helperText={checkValidateName && t('errorNameCategory')}
+                  color="primary"
+                  label={t('nameCategory')}
+                  variant="outlined"
+                  type="text"
+                  fullWidth={true}
+                  InputProps={{
+                    readOnly: input,
+                  }}
+                  value={categoryModal.name || ''}
+                  onChange={(e) => nameCategoryChangeHandler(e)}
+                />
               </Grid>
-            </div>
-          </DialogContent>
-          <DialogActions>
-            <div className={classes.buttonModal}>
+              <Grid item xs={12}>
+                <TextField
+                  error={checkValidateDecripstion}
+                  helperText={checkValidateDecripstion && t('errorDescription')}
+                  color="primary"
+                  label={t('description')}
+                  variant="outlined"
+                  type="text"
+                  multiline
+                  rows={5}
+                  fullWidth={true}
+                  InputProps={{
+                    readOnly: input,
+                  }}
+                  value={categoryModal.decripstion || ''}
+                  onChange={(e) => descriptionCategoryChangeHandler(e)}
+                />
+              </Grid>
+            </Grid>
+          </div>
+        </DialogContent>
+        <DialogActions>
+          <div className={classes.buttonModal}>
+            <Button
+              variant="contained"
+              color="secondary"
+              style={{
+                marginRight: '5px',
+              }}
+              onClick={() => hideModalCategoryHandler()}
+            >
+              {t('close')}
+            </Button>
+            {titleCategoryModal !== 'show' && (
               <Button
                 variant="contained"
-                color="secondary"
-                style={{
-                  marginRight: '5px',
-                }}
-                onClick={() => hideModalCategoryHandler()}
+                color="primary"
+                onClick={() => editCategoryHandler()}
+                disabled={validate}
               >
-                {t('close')}
+                {titleModal}
               </Button>
-              {titleCategoryModal !== 'show' && (
-                <Button
-                  variant="contained"
-                  color="primary"
-                  onClick={() => editCategoryHandler()}
-                  disabled={validate}
-                >
-                  {titleModal}
-                </Button>
-              )}
-            </div>
-          </DialogActions>
-        </Dialog>
-      )}
+            )}
+          </div>
+        </DialogActions>
+      </Dialog>
     </>
   );
 }

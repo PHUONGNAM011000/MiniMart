@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import { InputAdornment, makeStyles } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
@@ -113,13 +113,7 @@ export default function DialogProductModal(props) {
   const classes = useStyles();
   const dispatch = useDispatch();
 
-  const [open, setOpen] = React.useState(true);
-
-  useEffect(() => {
-    setTimeout(() => {
-      setOpen(false);
-    }, 1500);
-  }, []);
+  const [open, setOpen] = React.useState(false);
 
   const productModal = useSelector((state) => state.modalProduct.productModal);
   const showInputProduct = useSelector(
@@ -218,8 +212,7 @@ export default function DialogProductModal(props) {
     if (validateImage) {
       dispatch(ActionsModalProduct.checkImageHandled());
     } else {
-      validateImageURL =
-        productModal.image.match(/\.(jpeg|jpg|gif|png)$/) == null;
+      validateImageURL = productModal.image.match(/(https?:\/\/)/i) == null;
 
       if (validateImageURL)
         dispatch(ActionsModalProduct.checkImageURLHandled());
@@ -263,9 +256,14 @@ export default function DialogProductModal(props) {
   };
 
   const saveDialogHandler = () => {
-    dispatch(dialogActions.hideDialog());
-    dispatch(ActionsProduct.editProduct(productModal));
-    dispatch(ActionsModalProduct.hideModalProduct());
+    setOpen(true);
+
+    setTimeout(() => {
+      dispatch(dialogActions.hideDialog());
+      dispatch(ActionsProduct.editProduct(productModal));
+      dispatch(ActionsModalProduct.hideModalProduct());
+      setOpen(false);
+    }, 1500);
   };
 
   let titleModal, titleButton, titleButtonDialog;
@@ -302,179 +300,177 @@ export default function DialogProductModal(props) {
         />
       )}
 
-      {!open && (
-        <Dialog
+      <Dialog
+        onClose={() => hideModalProductHandler()}
+        aria-labelledby="customized-dialog-title"
+        open={true}
+      >
+        <DialogTitle
+          id="customized-dialog-title"
           onClose={() => hideModalProductHandler()}
-          aria-labelledby="customized-dialog-title"
-          open={true}
         >
-          <DialogTitle
-            id="customized-dialog-title"
-            onClose={() => hideModalProductHandler()}
-          >
-            <span>{titleModal}</span> {t('titleProduct')}
-          </DialogTitle>
-          <DialogContent dividers>
-            <div className={classes.flexProduct}>
-              {titleProductModal !== 'add' && (
+          <span>{titleModal}</span> {t('titleProduct')}
+        </DialogTitle>
+        <DialogContent dividers>
+          <div className={classes.flexProduct}>
+            {titleProductModal !== 'add' && (
+              <Grid item xs={12}>
+                <Avatar
+                  variant="square"
+                  className={classes.imageModal}
+                  src={productModal.image}
+                />
+              </Grid>
+            )}
+            <Grid container spacing={3}>
+              <Grid item xs={12}>
+                <TextField
+                  error={checkName}
+                  helperText={checkName && t('errorNameProduct')}
+                  color="primary"
+                  label={t('nameProduct')}
+                  variant="outlined"
+                  type="text"
+                  fullWidth={true}
+                  InputProps={{
+                    readOnly: showInputProduct,
+                  }}
+                  value={productModal.name || ''}
+                  onChange={(e) => NameProductChangeHandler(e)}
+                />
+              </Grid>
+              {titleProductModal !== 'show' && (
                 <Grid item xs={12}>
-                  <Avatar
-                    variant="square"
-                    className={classes.imageModal}
-                    src={productModal.image}
+                  <TextField
+                    error={checkImage || checkImageURL}
+                    helperText={
+                      (checkImage && t('errorImage')) ||
+                      (checkImageURL && t('errorUrl'))
+                    }
+                    color="primary"
+                    label={t('image')}
+                    variant="outlined"
+                    type="text"
+                    fullWidth={true}
+                    InputProps={{
+                      readOnly: showInputProduct,
+                    }}
+                    value={productModal.image || ''}
+                    onChange={(e) => urlProductChangeHandler(e)}
                   />
                 </Grid>
               )}
-              <Grid container spacing={3}>
-                <Grid item xs={12}>
-                  <TextField
-                    error={checkName}
-                    helperText={checkName && t('errorNameProduct')}
-                    color="primary"
-                    label={t('nameProduct')}
-                    variant="outlined"
-                    type="text"
-                    fullWidth={true}
-                    InputProps={{
-                      readOnly: showInputProduct,
-                    }}
-                    value={productModal.name || ''}
-                    onChange={(e) => NameProductChangeHandler(e)}
-                  />
-                </Grid>
-                {titleProductModal !== 'show' && (
-                  <Grid item xs={12}>
-                    <TextField
-                      error={checkImage || checkImageURL}
-                      helperText={
-                        (checkImage && t('errorImage')) ||
-                        (checkImageURL && t('errorUrl'))
-                      }
-                      color="primary"
-                      label={t('image')}
-                      variant="outlined"
-                      type="text"
-                      fullWidth={true}
-                      InputProps={{
-                        readOnly: showInputProduct,
-                      }}
-                      value={productModal.image || ''}
-                      onChange={(e) => urlProductChangeHandler(e)}
-                    />
-                  </Grid>
-                )}
-                <Grid item xs={6}>
-                  <TextField
-                    error={checkAmount || checkAmountNegative}
-                    helperText={
-                      (checkAmount && t('errorAmount')) ||
-                      (checkAmountNegative && t('errorAmountNegative'))
-                    }
-                    color="primary"
-                    label={t('amount')}
-                    type="number"
-                    variant="outlined"
-                    fullWidth={true}
-                    InputProps={{
-                      readOnly: showInputProduct,
-                    }}
-                    value={productModal.amount || ''}
-                    onChange={(e) => AmountProductChangeHandler(e)}
-                  />
-                </Grid>
-                <Grid item xs={6}>
-                  <SelectCategory
-                    data={dataCategory.map((item) => item.name)}
-                    value={productModal.category}
-                    showInputProduct={showInputProduct}
-                    defaultValue={dataCategory[0].name}
-                    label={t('category')}
-                    onChange={categoryModalChangeHandler}
-                  />
-                </Grid>
-                <Grid item xs={6}>
-                  <TextField
-                    error={checkMass || checkMassNegative}
-                    helperText={
-                      (checkMass && t('errorMass')) ||
-                      (checkMassNegative && t('errorMassNegative'))
-                    }
-                    color="primary"
-                    type="number"
-                    label={t('mass')}
-                    fullWidth={true}
-                    InputProps={{
-                      endAdornment: (
-                        <InputAdornment position="end">kg</InputAdornment>
-                      ),
-                      readOnly: showInputProduct,
-                    }}
-                    variant="outlined"
-                    value={productModal.mass || ''}
-                    onChange={(e) => MassProductChangeHandler(e)}
-                  />
-                </Grid>
-                <Grid item xs={6}>
-                  <SelectCategory
-                    data={[t('stocking'), t('outStock')]}
-                    value={
-                      productModal.status === 'Còn hàng'
-                        ? t('stocking')
-                        : t('outStock')
-                    }
-                    showInputProduct={showInputProduct}
-                    defaultValue={t('stocking')}
-                    label={t('status')}
-                    onChange={StatusProductChangeHandler}
-                  />
-                </Grid>
-                <Grid item xs={12}>
-                  <TextField
-                    error={checkDescription}
-                    helperText={checkDescription && t('errorDescription')}
-                    color="primary"
-                    label={t('description')}
-                    variant="outlined"
-                    type="text"
-                    multiline
-                    rows={5}
-                    fullWidth={true}
-                    InputProps={{
-                      readOnly: showInputProduct,
-                    }}
-                    value={productModal.description || ''}
-                    onChange={(e) => DescriptionProductChangeHandler(e)}
-                  />
-                </Grid>
+              <Grid item xs={6}>
+                <TextField
+                  error={checkAmount || checkAmountNegative}
+                  helperText={
+                    (checkAmount && t('errorAmount')) ||
+                    (checkAmountNegative && t('errorAmountNegative'))
+                  }
+                  color="primary"
+                  label={t('amount')}
+                  type="number"
+                  variant="outlined"
+                  fullWidth={true}
+                  InputProps={{
+                    readOnly: showInputProduct,
+                  }}
+                  value={productModal.amount || ''}
+                  onChange={(e) => AmountProductChangeHandler(e)}
+                />
               </Grid>
-            </div>
-          </DialogContent>
-          <DialogActions>
-            <div className={classes.buttonModal}>
+              <Grid item xs={6}>
+                <SelectCategory
+                  data={dataCategory.map((item) => item.name)}
+                  value={productModal.category}
+                  showInputProduct={showInputProduct}
+                  defaultValue={dataCategory[0].name}
+                  label={t('category')}
+                  onChange={categoryModalChangeHandler}
+                />
+              </Grid>
+              <Grid item xs={6}>
+                <TextField
+                  error={checkMass || checkMassNegative}
+                  helperText={
+                    (checkMass && t('errorMass')) ||
+                    (checkMassNegative && t('errorMassNegative'))
+                  }
+                  color="primary"
+                  type="number"
+                  label={t('mass')}
+                  fullWidth={true}
+                  InputProps={{
+                    endAdornment: (
+                      <InputAdornment position="end">kg</InputAdornment>
+                    ),
+                    readOnly: showInputProduct,
+                  }}
+                  variant="outlined"
+                  value={productModal.mass || ''}
+                  onChange={(e) => MassProductChangeHandler(e)}
+                />
+              </Grid>
+              <Grid item xs={6}>
+                <SelectCategory
+                  data={[t('stocking'), t('outStock')]}
+                  value={
+                    productModal.status === 'Còn hàng'
+                      ? t('stocking')
+                      : t('outStock')
+                  }
+                  showInputProduct={showInputProduct}
+                  defaultValue={t('stocking')}
+                  label={t('status')}
+                  onChange={StatusProductChangeHandler}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  error={checkDescription}
+                  helperText={checkDescription && t('errorDescription')}
+                  color="primary"
+                  label={t('description')}
+                  variant="outlined"
+                  type="text"
+                  multiline
+                  rows={5}
+                  fullWidth={true}
+                  InputProps={{
+                    readOnly: showInputProduct,
+                  }}
+                  value={productModal.description || ''}
+                  onChange={(e) => DescriptionProductChangeHandler(e)}
+                />
+              </Grid>
+            </Grid>
+          </div>
+        </DialogContent>
+        <DialogActions>
+          <div className={classes.buttonModal}>
+            <Button
+              variant="contained"
+              color="secondary"
+              style={{
+                marginRight: '5px',
+              }}
+              onClick={() => hideModalProductHandler()}
+            >
+              {t('close')}
+            </Button>
+            {titleProductModal !== 'show' && (
               <Button
                 variant="contained"
-                color="secondary"
-                style={{
-                  marginRight: '5px',
-                }}
-                onClick={() => hideModalProductHandler()}
+                color="primary"
+                onClick={() => editProductHandler()}
+                disabled={validate}
               >
-                {t('close')}
+                {titleModal}
               </Button>
-              {titleProductModal !== 'show' && (
-                <Button
-                  variant="contained"
-                  color="primary"
-                  onClick={() => editProductHandler()}
-                  disabled={validate}
-                >
-                  {titleModal}
-                </Button>
-              )}
-            </div>
-          </DialogActions>
-        </Dialog>
-      )}
+            )}
+          </div>
+        </DialogActions>
+      </Dialog>
     </>
   );
 }

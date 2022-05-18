@@ -15,6 +15,7 @@ import VisibilityIcon from '@material-ui/icons/Visibility';
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
 import { useTranslation } from 'react-i18next';
+import React from 'react';
 
 const useStyles = makeStyles({
   imgSize: {
@@ -45,6 +46,10 @@ const useStyles = makeStyles({
   },
   groupButton: {
     minWidth: '280px',
+  },
+  backdrop: {
+    zIndex: '2000',
+    color: '#fff',
   },
 });
 
