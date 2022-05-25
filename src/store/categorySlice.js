@@ -8,11 +8,41 @@ const categoryReducer = createSlice({
   },
   reducers: {
     remove(state, action) {
-      const idItemRemove = action.payload;
+      function sortValueDelete(arr, key) {
+        if (arr[0].id === key) {
+          arr.shift();
+          let result = arr.map((item) => {
+            return {
+              ...item,
+              stt: item.stt - 1,
+            };
+          });
 
-      state.dataCategory = state.dataCategory.filter(
-        (item) => item.id !== idItemRemove
-      );
+          return result;
+        }
+
+        if (arr[arr.length - 1].id === key) {
+          arr.pop();
+
+          return arr;
+        }
+
+        const idItemRemove = arr.findIndex((item) => item.id === key);
+        console.log(idItemRemove);
+        let result = arr.splice(idItemRemove, arr.length - idItemRemove);
+
+        result.shift();
+
+        const oke = result.map((item) => {
+          return {
+            ...item,
+            stt: item.stt - 1,
+          };
+        });
+        return [...arr, ...oke];
+      }
+
+      state.dataCategory = sortValueDelete(state.dataCategory, action.payload);
     },
     editCategory(state, action) {
       if (action.payload.id) {

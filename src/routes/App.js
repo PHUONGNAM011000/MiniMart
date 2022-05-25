@@ -128,7 +128,6 @@ function App() {
 
   return (
     <Router>
-      
       {isShowModalCategory && <DialogCategoryModal titleModal="danh mục" />}
       {isShowModalProduct && <DialogProductModal titleModal="sản phẩm" />}
       <div className={classes.root}>
